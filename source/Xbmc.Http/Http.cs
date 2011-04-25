@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Browser;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -180,6 +181,9 @@ namespace Xbmc.Http
         #region Configure Web Request
         HttpWebRequest ConfigureWebRequest(string method, Uri url)
         {
+            WebRequest.RegisterPrefix("http://", WebRequestCreator.ClientHttp);
+            WebRequest.RegisterPrefix("https://", WebRequestCreator.ClientHttp);
+
             var webRequest = (HttpWebRequest)WebRequest.Create(url);
             webRequest.UseDefaultCredentials = false;
 
