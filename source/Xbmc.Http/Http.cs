@@ -111,6 +111,26 @@ namespace Xbmc.Http
         /// </summary>
         public string RequestContentType { get; set; }
 
+        public Task<HttpResponse> Delete()
+        {
+            return Invoke("DELETE");
+        }
+
+        public Task<HttpResponse> Get()
+        {
+            return Invoke("GET");
+        }
+
+        public Task<HttpResponse> Head()
+        {
+            return Invoke("HEAD");
+        }
+
+        public Task<HttpResponse> Options()
+        {
+            return Invoke("OPTIONS");
+        }
+
         public Task<HttpResponse> Post()
         {
             return PutPost("POST");
@@ -119,6 +139,23 @@ namespace Xbmc.Http
         public Task<HttpResponse> Put()
         {
             return PutPost("PUT");
+        }
+
+        async Task<HttpResponse> Invoke(string method)
+        {
+            try
+            {
+                var request = ConfigureWebRequest(method, Url);
+                return await GetHttpResponse(request);
+            }
+            catch (Exception e)
+            {
+                var response = new HttpResponse();
+                response.ErrorMessage = e.Message;
+                response.ErrorException = e;
+                response.ResponseStatus = ResponseStatus.Error;
+                return response;
+            }
         }
 
         async Task<HttpResponse> PutPost(string method)
