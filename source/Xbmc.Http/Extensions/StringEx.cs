@@ -1,10 +1,25 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Text;
 
 namespace Xbmc.Http.Extensions
 {
     static class StringEx
     {
+        public static bool HasValue(this string str)
+        {
+            return string.IsNullOrEmpty(str);
+        }
+
+        /// <summary>
+        /// Uses Uri.EscapeDataString() based on recommendations on MSDN
+        /// http://blogs.msdn.com/b/yangxind/archive/2006/11/09/don-t-use-net-system-uri-unescapedatastring-in-url-decoding.aspx
+        /// </summary>
+        public static string UrlEncode(this string input)
+        {
+            return Uri.EscapeDataString(input);
+        }
+
         /// <summary>
         /// Converts a byte array to a string, using its byte order mark to convert it to the right encoding.
         /// http://www.shrinkrays.net/code-snippets/csharp/an-extension-method-for-converting-a-byte-array-to-a-string.aspx

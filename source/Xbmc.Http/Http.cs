@@ -111,6 +111,127 @@ namespace Xbmc.Http
         /// </summary>
         public string RequestContentType { get; set; }
 
+        public Task<HttpResponse> Post()
+        {
+            return PutPost("POST");
+        }
+
+        public Task<HttpResponse> Put()
+        {
+            return PutPost("PUT");
+        }
+
+        async Task<HttpResponse> PutPost(string method)
+        {
+            try
+            {
+                var request = ConfigureWebRequest(method, Url);
+                PreparePostBody(request);
+
+                return await WriteRequestBody(request);
+            }
+            catch (Exception e)
+            {
+                var response = new HttpResponse();
+                response.ErrorMessage = e.Message;
+                response.ErrorException = e;
+                response.ResponseStatus = ResponseStatus.Error;
+                return response;
+            }
+        }
+
+        #region Configure Web Request
+        HttpWebRequest ConfigureWebRequest(string method, Uri url)
+        {
+            var webRequest = (HttpWebRequest)WebRequest.Create(url);
+            webRequest.UseDefaultCredentials = false;
+
+            AppendHeaders(webRequest);
+            AppendCookies(webRequest);
+
+            webRequest.Method = method;
+
+            // make sure Content-Length header is always sent since default is -1
+            if (Credentials != null)
+            {
+                webRequest.Credentials = Credentials;
+            }
+
+            if (UserAgent.HasValue())
+            {
+                webRequest.UserAgent = UserAgent;
+            }
+
+            webRequest.AllowAutoRedirect = FollowRedirects;
+
+            return webRequest;
+        }
+
+        // http://msdn.microsoft.com/en-us/library/system.net.httpwebrequest.headers.aspx
+        private void AppendHeaders(HttpWebRequest webRequest)
+        {
+            foreach (var header in Headers)
+            {
+                if (_restrictedHeaderActions.ContainsKey(header.Name))
+                {
+                    _restrictedHeaderActions[header.Name].Invoke(webRequest, header.Value);
+                }
+                else
+                {
+                    webRequest.Headers[header.Name] = header.Value;
+                }
+            }
+        }
+
+        private void AppendCookies(HttpWebRequest webRequest)
+        {
+            webRequest.CookieContainer = new CookieContainer();
+            foreach (var httpCookie in Cookies)
+            {
+                var cookie = new Cookie
+                {
+                    Name = httpCookie.Name,
+                    Value = httpCookie.Value,
+                    Domain = webRequest.RequestUri.Host
+                };
+
+                var uri = webRequest.RequestUri;
+                webRequest.CookieContainer.Add(new Uri(string.Format("{0}://{1}", uri.Scheme, uri.Host)), cookie);
+            }
+        }
+
+        #endregion
+
+        void PreparePostBody(HttpWebRequest request)
+        {
+            if (HasFiles)
+            {
+                request.ContentType = GetMultipartFormContentType();
+            }
+            else if (HasParameters)
+            {
+                request.ContentType = "application/x-www-form-urlencoded";
+                RequestBody = EncodeParameters();
+            }
+            else if (HasBody)
+            {
+                request.ContentType = RequestContentType;
+            }
+        }
+
+        string EncodeParameters()
+        {
+            var querystring = new StringBuilder();
+            foreach (var p in Parameters)
+            {
+                if (querystring.Length > 1)
+                    querystring.Append("&");
+                querystring.AppendFormat("{0}={1}", p.Name.UrlEncode(), ((string)p.Value).UrlEncode());
+            }
+
+            return querystring.ToString();
+        }
+
         async Task<HttpResponse> WriteRequestBody(HttpWebRequest request)
         {
             if (HasBody || HasFiles)
@@ -163,9 +284,13 @@ namespace Xbmc.Http
             await stream.WriteAsync(Encoding.UTF8.GetBytes(footer), 0, footer.Length);
         }
 
-        private const string FormBoundary = "-----------------------------28947758029299";
+        const string FormBoundary = "-----------------------------28947758029299";
+        string GetMultipartFormContentType()
+        {
+            return string.Format("multipart/form-data; boundary={0}", FormBoundary);
+        }
 
-        private string GetMultiPartFileHeader(HttpFile file)
+        string GetMultiPartFileHeader(HttpFile file)
         {
             return
                 string.Format(
@@ -174,13 +299,13 @@ namespace Xbmc.Http
                     Environment.NewLine);
         }
 
-        private string GetMultipartFormData(HttpParameter parameter)
+        string GetMultipartFormData(HttpParameter parameter)
         {
             return string.Format("--{0}{3}Content-Disposition: form-data; name=\"{1}\"{3}{3}{2}{3}",
                                  FormBoundary, parameter.Name, parameter.Value, Environment.NewLine);
         }
 
-        private string GetMultipartFooter()
+        string GetMultipartFooter()
         {
             return string.Format("--{0}--{1}", FormBoundary, Environment.NewLine);
         }
@@ -239,7 +364,7 @@ namespace Xbmc.Http
             return result;
         }
 
-        private void AddSharedHeaderActions()
+        void AddSharedHeaderActions()
         {
             _restrictedHeaderActions.Add("Accept", (r, v) => r.Accept = v);
             _restrictedHeaderActions.Add("Content-Type", (r, v) => r.ContentType = v);
@@ -257,14 +382,14 @@ namespace Xbmc.Http
                                                       });
         }
 
-        private void AddAsyncHeaderActions()
+        void AddAsyncHeaderActions()
         {
             // WP7 doesn't as of Beta doesn't support a way to set Content-Length either directly
             // or indirectly
             _restrictedHeaderActions.Add("Content-Length", (r, v) => { });
         }
 
-        private void AddSyncHeaderActions()
+        void AddSyncHeaderActions()
         {
             _restrictedHeaderActions.Add("User-Agent", (r, v) => r.UserAgent = v);
         }
