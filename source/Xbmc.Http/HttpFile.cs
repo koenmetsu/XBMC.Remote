@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Xbmc.Http
 {
@@ -15,7 +16,7 @@ namespace Xbmc.Http
         /// <summary>
         /// Provides raw data for file
         /// </summary>
-        public Action<Stream> Writer { get; set; }
+        public Func<Stream, Task> Writer { get; set; }
         /// <summary>
         /// Name of the file to use when uploading
         /// </summary>
