@@ -11,11 +11,11 @@ using Xbmc.Http.Extensions;
 
 namespace Xbmc.Http
 {
-    public class Http
+    public class HttpClient
     {
         readonly IDictionary<string, Action<HttpWebRequest, string>> _restrictedHeaderActions;
 
-        public Http()
+        public HttpClient()
         {
             Headers = new List<HttpHeader>();
             Cookies = new List<HttpCookie>();
