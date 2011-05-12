@@ -4,6 +4,7 @@ using System.Net;
 using Newtonsoft.Json;
 using Xbmc.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace Xbmc.JsonRpc
 {
@@ -28,7 +29,7 @@ namespace Xbmc.JsonRpc
         /// List of objects to pass as arguments to the method
         /// </summary>
         [JsonProperty("params", NullValueHandling = NullValueHandling.Ignore)]
-        public IEnumerable<object> Parameters { get; set; }
+        public JToken Parameters { get; set; }
 
         /// <summary>
         /// The request id.
@@ -37,7 +38,7 @@ namespace Xbmc.JsonRpc
         public int Id { get; set; }
     }
 
-    public class JsonRpcResponse
+    public class JsonRpcResponse<T>
     {
         /// <summary>
         /// The request id.
@@ -49,7 +50,7 @@ namespace Xbmc.JsonRpc
         public string Error { get; set; }
 
         [JsonProperty("result")]
-        public string Result { get; set; }
+        public T Result { get; set; }
 
         [JsonProperty("jsonrpc")]
         public string Version { get; set; }
@@ -70,14 +71,14 @@ namespace Xbmc.JsonRpc
             set { this.baseUrl = value; }
         }
 
-        public async Task<JsonRpcResponse> Execute(JsonRpcRequest request)
+        public async Task<JsonRpcResponse<T>> Execute<T>(JsonRpcRequest request)
         {
             var http = new HttpClient();
             ConfigureHttp(request, http);
 
             var repsonse = await http.Post();
 
-            return ConvertToJsonRpcResponse(repsonse);
+            return ConvertToJsonRpcResponse<T>(repsonse);
         }
 
         private void ConfigureHttp(JsonRpcRequest request, HttpClient http)
@@ -96,9 +97,9 @@ namespace Xbmc.JsonRpc
             http.RequestContentType = "application/json-rpc";
         }
 
-        private JsonRpcResponse ConvertToJsonRpcResponse(HttpResponse httpResponse)
+        private JsonRpcResponse<T> ConvertToJsonRpcResponse<T>(HttpResponse httpResponse)
         {
-            return JsonConvert.DeserializeObject<JsonRpcResponse>(httpResponse.Content);
+            return JsonConvert.DeserializeObject<JsonRpcResponse<T>>(httpResponse.Content);
         }
     }
 }

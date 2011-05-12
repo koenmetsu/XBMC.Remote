@@ -1,13 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5505DC6E-C2E3-42FC-A4FF-CE6C22C82670}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbmc.Http", "source\Xbmc.Http\Xbmc.Http.csproj", "{76BA423A-6FB4-4D18-8DED-1F578DE7CD63}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbmc.JsonRpc", "source\Xbmc.JsonRpc\Xbmc.JsonRpc.csproj", "{7FA0FEBB-7F1F-40D7-8BA0-81CB359CD639}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5505DC6E-C2E3-42FC-A4FF-CE6C22C82670}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbmc.Http.Tests", "tests\Xbmc.Http.Tests\Xbmc.Http.Tests.csproj", "{5B123D1D-88C8-431D-B1EF-4166EBD70D5E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbmc.Remote", "source\Xbmc.Remote\Xbmc.Remote.csproj", "{AFF3BD8D-3796-4149-8B0F-F73C1F7CDBB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xbmc.Movies", "source\Xbmc.Movies\Xbmc.Movies.csproj", "{b4027058-7ddb-4e1d-9b88-ef343cdeaa29}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,6 +33,18 @@ Global
 		{5B123D1D-88C8-431D-B1EF-4166EBD70D5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5B123D1D-88C8-431D-B1EF-4166EBD70D5E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5B123D1D-88C8-431D-B1EF-4166EBD70D5E}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{AFF3BD8D-3796-4149-8B0F-F73C1F7CDBB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF3BD8D-3796-4149-8B0F-F73C1F7CDBB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF3BD8D-3796-4149-8B0F-F73C1F7CDBB4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{AFF3BD8D-3796-4149-8B0F-F73C1F7CDBB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF3BD8D-3796-4149-8B0F-F73C1F7CDBB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF3BD8D-3796-4149-8B0F-F73C1F7CDBB4}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{B4027058-7DDB-4E1D-9B88-EF343CDEAA29}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4027058-7DDB-4E1D-9B88-EF343CDEAA29}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4027058-7DDB-4E1D-9B88-EF343CDEAA29}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{B4027058-7DDB-4E1D-9B88-EF343CDEAA29}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4027058-7DDB-4E1D-9B88-EF343CDEAA29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4027058-7DDB-4E1D-9B88-EF343CDEAA29}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
