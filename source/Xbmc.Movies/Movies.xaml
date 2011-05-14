@@ -5,12 +5,11 @@
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives" x:Name="Movies"
 	mc:Ignorable="d"
-	x:Class="Xbmc_Movies.MainControl"
+	x:Class="Xbmc_Movies.MoviesControl"
 	d:DesignWidth="480" d:DesignHeight="800"
 	FontFamily="{StaticResource PhoneFontFamilyNormal}"
 	FontSize="{StaticResource PhoneFontSizeNormal}"
-	Foreground="{StaticResource PhoneForegroundBrush}"
-	d:DataContext="{d:DesignData /SampleData/MoviesByTitleViewModelSampleData.xaml}">
+	Foreground="{StaticResource PhoneForegroundBrush}">
 
 	<Grid x:Name="LayoutRoot" d:DataContext="{d:DesignData /SampleData/MoviesByTitleViewModelSampleData.xaml}">
 		<Grid.Resources>

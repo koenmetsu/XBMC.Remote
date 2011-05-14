@@ -1,4 +1,4 @@
-namespace Xbmc.JsonRpc
+﻿namespace Xbmc.Client
 {
     using System.Collections.Generic;
 

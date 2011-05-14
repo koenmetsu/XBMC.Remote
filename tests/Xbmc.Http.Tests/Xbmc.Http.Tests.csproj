@@ -101,13 +101,13 @@
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\source\Xbmc.Http\Xbmc.Http.csproj">
+    <ProjectReference Include="..\..\source\Sysmeta.JsonRpc\Sysmeta.JsonRpc.csproj">
       <Project>{76BA423A-6FB4-4D18-8DED-1F578DE7CD63}</Project>
-      <Name>Xbmc.Http</Name>
+      <Name>Sysmeta.JsonRpc</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\source\Xbmc.JsonRpc\Xbmc.JsonRpc.csproj">
+    <ProjectReference Include="..\..\source\Xbmc.Client\Xbmc.Client.csproj">
       <Project>{7FA0FEBB-7F1F-40D7-8BA0-81CB359CD639}</Project>
-      <Name>Xbmc.JsonRpc</Name>
+      <Name>Xbmc.Client</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />

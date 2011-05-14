@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Text;
-
-namespace Xbmc.Http.Extensions
+﻿namespace Sysmeta.JsonRpc.Extensions
 {
+    using System;
+    using System.IO;
+    using System.Text;
+
     static class StringEx
     {
         public static bool HasValue(this string str)

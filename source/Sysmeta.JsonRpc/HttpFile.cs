@@ -1,9 +1,9 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-
-namespace Xbmc.Http
+﻿namespace Sysmeta.JsonRpc
 {
+    using System;
+    using System.IO;
+    using System.Threading.Tasks;
+
     /// <summary>
     /// Container for HTTP file
     /// </summary>

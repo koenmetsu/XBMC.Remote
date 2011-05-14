@@ -10,9 +10,9 @@ using System.Windows.Shapes;
 
 namespace Xbmc_Movies
 {
-	public partial class MainControl : UserControl
+	public partial class MoviesControl : UserControl
 	{
-		public MainControl()
+        public MoviesControl()
 		{
 			// Required to initialize variables
 			InitializeComponent();

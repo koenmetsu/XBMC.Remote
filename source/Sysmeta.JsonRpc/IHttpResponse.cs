@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-
-namespace Xbmc.Http
+﻿namespace Sysmeta.JsonRpc
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+
     /// <summary>
     /// HTTP response data
     /// </summary>

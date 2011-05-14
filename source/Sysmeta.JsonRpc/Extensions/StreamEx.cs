@@ -1,8 +1,7 @@
-﻿using System.IO;
-using System.Threading.Tasks;
-
-namespace Xbmc.Http.Extensions
+﻿namespace Sysmeta.JsonRpc.Extensions
 {
+    using System.IO;
+
     static class StreamEx
     {
          public static byte[] ReadAsBytes(this Stream stream)

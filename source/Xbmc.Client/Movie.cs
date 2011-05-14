@@ -1,4 +1,4 @@
-namespace Xbmc.JsonRpc
+﻿namespace Xbmc.Client
 {
     using System;
 
@@ -26,7 +26,7 @@ namespace Xbmc.JsonRpc
 
         [JsonProperty("director")]
         public string Director { get; set; }
-        
+
         [JsonProperty("trailer")]
         public string Trailer { get; set; }
 
@@ -86,7 +86,7 @@ namespace Xbmc.JsonRpc
 
         [JsonProperty("top250")]
         public string TOP250 { get; set; }
-        
+
         [JsonProperty("votes")]
         public string Votes { get; set; }
 

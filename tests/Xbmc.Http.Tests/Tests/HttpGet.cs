@@ -8,6 +8,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Xbmc.Http.Tests.Tests
 {
+    using Sysmeta.JsonRpc;
+
     [TestClass]
     public class HttpGet : SilverlightTest
     {

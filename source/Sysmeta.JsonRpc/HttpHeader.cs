@@ -1,16 +1,17 @@
-﻿namespace Xbmc.Http
+﻿namespace Sysmeta.JsonRpc
 {
     /// <summary>
-    /// Representation of an HTTP parameter (QueryString or Form value)
+    /// Represents a single HTTP header item
     /// </summary>
-    public class HttpParameter
+    public class HttpHeader
     {
         /// <summary>
-        /// Name of the parameter
+        /// The name of the HTTP header
         /// </summary>
         public string Name { get; set; }
+
         /// <summary>
-        /// Value of the parameter
+        /// The value of the HTTP header
         /// </summary>
         public string Value { get; set; }
     }

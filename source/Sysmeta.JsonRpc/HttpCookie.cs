@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Xbmc.Http
+﻿namespace Sysmeta.JsonRpc
 {
+    using System;
+
     /// <summary>
     /// Representation of an HTTP cookie
     /// </summary>

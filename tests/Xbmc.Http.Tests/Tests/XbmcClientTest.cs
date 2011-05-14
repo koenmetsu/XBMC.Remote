@@ -1,9 +1,10 @@
 ﻿using Microsoft.Silverlight.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Xbmc.JsonRpc;
 
 namespace Xbmc.Http.Tests.Tests
 {
+    using Xbmc.Client;
+
     [TestClass]
     public class XbmcClientTest : SilverlightTest
     {

@@ -1,4 +1,4 @@
-namespace Xbmc.JsonRpc
+namespace Xbmc.Client
 {
     public enum MovieFields
     {

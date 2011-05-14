@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using Newtonsoft.Json;
-using Xbmc.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
-
-namespace Xbmc.JsonRpc
+﻿namespace Sysmeta.JsonRpc
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Net;
+    using Newtonsoft.Json;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json.Linq;
+    using Sysmeta.JsonRpc;
+
     public class JsonRpcRequest
     {
         /// <summary>

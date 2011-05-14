@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Net;
-using System.Net.Browser;
-using System.Text;
-using System.Threading.Tasks;
-
-using Xbmc.Http.Extensions;
-
-namespace Xbmc.Http
+﻿namespace Sysmeta.JsonRpc
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Browser;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using Sysmeta.JsonRpc.Extensions;
+
     public class HttpClient
     {
         readonly IDictionary<string, Action<HttpWebRequest, string>> _restrictedHeaderActions;

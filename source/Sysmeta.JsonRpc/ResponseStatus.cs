@@ -1,4 +1,4 @@
-﻿namespace Xbmc.Http
+﻿namespace Sysmeta.JsonRpc
 {
     /// <summary>
     /// Status for responses (surprised?)
