@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Net;
     using Newtonsoft.Json;
-    using System.Threading.Tasks;
     using Newtonsoft.Json.Linq;
     using Sysmeta.JsonRpc;
 
@@ -71,14 +70,22 @@
             set { this.baseUrl = value; }
         }
 
-        public async Task<JsonRpcResponse<T>> Execute<T>(JsonRpcRequest request)
+        public void Execute<T>(JsonRpcRequest request, Action<JsonRpcResponse<T>, Exception> callback)
         {
             var http = new HttpClient();
             ConfigureHttp(request, http);
 
-            var repsonse = await http.Post();
-
-            return ConvertToJsonRpcResponse<T>(repsonse);
+            http.Post(response =>
+                {
+                    if (response.ResponseStatus == ResponseStatus.Error)
+                    {
+                        callback(null, response.ErrorException);
+                    }
+                    else
+                    {
+                        callback(ConvertToJsonRpcResponse<T>(response), null);
+                    }
+                });
         }
 
         private void ConfigureHttp(JsonRpcRequest request, HttpClient http)

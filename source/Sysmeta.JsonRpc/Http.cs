@@ -7,7 +7,7 @@
     using System.Net;
     using System.Net.Browser;
     using System.Text;
-    using System.Threading.Tasks;
+    using System.Windows;
 
     using Sysmeta.JsonRpc.Extensions;
 
@@ -112,69 +112,61 @@
         /// </summary>
         public string RequestContentType { get; set; }
 
-        public Task<HttpResponse> Delete()
+        public void Delete(Action<HttpResponse> callback)
         {
-            return Invoke("DELETE");
+            Invoke("DELETE", callback);
         }
 
-        public Task<HttpResponse> Get()
+        public void Get(Action<HttpResponse> callback)
         {
-            return Invoke("GET");
+            Invoke("GET", callback);
         }
 
-        public Task<HttpResponse> Head()
+        public void Head(Action<HttpResponse> callback)
         {
-            return Invoke("HEAD");
+            Invoke("HEAD", callback);
         }
 
-        public Task<HttpResponse> Options()
+        public void Options(Action<HttpResponse> callback)
         {
-            return Invoke("OPTIONS");
+            Invoke("OPTIONS", callback);
         }
 
-        public Task<HttpResponse> Post()
+        public void Post(Action<HttpResponse> callback)
         {
-            return PutPost("POST");
+            PutPost("POST", callback);
         }
 
-        public Task<HttpResponse> Put()
+        public void Put(Action<HttpResponse> callback)
         {
-            return PutPost("PUT");
+            PutPost("PUT", callback);
         }
 
-        async Task<HttpResponse> Invoke(string method)
+        void Invoke(string method, Action<HttpResponse> callback)
         {
             try
             {
                 var request = ConfigureWebRequest(method, Url);
-                return await GetHttpResponse(request);
+                GetHttpResponse(request, callback);
             }
             catch (Exception e)
             {
-                var response = new HttpResponse();
-                response.ErrorMessage = e.Message;
-                response.ErrorException = e;
-                response.ResponseStatus = ResponseStatus.Error;
-                return response;
+                OnError(e, callback);
             }
         }
 
-        async Task<HttpResponse> PutPost(string method)
+        void PutPost(string method, Action<HttpResponse> callback)
         {
             try
             {
                 var request = ConfigureWebRequest(method, Url);
                 PreparePostBody(request);
 
-                return await WriteRequestBody(request);
+                WriteRequestBody(request, callback);
             }
             catch (Exception e)
             {
-                var response = new HttpResponse();
-                response.ErrorMessage = e.Message;
-                response.ErrorException = e;
-                response.ResponseStatus = ResponseStatus.Error;
-                return response;
+                OnError(e, callback);
             }
         }
 
@@ -273,56 +265,63 @@
             return querystring.ToString();
         }
 
-        async Task<HttpResponse> WriteRequestBody(HttpWebRequest request)
+        void WriteRequestBody(HttpWebRequest request, Action<HttpResponse> callback)
         {
             if (HasBody || HasFiles)
             {
-                return await GetRequestStream(request);
+                GetRequestStream(request, callback);
             }
-
-            return await GetHttpResponse(request);
+            else
+            {
+                GetHttpResponse(request, callback);
+            }
         }
 
-        async Task<HttpResponse> GetRequestStream(HttpWebRequest request)
+        void GetRequestStream(HttpWebRequest request, Action<HttpResponse> callback)
         {
-            using (var stream = await request.GetRequestStreamAsync())
-            {
-                if (HasFiles)
+            request.BeginGetRequestStream(ar =>
                 {
-                    await WriteMultipartFormData(stream);
-                }
-                else // This is when we have a RequestBody
-                {
-                    await stream.WriteAsync(Encoding.UTF8.GetBytes(RequestBody), 0, RequestBody.Length);
-                }
-            }
+                    using (var stream = request.EndGetRequestStream(ar))
+                    {
+                        if (HasFiles)
+                        {
+                            WriteMultipartFormData(stream);
+                        }
+                        else // This is when we have a RequestBody
+                        {
+                            stream.Write(Encoding.UTF8.GetBytes(RequestBody), 0, RequestBody.Length);
+                        }
+                    }
 
-            return await GetHttpResponse(request);
+                    GetHttpResponse(request, callback);
+                }, null);
         }
 
         #region Multipart form data
 
-        async Task WriteMultipartFormData(Stream stream)
+        private void WriteMultipartFormData(Stream requestStream)
         {
+            var encoding = Encoding.UTF8;
             foreach (var file in Files)
             {
-                string header = GetMultiPartFileHeader(file);
-                await stream.WriteAsync(Encoding.UTF8.GetBytes(header), 0, header.Length);
+                // Add just the first part of this param, since we will write the file data directly to the Stream
+                var header = GetMultiPartFileHeader(file);
+                requestStream.Write(encoding.GetBytes(header), 0, header.Length);
 
-                await file.Writer(stream);
-
-                string eol = Environment.NewLine;
-                await stream.WriteAsync(Encoding.UTF8.GetBytes(eol), 0, eol.Length);
+                // Write the file data directly to the Stream, rather than serializing it to a string.
+                file.Writer(requestStream);
+                var lineEnding = Environment.NewLine;
+                requestStream.Write(encoding.GetBytes(lineEnding), 0, lineEnding.Length);
             }
 
-            foreach (var parameter in Parameters)
+            foreach (var param in Parameters)
             {
-                string data = GetMultipartFormData(parameter);
-                await stream.WriteAsync(Encoding.UTF8.GetBytes(data), 0, data.Length);
+                var postData = GetMultipartFormData(param);
+                requestStream.Write(encoding.GetBytes(postData), 0, postData.Length);
             }
 
-            string footer = GetMultipartFooter();
-            await stream.WriteAsync(Encoding.UTF8.GetBytes(footer), 0, footer.Length);
+            var footer = GetMultipartFooter();
+            requestStream.Write(encoding.GetBytes(footer), 0, footer.Length);
         }
 
         const string FormBoundary = "-----------------------------28947758029299";
@@ -353,56 +352,66 @@
 
         #endregion
 
-        async Task<HttpResponse> GetHttpResponse(HttpWebRequest request)
+        void GetHttpResponse(HttpWebRequest request, Action<HttpResponse> callback)
         {
-            var response = (HttpWebResponse)await request.GetResponseAsync();
-            var result = new HttpResponse();
-
-            using (response)
-            {
-                result.ContentType = response.ContentType;
-                result.ContentLength = response.ContentLength;
-                result.RawBytes = response.GetResponseStream().ReadAsBytes();
-                result.Content = result.RawBytes.GetString();
-                result.StatusCode = response.StatusCode;
-                result.StatusDescription = response.StatusDescription;
-                result.ResponseUri = response.ResponseUri;
-                result.ResponseStatus = ResponseStatus.Completed;
-
-                if (response.Cookies != null)
+            request.BeginGetResponse(ar =>
                 {
-                    foreach (Cookie cookie in response.Cookies)
+                    try
                     {
-                        result.Cookies.Add(new HttpCookie
+                        var response = (HttpWebResponse)request.EndGetResponse(ar);
+                        var result = new HttpResponse();
+
+                        using (response)
                         {
-                            Comment = cookie.Comment,
-                            CommentUri = cookie.CommentUri,
-                            Discard = cookie.Discard,
-                            Domain = cookie.Domain,
-                            Expired = cookie.Expired,
-                            Expires = cookie.Expires,
-                            HttpOnly = cookie.HttpOnly,
-                            Name = cookie.Name,
-                            Path = cookie.Path,
-                            Port = cookie.Port,
-                            Secure = cookie.Secure,
-                            TimeStamp = cookie.TimeStamp,
-                            Value = cookie.Value,
-                            Version = cookie.Version
-                        });
+                            result.ContentType = response.ContentType;
+                            result.ContentLength = response.ContentLength;
+                            result.RawBytes = response.GetResponseStream().ReadAsBytes();
+                            result.Content = result.RawBytes.GetString();
+                            result.StatusCode = response.StatusCode;
+                            result.StatusDescription = response.StatusDescription;
+                            result.ResponseUri = response.ResponseUri;
+                            result.ResponseStatus = ResponseStatus.Completed;
+
+                            if (response.Cookies != null)
+                            {
+                                foreach (Cookie cookie in response.Cookies)
+                                {
+                                    result.Cookies.Add(new HttpCookie
+                                    {
+                                        Comment = cookie.Comment,
+                                        CommentUri = cookie.CommentUri,
+                                        Discard = cookie.Discard,
+                                        Domain = cookie.Domain,
+                                        Expired = cookie.Expired,
+                                        Expires = cookie.Expires,
+                                        HttpOnly = cookie.HttpOnly,
+                                        Name = cookie.Name,
+                                        Path = cookie.Path,
+                                        Port = cookie.Port,
+                                        Secure = cookie.Secure,
+                                        TimeStamp = cookie.TimeStamp,
+                                        Value = cookie.Value,
+                                        Version = cookie.Version
+                                    });
+                                }
+                            }
+
+                            foreach (var headerName in response.Headers.AllKeys)
+                            {
+                                var headerValue = response.Headers[headerName];
+                                result.Headers.Add(new HttpHeader { Name = headerName, Value = headerValue });
+                            }
+
+                            response.Close();
+                        }
                     }
-                }
+                    catch (Exception e)
+                    {
+                        OnError(e, callback);
+                    }
 
-                foreach (var headerName in response.Headers.AllKeys)
-                {
-                    var headerValue = response.Headers[headerName];
-                    result.Headers.Add(new HttpHeader { Name = headerName, Value = headerValue });
-                }
 
-                response.Close();
-            }
-
-            return result;
+                }, null);
         }
 
         void AddSharedHeaderActions()
@@ -433,6 +442,21 @@
         void AddSyncHeaderActions()
         {
             _restrictedHeaderActions.Add("User-Agent", (r, v) => r.UserAgent = v);
+        }
+
+        void OnError(Exception e, Action<HttpResponse> callback)
+        {
+            var response = new HttpResponse();
+            response.ErrorMessage = e.Message;
+            response.ErrorException = e;
+            response.ResponseStatus = ResponseStatus.Error;
+            ExecuteCallback(response, callback);
+        }
+
+        void ExecuteCallback(HttpResponse response, Action<HttpResponse> callback)
+        {
+            var dispatcher = Deployment.Current.Dispatcher;
+            dispatcher.BeginInvoke(() => callback(response));
         }
     }
 }

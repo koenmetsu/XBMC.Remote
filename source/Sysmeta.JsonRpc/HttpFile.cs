@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Threading.Tasks;
 
     /// <summary>
     /// Container for HTTP file
@@ -16,7 +15,7 @@
         /// <summary>
         /// Provides raw data for file
         /// </summary>
-        public Func<Stream, Task> Writer { get; set; }
+        public Action<Stream> Writer { get; set; }
         /// <summary>
         /// Name of the file to use when uploading
         /// </summary>

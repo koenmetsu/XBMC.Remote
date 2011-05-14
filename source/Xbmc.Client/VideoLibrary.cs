@@ -5,7 +5,6 @@ namespace Xbmc.Client
     using Newtonsoft.Json.Linq;
 
     using Sysmeta.JsonRpc;
-    using System.Threading.Tasks;
 
     public class VideoLibrary
     {
@@ -18,12 +17,12 @@ namespace Xbmc.Client
             _getRequestId = getRequestId;
         }
 
-        public async Task<MoviesResult> GetMovies(params MovieFields[] fields)
+        public void GetMovies(Action<MoviesResult, Exception> callback, params MovieFields[] fields)
         {
             var param = new JObject();
             if (fields != null && fields.Length > 0)
             {
-                JArray jfields = new JArray();
+                var jfields = new JArray();
                 foreach (var field in fields)
                 {
                     jfields.Add(field.ToString());
@@ -31,7 +30,7 @@ namespace Xbmc.Client
                 param.Add(new JProperty("fields", jfields));
             }
 
-            JsonRpcRequest request = new JsonRpcRequest()
+            var request = new JsonRpcRequest()
             {
                 Credentials = null,
                 Id = GetRequestId(),
@@ -39,9 +38,7 @@ namespace Xbmc.Client
                 Parameters = param
             };
 
-            var response = await _client.Execute<MoviesResult>(request);
-
-            return response.Result;
+            _client.Execute<MoviesResult>(request, (rpcResponse, exception) => callback(rpcResponse.Result, exception));
         }
 
         int GetRequestId()

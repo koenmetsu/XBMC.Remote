@@ -41,9 +41,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncCtpLibrary_Phone">
-      <HintPath>..\..\packages\AsyncCTP.1.0.0.0\lib\sl3-wp\AsyncCtpLibrary_Phone.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json.WindowsPhone, Version=4.0.2.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.4.0.2\lib\sl3-wp\Newtonsoft.Json.WindowsPhone.dll</HintPath>
     </Reference>

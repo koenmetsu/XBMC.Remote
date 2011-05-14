@@ -2,10 +2,9 @@
 {
     using System;
     using System.Threading;
-    using Newtonsoft.Json;
-    using System.Threading.Tasks;
+
     using Newtonsoft.Json.Linq;
-    using System.Collections.Generic;
+
     using Sysmeta.JsonRpc;
 
     public class XbmcClient
@@ -22,9 +21,9 @@
 
         public VideoLibrary VideoLibrary { get; private set; }
 
-        public async void Log(string message)
+        public void Log(string message)
         {
-            JsonRpcRequest request = new JsonRpcRequest()
+            var request = new JsonRpcRequest
             {
                 Credentials = null,
                 Id = GetRequestId(),
@@ -32,13 +31,13 @@
                 Parameters = new JArray { message  }
             };
 
-            await client.Execute<JToken>(request);
+            client.Execute<JToken>(request, (response, exception) => {});
         }
 
-        public async void Log(string message, LogLevel level)
+        public void Log(string message, LogLevel level)
         {
             // All the log levels are lowercase characters.
-            JsonRpcRequest request = new JsonRpcRequest()
+            var request = new JsonRpcRequest()
             {
                 Credentials = null,
                 Id = GetRequestId(),
@@ -46,22 +45,22 @@
                 Parameters = new JArray { message, level.ToString().ToLower() }
             };
 
-            await client.Execute<JToken>(request);
+            client.Execute<JToken>(request, (response, exception) => {});
         }
 
-        public async void ToggleMute()
+        public void ToggleMute()
         {
-            JsonRpcRequest request = new JsonRpcRequest()
+            var request = new JsonRpcRequest()
             {
                 Credentials = null,
                 Id = GetRequestId(),
                 Method = "XBMC.ToggleMute"
             };
 
-            await client.Execute<JToken>(request);
+            client.Execute<JToken>(request, (response, exception) => {});
         }
 
-        public async void SetVolume(int volume)
+        public void SetVolume(int volume)
         {
             var request = new JsonRpcRequest()
             {
@@ -71,10 +70,10 @@
                 Parameters = new JArray { volume }
             };
 
-            await client.Execute<JToken>(request);
+            client.Execute<JToken>(request, (response, exception) => {});
         }
 
-        public async Task<int> GetVolumn()
+        public void GetVolumn(Action<int, Exception> callback)
         {
             var request = new JsonRpcRequest()
             {
@@ -83,33 +82,43 @@
                 Method = "XBMC.GetVolume"
             };
 
-            var response = await client.Execute<int>(request);
+            client.Execute<int>(request, (rpcResponse, exception) =>
+                {
+                    if (exception != null)
+                    {
+                        callback(0, exception);
+                    }
+                    else
+                    {
+                        callback(rpcResponse.Result, null);
+                    }
+                });
 
-            return (int)response.Result;
+            return ;
         }
 
-        public async void Play()
+        public void Play()
         {
-            JsonRpcRequest request = new JsonRpcRequest()
+            var request = new JsonRpcRequest()
             {
                 Credentials = null,
                 Id = GetRequestId(),
                 Method = "XBMC.Play"
             };
 
-            await client.Execute<JToken>(request);
+            client.Execute<JToken>(request, (response, exception) => {});
         }
 
-        public async void Quit()
+        public void Quit()
         {
-            JsonRpcRequest request = new JsonRpcRequest()
+            var request = new JsonRpcRequest()
             {
                 Credentials = null,
                 Id = GetRequestId(),
                 Method = "XBMC.Quit"
             };
 
-            await client.Execute<JToken>(request);
+            client.Execute<JToken>(request, (response, exception) => {});
         }
 
         internal int GetRequestId()
