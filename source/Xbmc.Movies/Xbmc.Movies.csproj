@@ -98,6 +98,12 @@
       <Generator>MSBuild:MarkupCompilePass1</Generator>
     </DesignData>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Xbmc.Client\Xbmc.Client.csproj">
+      <Project>{7FA0FEBB-7F1F-40D7-8BA0-81CB359CD639}</Project>
+      <Name>Xbmc.Client</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

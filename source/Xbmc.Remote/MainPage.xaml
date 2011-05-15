@@ -21,7 +21,7 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-    	<Xbmc_Movies:MainControl d:LayoutOverrides="Height"/>
+    	<Xbmc_Movies:MoviesControl x:Name="movies" d:LayoutOverrides="Height"/>
     </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->

@@ -12,12 +12,16 @@ using System.Windows.Shapes;
 
 namespace Xbmc_Movies
 {
-	public class MovieViewModel
+    using System.ComponentModel;
+
+    public class MovieViewModel : INotifyPropertyChanged
 	{
 		private string duration;
 		private bool durationFormatted = false;
-		
-		public MovieViewModel()
+
+	    private BitmapImage thumbnail;
+
+	    public MovieViewModel()
 		{
 		}
 		
@@ -25,7 +29,19 @@ namespace Xbmc_Movies
 		
 		public int Year { get; set; }
 		
-		public BitmapImage Thumbnail { get; set; }
+	    public BitmapImage Thumbnail
+	    {
+	        get
+	        {
+	            return this.thumbnail;
+	        }
+            
+            set
+            {
+                this.thumbnail = value;
+                this.OnPropertyChanged("Thumbnail");
+            }
+	    }
 		
 		public string Duration 
 		{ 
@@ -62,5 +78,17 @@ namespace Xbmc_Movies
 		public string Cast { get; set; }
 		
 		public string Director { get; set; }
+
+        protected void OnPropertyChanged(string name)
+        {
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null)
+            {
+                handler(this, new PropertyChangedEventArgs(name));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
 	}
 }

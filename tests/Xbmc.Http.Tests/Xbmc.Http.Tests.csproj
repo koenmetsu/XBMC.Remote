@@ -48,9 +48,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AsyncCtpLibrary_Phone">
-      <HintPath>..\..\packages\AsyncCTP.1.0.0.0\lib\sl3-wp\AsyncCtpLibrary_Phone.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Microsoft.Silverlight.Testing">

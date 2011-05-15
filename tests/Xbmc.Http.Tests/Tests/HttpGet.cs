@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Threading;
 using Microsoft.Silverlight.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -21,15 +17,12 @@ namespace Xbmc.Http.Tests.Tests
             http.Url = new Uri("http://www.google.com");
 
             bool done = false;
-            var task = http.Get();
-            task.ContinueWith(task1 =>
-                                  {
-                                      var result = task.Result;
+            http.Get(r =>
+                {
+                    Assert.AreEqual(218, r.ContentLength);
 
-                                      Assert.AreEqual(218, result.ContentLength);
-                                      
-                                      done = true;
-                                  });
+                    done = true;
+                });
 
             this.EnqueueConditional(() => done);
 

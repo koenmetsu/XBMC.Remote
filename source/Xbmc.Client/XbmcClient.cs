@@ -7,19 +7,58 @@
 
     using Sysmeta.JsonRpc;
 
+    public class Vfs
+    {
+        private Uri baseUrl;
+
+        public Vfs(Uri url)
+        {
+            this.baseUrl = url;
+        }
+
+        public void GetFile(Uri uri, Action<byte[], Exception> callback)
+        {
+            var client = new HttpClient();
+            client.Url = BuildUrl(uri);
+            
+            client.Get(response =>
+                {
+                    if (response.ResponseStatus == ResponseStatus.Error)
+                    {
+                        callback(null, response.ErrorException);
+                    }
+                    else
+                    {
+                        callback(response.RawBytes, null);
+                    }
+                });
+        }
+
+        private Uri BuildUrl(Uri uri)
+        {
+            var builder = new UriBuilder(this.baseUrl);
+            builder.Path = "/vfs/" + uri.ToString();
+
+            return builder.Uri;
+        }
+    }
+
     public class XbmcClient
     {
-        private JsonRpcClient client;
+        private readonly JsonRpcClient client;
         private int idCounter = 1;
 
         public XbmcClient(string baseUrl)
         {
-            client = new JsonRpcClient(new Uri(baseUrl));
+            client = new JsonRpcClient(this.BuildUrl(baseUrl));
 
             this.VideoLibrary = new VideoLibrary(client, GetRequestId);
+            this.Vfs = new Vfs(new Uri(baseUrl));
         }
 
         public VideoLibrary VideoLibrary { get; private set; }
+
+        public Vfs Vfs { get; private set; }
 
         public void Log(string message)
         {
@@ -124,6 +163,14 @@
         internal int GetRequestId()
         {
             return Interlocked.Increment(ref idCounter);
+        }
+
+        private Uri BuildUrl(string baseUrl)
+        {
+            var builder = new UriBuilder(baseUrl);
+            builder.Path = "/jsonrpc";
+
+            return builder.Uri;
         }
     }
 }

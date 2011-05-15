@@ -404,6 +404,8 @@
 
                             response.Close();
                         }
+
+                        this.ExecuteCallback(result, callback);
                     }
                     catch (Exception e)
                     {
