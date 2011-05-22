@@ -15,10 +15,10 @@
 
         public MoviesByTitleViewModel()
         {
-            this.client = new XbmcClient("http://localhost:8081/");
+            this.client = new XbmcClient("http://FENPC100:8081/");
 
             this.Movies = new ObservableCollection<MovieViewModel>();
-            this.client.VideoLibrary.GetMovies(this.OnGetMovies, MovieFields.Title, MovieFields.Cast, MovieFields.Director, 
+            this.client.VideoLibrary.GetMovies(this.OnGetMovies, MovieFields.Title, MovieFields.Director, 
                 MovieFields.Genre, MovieFields.Rating, MovieFields.Year, MovieFields.Thumbnail, MovieFields.Runtime);
         }
 
@@ -29,24 +29,25 @@
                 var movieVm = new MovieViewModel()
                     {
                         Title = movie.Title,
-                        Cast = movie.Cast,
-                        Director = movie.Cast,
+                        Director = movie.Director,
                         Duration = movie.Runtime,
                         Genre = movie.Genre,
                         Rating = movie.Rating.ToString(),
                         Year = movie.Year
                     };
 
-                if (movie.Thumbnail != null)
-                {
-                    this.LoadThumbnail(movieVm, movie.Thumbnail);
-                }
+//                if (movie.Thumbnail != null)
+//                {
+//                    this.LoadThumbnail(movieVm, movie.Thumbnail);
+//                }
 
                 this.Movies.Add(movieVm);
             }
         }
 
         public ObservableCollection<MovieViewModel> Movies { get; set; }
+
+        // TODO : Create a background thread that can load images and set the data to the MovieViewModel
 
         private void LoadThumbnail(MovieViewModel movieVm, Uri thumbnail)
         {

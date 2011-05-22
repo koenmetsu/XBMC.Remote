@@ -19,7 +19,7 @@ namespace Xbmc_Movies
 		private string duration;
 		private bool durationFormatted = false;
 
-	    private BitmapImage thumbnail;
+        private BitmapImage thumbnail;
 
 	    public MovieViewModel()
 		{

@@ -11,14 +11,17 @@
     {
         private Uri baseUrl;
 
-        public Vfs(Uri url)
+        private readonly bool executeCallbackOnUiThread;
+
+        public Vfs(Uri url, bool executeCallbackOnUIThread = true)
         {
             this.baseUrl = url;
+            executeCallbackOnUiThread = executeCallbackOnUIThread;
         }
 
         public void GetFile(Uri uri, Action<byte[], Exception> callback)
         {
-            var client = new HttpClient();
+            var client = new HttpClient(this.executeCallbackOnUiThread);
             client.Url = BuildUrl(uri);
             
             client.Get(response =>
@@ -48,12 +51,12 @@
         private readonly JsonRpcClient client;
         private int idCounter = 1;
 
-        public XbmcClient(string baseUrl)
+        public XbmcClient(string baseUrl, bool executeCallbackOnUIThread = true)
         {
-            client = new JsonRpcClient(this.BuildUrl(baseUrl));
+            client = new JsonRpcClient(this.BuildUrl(baseUrl), executeCallbackOnUIThread);
 
             this.VideoLibrary = new VideoLibrary(client, GetRequestId);
-            this.Vfs = new Vfs(new Uri(baseUrl));
+            this.Vfs = new Vfs(new Uri(baseUrl), executeCallbackOnUIThread);
         }
 
         public VideoLibrary VideoLibrary { get; private set; }

@@ -13,10 +13,13 @@
 
     public class HttpClient
     {
+        private readonly bool executeCallbackOnUiThread;
+
         readonly IDictionary<string, Action<HttpWebRequest, string>> _restrictedHeaderActions;
 
-        public HttpClient()
+        public HttpClient(bool executeCallbackOnUIThread = true)
         {
+            executeCallbackOnUiThread = executeCallbackOnUIThread;
             Headers = new List<HttpHeader>();
             Cookies = new List<HttpCookie>();
             Files = new List<HttpFile>();
@@ -457,8 +460,15 @@
 
         void ExecuteCallback(HttpResponse response, Action<HttpResponse> callback)
         {
-            var dispatcher = Deployment.Current.Dispatcher;
-            dispatcher.BeginInvoke(() => callback(response));
+            if (this.executeCallbackOnUiThread)
+            {
+                var dispatcher = Deployment.Current.Dispatcher;
+                dispatcher.BeginInvoke(() => callback(response));
+            }
+            else
+            {
+                callback(response);
+            }
         }
     }
 }

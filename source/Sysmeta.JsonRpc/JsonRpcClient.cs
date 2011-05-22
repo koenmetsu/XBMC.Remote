@@ -59,9 +59,12 @@
     {
         private Uri baseUrl;
 
-        public JsonRpcClient(Uri baseUrl)
+        private readonly bool executeCallbackOnUiThread;
+
+        public JsonRpcClient(Uri baseUrl, bool executeCallbackOnUIThread = true)
         {
             this.baseUrl = baseUrl;
+            executeCallbackOnUiThread = executeCallbackOnUIThread;
         }
 
         public Uri BaseUrl
@@ -72,7 +75,7 @@
 
         public void Execute<T>(JsonRpcRequest request, Action<JsonRpcResponse<T>, Exception> callback)
         {
-            var http = new HttpClient();
+            var http = new HttpClient(this.executeCallbackOnUiThread);
             ConfigureHttp(request, http);
 
             http.Post(response =>

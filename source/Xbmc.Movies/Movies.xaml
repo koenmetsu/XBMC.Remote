@@ -3,7 +3,9 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives" x:Name="Movies"
+	xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives" 
+    xmlns:load="clr-namespace:Xbmc_Movies;assembly=Xbmc.Movies"
+    x:Name="Movies"
 	mc:Ignorable="d"
 	x:Class="Xbmc_Movies.MoviesControl"
 	d:DesignWidth="480" d:DesignHeight="800"
@@ -112,6 +114,13 @@
                 </Border>
             </DataTemplate>
 		</Grid.Resources>
-		<telerikPrimitives:RadDataBoundListBox ItemContainerStyle="{StaticResource ItemContainerStyle}" ItemTemplate="{StaticResource ListBoxItemTemplate}" DataContext="{Binding Movies}" ItemsSource="{Binding}"/>
+		<telerikPrimitives:RadDataBoundListBox 
+            x:Name="listBox" 
+            ItemContainerStyle="{StaticResource ItemContainerStyle}" 
+            ItemTemplate="{StaticResource ListBoxItemTemplate}" 
+            DataContext="{Binding Movies}" 
+            ItemsSource="{Binding}"
+            IsAsyncBalanceEnabled="True" 
+            ScrollBarMode="Default"/>
 	</Grid>
 </UserControl>

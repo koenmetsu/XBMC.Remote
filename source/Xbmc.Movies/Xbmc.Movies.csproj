@@ -9,7 +9,7 @@
     <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Xbmc_Movies</RootNamespace>
+    <RootNamespace>Xbmc.Movies</RootNamespace>
     <AssemblyName>Xbmc.Movies</AssemblyName>
     <TargetFrameworkProfile>WindowsPhone</TargetFrameworkProfile>
     <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
@@ -78,6 +78,7 @@
     </Compile>
     <Compile Include="ViewModels\MoviesByTitleViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
+    <Compile Include="XbmcImageLoader.cs" />
     <Page Include="Movies.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -91,7 +92,7 @@
   <ItemGroup>
     <Resource Include="Data\arrow-down.png" />
     <Resource Include="Data\arrow-up.png" />
-    <Resource Include="Data\star.png" />
+    <EmbeddedResource Include="Data\star.png" />
   </ItemGroup>
   <ItemGroup>
     <DesignData Include="SampleData\MoviesByTitleViewModelSampleData.xaml">

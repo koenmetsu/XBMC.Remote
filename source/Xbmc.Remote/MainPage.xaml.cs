@@ -13,16 +13,18 @@ using Microsoft.Phone.Controls;
 
 namespace Xbmc.Remote
 {
+    using Xbmc.Remote.ViewModels;
+    using Xbmc.Remote.Views;
     using Xbmc_Movies;
 
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MainPage : XbmcPage
     {
         // Constructor
         public MainPage()
         {
             InitializeComponent();
 
-            this.movies.DataContext = new MoviesByTitleViewModel();
+            this.DataContext = MainViewModel.Instance;
         }
     }
 }
