@@ -16,6 +16,8 @@ namespace Xbmc_Movies
 		{
 			// Required to initialize variables
 			InitializeComponent();
+
+            this.DataContext = new MoviesByTitleViewModel();
 		}
 	}
 }
