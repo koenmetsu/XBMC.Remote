@@ -1,8 +1,8 @@
-﻿using System.IO;
-using System.IO.IsolatedStorage;
-
-namespace Xbmc.Remote.Extensions
+﻿namespace Xbmc.Core.Extensions
 {
+    using System.IO;
+    using System.IO.IsolatedStorage;
+
     public class FileEx
     {
         public static string ReadAllText(IsolatedStorageFile storage, string path)

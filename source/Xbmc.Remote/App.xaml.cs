@@ -1,43 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
-using Telerik.Windows.Controls;
-using Xbmc.Remote.ViewModels;
-
-namespace Xbmc.Remote
+﻿namespace Xbmc.Remote
 {
+    using System.Diagnostics;
+    using System.Windows;
+    using System.Windows.Media;
+    using System.Windows.Navigation;
+
+    using Microsoft.Phone.Shell;
+
+    using Telerik.Windows.Controls;
+
+    using TinyIoC;
+
+    using Xbmc.Core;
+
     public partial class App : Application
     {
-        /// <summary>
-        /// Provides easy access to the root frame of the Phone Application.
-        /// </summary>
-        /// <returns>The root frame of the Phone Application.</returns>
-        public RadPhoneApplicationFrame RootFrame { get; private set; }
-
         /// <summary>
         /// Constructor for the Application object.
         /// </summary>
         public App()
         {
             // Global handler for uncaught exceptions. 
-            UnhandledException += Application_UnhandledException;
+            this.UnhandledException += this.Application_UnhandledException;
 
             // Show graphics profiling information while debugging.
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 // Display the current frame rate counters.
-                Application.Current.Host.Settings.EnableFrameRateCounter = true;
+                Current.Host.Settings.EnableFrameRateCounter = true;
 
                 // Show the areas of the app that are being redrawn in each frame.
                 //Application.Current.Host.Settings.EnableRedrawRegions = true;
@@ -48,68 +38,81 @@ namespace Xbmc.Remote
             }
 
             // Standard Silverlight initialization
-            InitializeComponent();
+            this.InitializeComponent();
 
             // Create the frame but don't set it as RootVisual yet; this allows the splash
             // screen to remain active until the application is ready to render.
-            RootFrame = new RadPhoneApplicationFrame();
-            RootFrame.Navigated += OnRootFrameNavigated;
+            this.RootFrame = new RadPhoneApplicationFrame();
+
+            this.RootFrame.Navigated += this.OnRootFrameNavigated;
 
             // Handle navigation failures
-            RootFrame.NavigationFailed += RootFrame_NavigationFailed;
+            this.RootFrame.NavigationFailed += this.RootFrame_NavigationFailed;
 
-            RootFrame.Style = this.Resources["RadPhoneApplicationFrameStyle"] as Style;
+            this.RootFrame.Style = this.Resources["RadPhoneApplicationFrameStyle"] as Style;
+
+            this.Bootstraper = new XbmcBootstrapper(this.RootFrame);
         }
 
-        // Code to execute when the application is launching (eg, from Start)
-        // This code will not execute when the application is reactivated
+        /// <summary>
+        /// Provides easy access to the root frame of the Phone Application.
+        /// </summary>
+        /// <returns>The root frame of the Phone Application.</returns>
+        public RadPhoneApplicationFrame RootFrame { get; private set; }
+
+        public XbmcBootstrapper Bootstraper { get; set; }
+
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
-            MainViewModel.Instance.OnApplicationLaunching();
+            var handler = TinyIoCContainer.Current.Resolve<IApplicationLaunching>();
+            if (handler != null)
+            {
+                handler.OnApplicationLaunching();
+            }
         }
 
-        // Code to execute when the application is activated (brought to foreground)
-        // This code will not execute when the application is first launched
         private void Application_Activated(object sender, ActivatedEventArgs e)
         {
-            MainViewModel.Instance.OnApplicationActivated();
+            var handler = TinyIoCContainer.Current.Resolve<IApplicationActivated>();
+            if (handler != null)
+            {
+                handler.OnApplicationActivated();
+            }
         }
 
-        // Code to execute when the application is deactivated (sent to background)
-        // This code will not execute when the application is closing
         private void Application_Deactivated(object sender, DeactivatedEventArgs e)
         {
-            MainViewModel.Instance.OnApplicationDeactivated();
+            var handler = TinyIoCContainer.Current.Resolve<IApplicationDeactivated>();
+            if (handler != null)
+            {
+                handler.OnApplicationDeactivated();
+            }
         }
 
-        // Code to execute when the application is closing (eg, user hit Back)
-        // This code will not execute when the application is deactivated
         private void Application_Closing(object sender, ClosingEventArgs e)
         {
-            MainViewModel.Instance.OnApplicationClosing(e);
+            var handler = TinyIoCContainer.Current.Resolve<IApplicationClosing>();
+            if (handler != null)
+            {
+                handler.OnApplicationClosing(e);
+            }
         }
 
-        // Code to execute if a navigation fails
         private void RootFrame_NavigationFailed(object sender, NavigationFailedEventArgs e)
         {
-            if (System.Diagnostics.Debugger.IsAttached)
+            var handler = TinyIoCContainer.Current.Resolve<INavigationFailed>();
+            if (handler != null)
             {
-                // A navigation has failed; break into the debugger
-                System.Diagnostics.Debugger.Break();
+                handler.OnNavigationFailed(sender, e);
             }
         }
 
-        // Code to execute on Unhandled Exceptions
         private void Application_UnhandledException(object sender, ApplicationUnhandledExceptionEventArgs e)
         {
-            if (System.Diagnostics.Debugger.IsAttached)
+            var handler = TinyIoCContainer.Current.Resolve<IUnhandledException>();
+            if (handler != null)
             {
-                // An unhandled exception has occurred; break into the debugger
-                System.Diagnostics.Debugger.Break();
-            }
-            else
-            {
-                MainViewModel.Instance.OnUnhandledException(sender, e);
+                handler.OnUnhandledException(sender, e);
             }
         }
 
@@ -118,11 +121,11 @@ namespace Xbmc.Remote
         // Do not add any additional code to this method
         private void OnRootFrameNavigated(object sender, NavigationEventArgs e)
         {
-            Application.Current.RootVisual = this.RootFrame;
-            this.RootFrame.Background = (Brush)Application.Current.Resources["InnerScreensBrush"];
+            Current.RootVisual = this.RootFrame;
+            this.RootFrame.Background = (Brush)Current.Resources["InnerScreensBrush"];
 
             this.RootFrame.Navigated -= this.OnRootFrameNavigated;
-            MainViewModel.Instance.MainFrame = this.RootFrame;
+            TinyIoCContainer.Current.Resolve<INavigation>().MainFrame = this.RootFrame;
         }
 
         #endregion
