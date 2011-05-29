@@ -1,0 +1,36 @@
+namespace Sysmeta.Xbmc.Client
+{
+    public enum MovieFields
+    {
+        Title,
+        Genre,
+        Year,
+        Rating,
+        Director,
+        Trailer,
+        Tagline,
+        Plot,
+        PlotOutline,
+        OriginalTitle,
+        LastPlayed,
+        PlayCount,
+        Writer,
+        Studio,
+        MPAA,
+        Cast,
+        Country,
+        IMDBNumber,
+        Premiered,
+        ProductionCode,
+        Runtime,
+        Set,
+        Showlink,
+        StreamDetails,
+        Top250,
+        Votes,
+        WritingCredits,
+        Fanart,
+        Thumbnail,
+        File
+    }
+}

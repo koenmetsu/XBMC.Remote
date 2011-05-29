@@ -1,0 +1,452 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Caliburn.Micro.Extensions</name>
+    </assembly>
+    <members>
+        <member name="T:Caliburn.Micro.TaskExecutionRequested">
+            <summary>
+            A message that is published to signify a components request for the execution of a particular task.
+            </summary>
+        </member>
+        <member name="F:Caliburn.Micro.TaskExecutionRequested.State">
+            <summary>
+            Optional state to be passed along to the task completion message.
+            </summary>
+        </member>
+        <member name="F:Caliburn.Micro.TaskExecutionRequested.Task">
+            <summary>
+            The task instance.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Micro.TaskController">
+            <summary>
+            Handles <see cref="T:Caliburn.Micro.TaskExecutionRequested"/> messages and ensures that the property handler receives the completion message.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.TaskController.#ctor(Caliburn.Micro.IPhoneService,Caliburn.Micro.IEventAggregator)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Caliburn.Micro.TaskController"/> class.
+            </summary>
+            <param name="phoneService">The phone service.</param>
+            <param name="events">The event aggregator.</param>
+        </member>
+        <member name="M:Caliburn.Micro.TaskController.Start">
+            <summary>
+            Starts monitoring for task requests and controlling completion messages.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.TaskController.Stop">
+            <summary>
+            Stops monitoring for task requests and controlling completion messages.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Micro.TaskExtensionMethods">
+            <summary>
+            Extension methods related to phone tasks.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.TaskExtensionMethods.RequestTask``1(Caliburn.Micro.IEventAggregator,System.Action{``0},System.Object)">
+            <summary>
+            Creates a task and publishes it using the <see cref="T:Caliburn.Micro.EventAggregator"/>.
+            </summary>
+            <typeparam name="TTask">The task to create.</typeparam>
+            <param name="events">The event aggregator.</param>
+            <param name="configure">Optional configuration for the task.</param>
+            <param name="state">Optional state to be passed along to the task completion message.</param>
+        </member>
+        <member name="T:Caliburn.Micro.StorageInstruction`1">
+            <summary>
+            An instruction for saving/loading data.
+            </summary>
+            <typeparam name="T">The model type.</typeparam>
+        </member>
+        <member name="P:Caliburn.Micro.StorageInstruction`1.Owner">
+            <summary>
+            Gets or sets the owner.
+            </summary>
+            <value>
+            The owner.
+            </value>
+        </member>
+        <member name="P:Caliburn.Micro.StorageInstruction`1.StorageMechanism">
+            <summary>
+            Gets or sets the storage mechanism.
+            </summary>
+            <value>
+            The storage mechanism.
+            </value>
+        </member>
+        <member name="P:Caliburn.Micro.StorageInstruction`1.Key">
+            <summary>
+            Gets or sets the persistence key.
+            </summary>
+            <value>
+            The key.
+            </value>
+        </member>
+        <member name="P:Caliburn.Micro.StorageInstruction`1.Save">
+            <summary>
+            Gets or sets the save action.
+            </summary>
+            <value>
+            The save action.
+            </value>
+        </member>
+        <member name="P:Caliburn.Micro.StorageInstruction`1.Restore">
+            <summary>
+            Gets or sets the restore action.
+            </summary>
+            <value>
+            The restore action.
+            </value>
+        </member>
+        <member name="T:Caliburn.Micro.SimpleContainer">
+            <summary>
+            A simple IoC container.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.SimpleContainer.RegisterInstance(System.Type,System.String,System.Object)">
+            <summary>
+            Registers the instance.
+            </summary>
+            <param name="service">The service.</param>
+            <param name="key">The key.</param>
+            <param name="implementation">The implementation.</param>
+        </member>
+        <member name="M:Caliburn.Micro.SimpleContainer.RegisterPerRequest(System.Type,System.String,System.Type)">
+            <summary>
+            Registers the class so that a new instance is created on every request.
+            </summary>
+            <param name="service">The service.</param>
+            <param name="key">The key.</param>
+            <param name="implementation">The implementation.</param>
+        </member>
+        <member name="M:Caliburn.Micro.SimpleContainer.RegisterSingleton(System.Type,System.String,System.Type)">
+            <summary>
+            Registers the class so that it is created once, on first request, and the same instance is returned to all requestors thereafter.
+            </summary>
+            <param name="service">The service.</param>
+            <param name="key">The key.</param>
+            <param name="implementation">The implementation.</param>
+        </member>
+        <member name="M:Caliburn.Micro.SimpleContainer.RegisterHandler(System.Type,System.String,System.Func{System.Object})">
+            <summary>
+            Registers a custom handler for serving requests from the container.
+            </summary>
+            <param name="service">The service.</param>
+            <param name="key">The key.</param>
+            <param name="handler">The handler.</param>
+        </member>
+        <member name="M:Caliburn.Micro.SimpleContainer.GetInstance(System.Type,System.String)">
+            <summary>
+            Requests an instance.
+            </summary>
+            <param name="service">The service.</param>
+            <param name="key">The key.</param>
+            <returns>The instance, or null if a handler is not found.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.SimpleContainer.GetAllInstances(System.Type)">
+            <summary>
+            Requests all instances of a given type.
+            </summary>
+            <param name="service">The service.</param>
+            <returns>All the instances or an empty enumerable if none are found.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.SimpleContainer.BuildUp(System.Object)">
+            <summary>
+            Pushes dependencies into an existing instance based on interface properties with setters.
+            </summary>
+            <param name="instance">The instance.</param>
+        </member>
+        <member name="M:Caliburn.Micro.SimpleContainer.BuildInstance(System.Type)">
+            <summary>
+            Actually does the work of creating the instance and satisfying it's constructor dependencies.
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Caliburn.Micro.SimpleContainer.ActivateInstance(System.Type,System.Object[])">
+            <summary>
+            Creates an instance of the type with the specified constructor arguments.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="args">The constructor args.</param>
+            <returns>The created instance.</returns>
+        </member>
+        <member name="E:Caliburn.Micro.SimpleContainer.Activated">
+            <summary>
+            Occurs when a new instance is created.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Micro.StorageCoordinator">
+            <summary>
+            Coordinates the saving and loading of objects based on application lifecycle events.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.StorageCoordinator.#ctor(Caliburn.Micro.IPhoneContainer,Caliburn.Micro.IPhoneService,System.Collections.Generic.IEnumerable{Caliburn.Micro.IStorageMechanism},System.Collections.Generic.IEnumerable{Caliburn.Micro.IStorageHandler})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Caliburn.Micro.StorageCoordinator"/> class.
+            </summary>
+            <param name="container">The container.</param>
+            <param name="phoneService">The phone service.</param>
+            <param name="storageMechanisms">The storage mechanisms.</param>
+            <param name="handlers">The handlers.</param>
+        </member>
+        <member name="M:Caliburn.Micro.StorageCoordinator.Start">
+            <summary>
+            Starts monitoring application and container events.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.StorageCoordinator.Stop">
+            <summary>
+            Stops monitoring application and container events.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.StorageCoordinator.GetStorageMechanism``1">
+            <summary>
+            Gets the storage mechanism.
+            </summary>
+            <typeparam name="T">The type of storage mechanism to get.</typeparam>
+            <returns>The storage mechanism.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageCoordinator.AddStorageMechanism(Caliburn.Micro.IStorageMechanism)">
+            <summary>
+            Adds the storage mechanism.
+            </summary>
+            <param name="storageMechanism">The storage mechanism.</param>
+        </member>
+        <member name="M:Caliburn.Micro.StorageCoordinator.AddStorageHandler(Caliburn.Micro.IStorageHandler)">
+            <summary>
+            Adds the storage handler.
+            </summary>
+            <param name="handler">The handler.</param>
+            <returns>Itself</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageCoordinator.GetStorageHandlerFor(System.Object)">
+            <summary>
+            Gets the storage handler for a paricular instance.
+            </summary>
+            <param name="instance">The instance.</param>
+            <returns>The storage handler.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageCoordinator.Save(Caliburn.Micro.StorageMode)">
+            <summary>
+            Saves all monitored instances according to the provided mode.
+            </summary>
+            <param name="saveMode">The save mode.</param>
+        </member>
+        <member name="M:Caliburn.Micro.StorageCoordinator.Restore(System.Object,Caliburn.Micro.StorageMode)">
+            <summary>
+            Restores the specified instance.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="restoreMode">The restore mode.</param>
+        </member>
+        <member name="T:Caliburn.Micro.StorageMode">
+            <summary>
+            The mode used to save/restore data.
+            </summary>
+        </member>
+        <member name="F:Caliburn.Micro.StorageMode.Automatic">
+            <summary>
+            Automatic Determine the Mode
+            </summary>
+        </member>
+        <member name="F:Caliburn.Micro.StorageMode.Temporary">
+            <summary>
+            Use Temporary storage.
+            </summary>
+        </member>
+        <member name="F:Caliburn.Micro.StorageMode.Permanent">
+            <summary>
+            Use Permenent storage.
+            </summary>
+        </member>
+        <member name="F:Caliburn.Micro.StorageMode.Any">
+            <summary>
+            Use any storage mechanism available.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Micro.StorageHandler`1">
+            <summary>
+            Handles the storage of a pariticular class.
+            </summary>
+            <typeparam name="T">The type that this class handles.</typeparam>
+        </member>
+        <member name="M:Caliburn.Micro.StorageHandler`1.Id(System.Func{`0,System.Object})">
+            <summary>
+            Provides a mechanism for obtaining an instance's unique id.
+            </summary>
+            <param name="getter">The getter.</param>
+        </member>
+        <member name="M:Caliburn.Micro.StorageHandler`1.Configure">
+            <summary>
+            Overrided by inheritors to configure the handler for use.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.StorageHandler`1.EntireGraph``1(System.String)">
+            <summary>
+            Instructs the handler to store the entire object graph, rather than individual properties.
+            </summary>
+            <typeparam name="TService">The type of the service.</typeparam>
+            <param name="storageKey">The optional storage key.</param>
+            <returns>The builder.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageHandler`1.Property(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Instructs the handler to store a property.
+            </summary>
+            <param name="property">The property.</param>
+            <returns>The builder.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageHandler`1.Child(System.Linq.Expressions.Expression{System.Func{`0,System.Object}})">
+            <summary>
+            Instructs the handler to store a child object's properties.
+            </summary>
+            <param name="property">The property.</param>
+            <returns>The builder.</returns>
+            <remarks>This assumes that the parent instance provides the child instance, but that the child instance's properties are handled by a unique handler.</remarks>
+        </member>
+        <member name="M:Caliburn.Micro.StorageHandler`1.AddInstruction">
+            <summary>
+            Adds a new storage instruction.
+            </summary>
+            <returns>The builder.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageHandler`1.Save(`0,Caliburn.Micro.StorageMode)">
+            <summary>
+            Uses this handler to save a particular instance using instructions that support the provided mode.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="mode">The storage mode.</param>
+        </member>
+        <member name="M:Caliburn.Micro.StorageHandler`1.Restore(`0,Caliburn.Micro.StorageMode)">
+            <summary>
+            Uses this handler to restore a particular instance using instructions that support the provided mode.
+            </summary>
+            <param name="instance">The instance.</param>
+            <param name="mode">The mode.</param>
+        </member>
+        <member name="P:Caliburn.Micro.StorageHandler`1.Coordinator">
+            <summary>
+            Gets or sets the coordinator.
+            </summary>
+            <value>
+            The coordinator.
+            </value>
+        </member>
+        <member name="T:Caliburn.Micro.TaskCompleted`1">
+            <summary>
+            A message which is published when a task completes.
+            </summary>
+            <typeparam name="TTaskEventArgs">The type of the task event args.</typeparam>
+        </member>
+        <member name="F:Caliburn.Micro.TaskCompleted`1.State">
+            <summary>
+            Optional state provided by the original sender.
+            </summary>
+        </member>
+        <member name="F:Caliburn.Micro.TaskCompleted`1.Result">
+            <summary>
+            The results of the task.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Micro.UriBuilder`1">
+            <summary>
+            Builds a Uri in a strongly typed fashion, based on a ViewModel.
+            </summary>
+            <typeparam name="TViewModel"></typeparam>
+        </member>
+        <member name="M:Caliburn.Micro.UriBuilder`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Caliburn.Micro.UriBuilder`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.UriBuilder`1.WithParam``1(System.Linq.Expressions.Expression{System.Func{`0,``0}},``0)">
+            <summary>
+            Adds a query string parameter to the Uri.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="property">The property.</param>
+            <param name="value">The property value.</param>
+            <returns>Itself</returns>
+        </member>
+        <member name="M:Caliburn.Micro.UriBuilder`1.AttachTo(Caliburn.Micro.INavigationService)">
+            <summary>
+            Attaches a navigation servies to this builder.
+            </summary>
+            <param name="navigationService">The navigation service.</param>
+            <returns>Itself</returns>
+        </member>
+        <member name="M:Caliburn.Micro.UriBuilder`1.Navigate">
+            <summary>
+            Navigates to the Uri represented by this builder.
+            </summary>
+        </member>
+        <member name="T:Caliburn.Micro.StorageInstructionBuilder`1">
+            <summary>
+            Used to create a fluent interface for building up a storage instruction.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:Caliburn.Micro.StorageInstructionBuilder`1.#ctor(Caliburn.Micro.StorageInstruction{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Caliburn.Micro.StorageInstructionBuilder`1"/> class.
+            </summary>
+            <param name="storageInstruction">The storage instruction.</param>
+        </member>
+        <member name="M:Caliburn.Micro.StorageInstructionBuilder`1.Configure(System.Action{Caliburn.Micro.StorageInstruction{`0}})">
+            <summary>
+            Configures the instruction with the specified behavior.
+            </summary>
+            <param name="configure">The configuration callback.</param>
+            <returns>Itself</returns>
+        </member>
+        <member name="T:Caliburn.Micro.StorageInstructionExtensions">
+            <summary>
+            Extension methods for configuring storage instructions.
+            </summary>
+        </member>
+        <member name="M:Caliburn.Micro.StorageInstructionExtensions.InPhoneState``1(Caliburn.Micro.StorageInstructionBuilder{``0})">
+            <summary>
+            Stores the data in the transient phone State.
+            </summary>
+            <typeparam name="T">The model type.</typeparam>
+            <param name="builder">The builder.</param>
+            <returns>The builder.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageInstructionExtensions.InAppSettings``1(Caliburn.Micro.StorageInstructionBuilder{``0})">
+            <summary>
+            Stores the data in the permanent ApplicationSettings.
+            </summary>
+            <typeparam name="T">The model type.</typeparam>
+            <param name="builder">The builder.</param>
+            <returns>The builder.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageInstructionExtensions.RestoreAfterActivation``1(Caliburn.Micro.StorageInstructionBuilder{``0})">
+            <summary>
+            Restores the data when IActivate.Activated is raised.
+            </summary>
+            <typeparam name="T">The model type.</typeparam>
+            <param name="builder">The builder.</param>
+            <returns>The builder.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageInstructionExtensions.RestoreAfterViewLoad``1(Caliburn.Micro.StorageInstructionBuilder{``0})">
+            <summary>
+            Restores the data after view's Loaded event is raised.
+            </summary>
+            <typeparam name="T">The model type.</typeparam>
+            <param name="builder">The builder.</param>
+            <returns>The builder.</returns>
+        </member>
+        <member name="M:Caliburn.Micro.StorageInstructionExtensions.ActiveItemIndex``1(Caliburn.Micro.StorageHandler{``0})">
+            <summary>
+            Stores the index of the Conductor's ActiveItem.
+            </summary>
+            <typeparam name="T">The model type.</typeparam>
+            <param name="handler">The handler.</param>
+            <returns>The builder.</returns>
+        </member>
+    </members>
+</doc>
