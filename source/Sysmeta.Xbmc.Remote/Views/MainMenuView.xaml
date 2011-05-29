@@ -3,20 +3,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" mc:Ignorable="d"
+             xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+             xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime" mc:Ignorable="d"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
+    d:DataContext="{d:DesignInstance Type=designData:MainMenuDesignData, IsDesignTimeCreatable=True}"
     d:DesignHeight="480" d:DesignWidth="480">
     
-    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneChromeBrush}">
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneBackgroundBrush}">
         <ListBox Margin="0,0,-12,0" ItemsSource="{Binding MenuItems}">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Margin="0,0,0,17" Width="432" cal:Message.Attach="[Event MouseLeftButtonUp] = [Action Selected($datacontext)]">
-                        <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                    </StackPanel>
+                    <StackPanel Orientation="Horizontal">
+                		<Image Height="64" Width="64" Source="{Binding Image}" RenderTransformOrigin="0.895,0.394"/>
+                		<StackPanel Margin="0,0,0,17" Width="432" cal:Message.Attach="[Event MouseLeftButtonUp] = [Action Selected($datacontext)]">
+                			<TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
+                			<TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                		</StackPanel>
+                	</StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>

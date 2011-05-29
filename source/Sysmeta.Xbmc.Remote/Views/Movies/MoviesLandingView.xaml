@@ -7,12 +7,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
+    xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False"
+    d:DataContext="{d:DesignInstance Type=designData:MoviesLandingDesignData, IsDesignTimeCreatable=True}">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -22,14 +24,14 @@
         </Grid.RowDefinitions>
 
         <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="movies" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,2,0,88">
+        	<TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" />
+        	<TextBlock x:Name="PageTitle" Text="movies" Style="{StaticResource PhoneTextTitle1Style}" Foreground="#DE000000" Margin="0,0,80,0" HorizontalAlignment="Right"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
+            <ListBox Margin="0,-87,-12,0" ItemsSource="{Binding Items}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Margin="0,0,0,17" Width="432" cal:Message.Attach="[Event MouseLeftButtonUp] = [Action Selected($datacontext)]">
@@ -40,5 +42,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
+        <Image Margin="0,2,340,104" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/movies.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
     </Grid>
 </phone:PhoneApplicationPage>

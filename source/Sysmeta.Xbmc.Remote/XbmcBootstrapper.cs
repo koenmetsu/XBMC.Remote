@@ -29,7 +29,8 @@
             container.PerRequest<MoviesLandingViewModel>();
             container.PerRequest<MovieTitleListViewModel>();
             container.PerRequest<MovieDetailedViewModel>();
-            
+
+            container.RegisterSingleton(typeof(ICache), null, typeof(Cache));
             container.RegisterSingleton(typeof(IXbmcHost), null, typeof(XbmcHost));
             container.RegisterSingleton(typeof(IProgressService), null, typeof(ProgressService));
 

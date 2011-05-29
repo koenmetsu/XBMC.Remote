@@ -14,37 +14,20 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait"  Orientation="Portrait"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="False">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
 
-        <controls:Panorama Title="xmbc">
-<!--            <controls:Panorama.Background>-->
-<!--                <ImageBrush ImageSource="PanoramaBackground.png"/>-->
-<!--            </controls:Panorama.Background>-->
+        <controls:Panorama Title="">
+        	<controls:Panorama.TitleTemplate>
+        		<DataTemplate>
+					<Image Height="98" Margin="8,72,72,0" Stretch="Fill" VerticalAlignment="Top" Source="Images/xbmc_logo.png"/>
+				</DataTemplate>
+			</controls:Panorama.TitleTemplate>
 
-            <!--Panorama item one-->
-            <controls:PanoramaItem x:Name="MainMenu" Header="menu" />
-
-            <!--Panorama item two-->
-            <!--Use 'Orientation="Horizontal"' to enable a panel that lays out horizontally-->
-            <controls:PanoramaItem Header="second item">
-                <!--Double line list with image placeholder and text wrapping-->
-                <ListBox Margin="0,0,-12,0" ItemsSource="{Binding Items}">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,17">
-                                <!--Replace rectangle with image-->
-                                <Rectangle Height="100" Width="100" Fill="#FFE5001b" Margin="12,0,9,0"/>
-                                <StackPanel Width="311">
-                                    <TextBlock Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
-                                    <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
-                                </StackPanel>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </controls:PanoramaItem>
+            <controls:PanoramaItem x:Name="MainMenu" Header="menu" />            
+            <controls:PanoramaItem Header="current" />
+			
         </controls:Panorama>
 
     </Grid>

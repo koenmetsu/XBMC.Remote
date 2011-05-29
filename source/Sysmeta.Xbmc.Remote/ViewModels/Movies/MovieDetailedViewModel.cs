@@ -6,10 +6,13 @@
 
     public class MovieDetailedViewModel : Screen
     {
+        private readonly INavigationService navigationService;
+
         private readonly IXbmcHost host;
 
-        public MovieDetailedViewModel(IXbmcHost host)
+        public MovieDetailedViewModel(INavigationService navigationService, IXbmcHost host)
         {
+            this.navigationService = navigationService;
             this.host = host;
         }
 
@@ -21,9 +24,16 @@
         {
             base.OnActivate();
 
-            this.host.GetMovieDetail(this.MovieId, movie =>
+            this.host.GetMovieDetails(this.MovieId, movie =>
                 {
-                    
+                    if (movie == null)
+                    {
+                        this.navigationService.GoBack();
+                        return;
+                    }
+
+                    this.Title = movie.Title;
+                    NotifyOfPropertyChange(() => this.Title);
                 });
         }
     }

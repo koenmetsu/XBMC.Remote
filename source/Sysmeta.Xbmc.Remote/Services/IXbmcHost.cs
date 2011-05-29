@@ -10,23 +10,32 @@
     {
         void ListMovies(Action<IEnumerable<Movie>> action);
 
-        void GetMovieDetail(int movieId, Action<Movie> action);
+        void GetMovieDetails(int movieId, Action<Movie> action);
     }
 
     public class XbmcHost : IXbmcHost
     {
+        private readonly ICache cache;
+
         private readonly IProgressService progressService;
 
         private XbmcClient client;
 
-        public XbmcHost(IProgressService progressService)
+        public XbmcHost(ICache cache, IProgressService progressService)
         {
+            this.cache = cache;
             this.progressService = progressService;
             this.client = new XbmcClient("http://FENPC100:8081/");
         }
 
         public void ListMovies(Action<IEnumerable<Movie>> action)
         {
+            if (cache.HasValue("ListMovies"))
+            {
+                action(cache.Get<IEnumerable<Movie>>("ListMovies"));
+                return;
+            }
+
             progressService.Show();
             this.client.VideoLibrary.GetMovies(
                 (result, exception) =>
@@ -38,38 +47,17 @@
                         }
                         else
                         {
+                            foreach (var movie in result.Movies)
+                            {
+                                cache.Add(movie.MovieId.ToString(), movie);
+                            }
+
+                            cache.Add("ListMovies", result.Movies);
                             action(result.Movies);
                             progressService.Hide();
                         }
                     },
-                MovieFields.Title,
-                MovieFields.Director,
-                MovieFields.Genre,
-                MovieFields.Rating,
-                MovieFields.Year,
-                MovieFields.Thumbnail,
-                MovieFields.Runtime);
-        }
-
-        public void GetMovieDetail(int movieId, Action<Movie> action)
-        {
-            progressService.Show();
-
-            this.client.VideoLibrary.GetMovieDetails(
-                (movie, exception) =>
-                    {
-                        action(movie);
-                        progressService.Hide();
-                    },
-                movieId,
-                MovieFields.Title,
-                MovieFields.Director,
-                MovieFields.Genre,
-                MovieFields.Rating,
-                MovieFields.Year,
-                MovieFields.Thumbnail,
-                MovieFields.Runtime
-                /*MovieFields.Cast,
+                MovieFields.Cast,
                 MovieFields.Country,
                 MovieFields.Director,
                 MovieFields.Fanart,
@@ -98,7 +86,47 @@
                 MovieFields.Votes,
                 MovieFields.Writer,
                 MovieFields.WritingCredits,
-                MovieFields.Year*/);
+                MovieFields.Year);
+        }
+
+        public void GetMovieDetails(int movieId, Action<Movie> action)
+        {
+            string key = movieId.ToString();
+
+            if (!this.cache.HasValue(key))
+            {
+                action(null);
+                return;
+            }
+
+            action(this.cache.Get<Movie>(key));
+        }
+    }
+
+    public interface ICache
+    {
+        void Add(string key, object value);
+        T Get<T>(string key);
+        bool HasValue(string key);
+    }
+
+    public class Cache : ICache
+    {
+        private Dictionary<string, object> cache = new Dictionary<string, object>(); 
+
+        public void Add(string key, object value)
+        {
+            cache[key] = value;
+        }
+
+        public T Get<T>(string key)
+        {
+            return (T)this.cache[key];
+        }
+
+        public bool HasValue(string key)
+        {
+            return this.cache.ContainsKey(key);
         }
     }
 }

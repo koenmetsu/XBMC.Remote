@@ -25,8 +25,9 @@ namespace Sysmeta.Xbmc.Client
                 var jfields = new JArray();
                 foreach (var field in fields)
                 {
-                    jfields.Add(field.ToString().ToLower());
+                    jfields.Add(field.ToString());
                 }
+                jfields.Add("imdbnumber");
                 param.Add(new JProperty("fields", jfields));
             }
 

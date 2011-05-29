@@ -25,6 +25,8 @@
     <SilverlightAppEntry>Sysmeta.Xbmc.Remote.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>4.0.20901.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -89,6 +91,10 @@
     <Compile Include="ViewModels\Movies\MovieDetailedViewModel.cs" />
     <Compile Include="ViewModels\Movies\MoviesLandingViewModel.cs" />
     <Compile Include="ViewModels\Movies\MovieTitleListViewModel.cs" />
+    <Compile Include="Views\DesignTime\MainMenuDesignData.cs" />
+    <Compile Include="Views\DesignTime\MovieDesignData.cs" />
+    <Compile Include="Views\DesignTime\MovieListDesignData.cs" />
+    <Compile Include="Views\DesignTime\MoviesLandingDesignData.cs" />
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
@@ -153,8 +159,13 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Images\Black\movies.png" />
+    <Resource Include="Images\Black\remote.png" />
+    <Resource Include="Images\Black\settings.png" />
+    <Resource Include="Images\Black\tv.png" />
     <Resource Include="Images\star.png" />
     <Content Include="SplashScreenImage.jpg" />
+    <Resource Include="Images\xbmc_logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Model\" />

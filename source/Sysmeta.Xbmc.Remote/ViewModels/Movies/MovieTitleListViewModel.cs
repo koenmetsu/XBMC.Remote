@@ -1,9 +1,13 @@
 ﻿namespace Sysmeta.Xbmc.Remote.ViewModels.Movies
 {
+    using System;
+
     using Caliburn.Micro;
 
     using Sysmeta.Xbmc.Client;
     using Sysmeta.Xbmc.Remote.Services;
+
+    using Telerik.Windows.Controls;
 
     public class MovieTitleListViewModel : Screen, IMenuItem
     {
@@ -21,16 +25,21 @@
             this.host = host;
             this.Title = TitleString;
             this.Description = DescriptionString;
+            this.Image = null;
         }
 
         public string Title { get; set; }
 
         public string Description { get; set; }
 
+        public Uri Image { get; set; }
+
         public IObservableCollection<Movie> Movies { get; set; }
 
-        public void Selected(Movie movie)
+        public void Selected(ListBoxItemTapEventArgs eventArgs)
         {
+            Movie movie = (Movie)eventArgs.Item.Content;
+
             this.navigationService.UriFor<MovieDetailedViewModel>()
                 .WithParam(p => p.MovieId, movie.MovieId)
                 .Navigate();

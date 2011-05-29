@@ -1,5 +1,6 @@
 ﻿namespace Sysmeta.Xbmc.Remote.ViewModels.Movies
 {
+    using System;
     using System.Collections.Generic;
 
     using Caliburn.Micro;
@@ -18,6 +19,7 @@
             this.navigationService = navigationService;
             this.Title = TitleString;
             this.Description = DescriptionString;
+            this.Image = new Uri("/Sysmeta.Xbmc.Remote;component/Images/Black/movies.png", UriKind.RelativeOrAbsolute);
 
             this.Items = new[] { titleList };
         }
@@ -25,6 +27,8 @@
         public string Title { get; set; }
 
         public string Description { get; set; }
+
+        public Uri Image { get; set; }
 
         public IEnumerable<IMenuItem> Items { get; set; }
 
