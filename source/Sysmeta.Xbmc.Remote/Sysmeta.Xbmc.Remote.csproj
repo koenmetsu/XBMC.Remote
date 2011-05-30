@@ -161,7 +161,9 @@
     </Content>
     <Resource Include="Images\Black\movies.png" />
     <Resource Include="Images\Black\remote.png" />
+    <Resource Include="Images\Black\seen16.png" />
     <Resource Include="Images\Black\settings.png" />
+    <Resource Include="Images\Black\star.png" />
     <Resource Include="Images\Black\tv.png" />
     <Resource Include="Images\star.png" />
     <Content Include="SplashScreenImage.jpg" />

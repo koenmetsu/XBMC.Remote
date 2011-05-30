@@ -56,7 +56,7 @@
           </Setter>
         </Style>
         <DataTemplate x:Name="ListBoxItemTemplate">
-            <Border Padding="0, 10, 0, 8" BorderThickness="0, 0, 0, 1" BorderBrush="#01636A">
+            <Border Padding="0, 10, 0, 8" BorderThickness="0, 0, 0, 1" BorderBrush="{StaticResource PhoneBorderBrush}" d:DataContext="{d:DesignInstance Type=designData:MovieDesignData, IsDesignTimeCreatable=True}">
               <Grid>
                 <Grid.ColumnDefinitions>
                   <ColumnDefinition Width="Auto" />
@@ -69,7 +69,7 @@
                     <RowDefinition Height="*" />
                   </Grid.RowDefinitions>
                   <TextBlock Text="{Binding Year}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"
-                             FontSize="16" FontWeight="Bold" Margin="0, 13, 0, 0">
+                             FontSize="16" FontWeight="Bold" Margin="0,8,0,0">
                     <TextBlock.RenderTransformOrigin>
                       <Point X="0.5" Y="0.5" />
                     </TextBlock.RenderTransformOrigin>
@@ -83,12 +83,12 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                   </Grid.RowDefinitions>
-                  <Border BorderThickness="1, 1, 5, 5" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Image Source="{Binding Thumbnail}" Width="63" Height="86" Grid.Row="0" Stretch="Fill"
+                  <Border BorderThickness="0, 0, 0, 0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image Source="{Binding Thumbnail}" Width="67" Height="92" Grid.Row="0" Stretch="Fill"
                            HorizontalAlignment="Left" VerticalAlignment="Top" />
                   </Border>
-                  <Border BorderThickness="0" Grid.Row="1" Background="{StaticResource PhoneBackgroundBrush}"
-                          Padding="3, 0, 3, 0" Margin="0, 8, 0, 10">
+                  <Border BorderThickness="1" BorderBrush="{StaticResource PhoneBorderBrush}" Grid.Row="1" Background="{StaticResource PhoneBackgroundBrush}"
+                          Padding="3, 0, 3, 0" Margin="0,0,0,10">
                     <TextBlock Text="{Binding Runtime}" FontSize="14" Foreground="{StaticResource PhoneSubtleBrush}"
                                HorizontalAlignment="Center" VerticalAlignment="Center" />
                   </Border>
@@ -100,12 +100,19 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
                   </Grid.RowDefinitions>
                   <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Grid.Row="0" TextWrapping="Wrap" />
                   <StackPanel Orientation="Horizontal" Grid.Row="1">
-                    <Image Source="/Images/star.png" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                    <TextBlock Text="{Binding Rating}" FontSize="15" VerticalAlignment="Center" FontWeight="SemiBold"
-                               Margin="8, 0, 8, 0" Foreground="#0795B9" />
+                  	<Image Margin="0,2,0,0" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/star.png" Width="16" Height="16"/>
+                  	<TextBlock Text="{Binding Rating}" FontSize="15" VerticalAlignment="Center" FontWeight="SemiBold" Margin="8, 0, 8, 0" />
+					<Rectangle VerticalAlignment="Stretch" Width="1" Fill="{StaticResource PhoneSubtleBrush}" Margin="0, 3, 8, 3"/>
+                    <Border BorderThickness="1" Background="Transparent" BorderBrush="{StaticResource PhoneSubtleBrush}" Margin="0, 3, 0, 3" Padding="2, 1, 2, 1">
+                    	<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding MPAA}" Foreground="{StaticResource PhoneSubtleBrush}" FontFamily="Georgia" FontWeight="Bold" FontSize="14"/>
+                    </Border>
+					<Rectangle VerticalAlignment="Stretch" Width="1" Fill="{StaticResource PhoneSubtleBrush}" Margin="8,3"/>
+					<Image Margin="0,2,0,0" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/seen16.png" Width="16" Height="16"/>
+					
                   </StackPanel>
                   <StackPanel Orientation="Horizontal" Grid.Row="2">
                     <TextBlock Text="Genre: " FontSize="17" FontWeight="Bold"
@@ -117,6 +124,11 @@
                                Foreground="{StaticResource PhoneSubtleBrush}" />
                     <TextBlock Text="{Binding Director}" FontSize="17" />
                   </StackPanel>
+                  <StackPanel Orientation="Horizontal" Grid.Row="5">
+                    <TextBlock Text="Tagline: " FontSize="17" FontWeight="Bold"
+                               Foreground="{StaticResource PhoneSubtleBrush}" />
+                    <TextBlock Text="{Binding Tagline}" FontSize="17" />
+                  </StackPanel>				  
                 </Grid>
               </Grid>
             </Border>
