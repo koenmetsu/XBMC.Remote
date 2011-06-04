@@ -1,4 +1,4 @@
-namespace Sysmeta.Xbmc.Client
+namespace Sysmeta.Xbmc.Remote.Services
 {
     using System;
 

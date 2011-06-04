@@ -1,10 +1,11 @@
-namespace Sysmeta.Xbmc.Client
+namespace Sysmeta.Xbmc.Remote.Services
 {
     using System;
 
     using Newtonsoft.Json.Linq;
 
     using Sysmeta.JsonRpc;
+    using Sysmeta.Xbmc.Remote.Model;
 
     public class VideoLibrary
     {

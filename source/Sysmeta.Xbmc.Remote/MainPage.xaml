@@ -21,7 +21,7 @@
         <controls:Panorama Title="">
         	<controls:Panorama.TitleTemplate>
         		<DataTemplate>
-					<Image Height="98" Margin="8,72,72,0" Stretch="Fill" VerticalAlignment="Top" Source="Images/xbmc_logo.png"/>
+					<Image Height="98" Margin="8,80,72,0" Stretch="Fill" VerticalAlignment="Top" Source="Images/Black/xbmc_logo.png"/>
 				</DataTemplate>
 			</controls:Panorama.TitleTemplate>
 

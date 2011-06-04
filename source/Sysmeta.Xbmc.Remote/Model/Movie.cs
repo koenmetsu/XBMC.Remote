@@ -1,4 +1,4 @@
-﻿namespace Sysmeta.Xbmc.Client
+﻿namespace Sysmeta.Xbmc.Remote.Model
 {
     using System;
 
@@ -7,7 +7,7 @@
     public class Movie
     {
         [JsonProperty("movieid")]
-        public int MovieId { get; set; }
+        public int Id { get; set; }
 
         [JsonProperty("label")]
         public string Label { get; set; }

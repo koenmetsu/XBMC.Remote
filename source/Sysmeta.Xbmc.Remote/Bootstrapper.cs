@@ -9,17 +9,18 @@
 
     using Microsoft.Phone.Controls;
 
-    using Sysmeta.Xbmc.Client;
     using Sysmeta.Xbmc.Remote.Services;
     using Sysmeta.Xbmc.Remote.ViewModels;
     using Sysmeta.Xbmc.Remote.ViewModels.Movies;
-    using Sysmeta.Xbmc.Remote.Views.Movies;
+    using Sysmeta.Xbmc.Remote.ViewModels.Remote;
+    using Sysmeta.Xbmc.Remote.ViewModels.Settings;
+    using Sysmeta.Xbmc.Remote.ViewModels.Tvshows;
 
-    public class XbmcBootstrapper : PhoneBootstrapper
+    public class Bootstrapper : PhoneBootstrapper
     {
         private PhoneContainer container;
 
-        public XbmcBootstrapper()
+        public Bootstrapper()
         {
             this.container = new PhoneContainer(this.RootFrame);
 
@@ -29,6 +30,9 @@
             container.PerRequest<MoviesLandingViewModel>();
             container.PerRequest<MovieTitleListViewModel>();
             container.PerRequest<MovieDetailedViewModel>();
+            container.PerRequest<SettingsViewModel>();
+            container.PerRequest<TvshowsLandingViewModel>();
+            container.PerRequest<RemoteViewModel>();
 
             container.RegisterSingleton(typeof(ICache), null, typeof(Cache));
             container.RegisterSingleton(typeof(IXbmcHost), null, typeof(XbmcHost));

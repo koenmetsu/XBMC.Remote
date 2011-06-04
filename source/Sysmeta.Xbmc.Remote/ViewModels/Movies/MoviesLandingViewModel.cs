@@ -5,7 +5,7 @@
 
     using Caliburn.Micro;
 
-    using Sysmeta.Xbmc.Remote.Services;
+    using Sysmeta.Xbmc.Remote.ViewModels.Settings;
 
     public class MoviesLandingViewModel : Screen, IMenuItem
     {
@@ -21,7 +21,7 @@
             this.Description = DescriptionString;
             this.Image = new Uri("/Sysmeta.Xbmc.Remote;component/Images/Black/movies.png", UriKind.RelativeOrAbsolute);
 
-            this.Items = new[] { titleList };
+            this.Items = new IMenuItem[] { titleList };
         }
 
         public string Title { get; set; }

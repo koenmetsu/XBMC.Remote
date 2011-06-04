@@ -1,4 +1,4 @@
-﻿namespace Sysmeta.Xbmc.Client
+﻿namespace Sysmeta.Xbmc.Remote.Model
 {
     public enum Order
     {

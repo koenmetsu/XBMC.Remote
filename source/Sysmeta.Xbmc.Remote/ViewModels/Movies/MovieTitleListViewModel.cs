@@ -4,10 +4,11 @@
 
     using Caliburn.Micro;
 
-    using Sysmeta.Xbmc.Client;
     using Sysmeta.Xbmc.Remote.Services;
 
     using Telerik.Windows.Controls;
+
+    using Movie = Sysmeta.Xbmc.Remote.Model.Movie;
 
     public class MovieTitleListViewModel : Screen, IMenuItem
     {
@@ -34,14 +35,14 @@
 
         public Uri Image { get; set; }
 
-        public IObservableCollection<Movie> Movies { get; set; }
+        public IObservableCollection<MovieListItemViewModel> Movies { get; set; }
 
         public void Selected(ListBoxItemTapEventArgs eventArgs)
         {
-            Movie movie = (Movie)eventArgs.Item.Content;
+            MovieListItemViewModel movie = (MovieListItemViewModel)eventArgs.Item.Content;
 
             this.navigationService.UriFor<MovieDetailedViewModel>()
-                .WithParam(p => p.MovieId, movie.MovieId)
+                .WithParam(p => p.MovieId, movie.Id)
                 .Navigate();
         }
 
@@ -51,7 +52,7 @@
 
             this.host.ListMovies(movies =>
                 {
-                    this.Movies = new BindableCollection<Movie>(movies);
+                    this.Movies = new BindableCollection<MovieListItemViewModel>(movies);
                     NotifyOfPropertyChange(() => Movies);
                 });
         }

@@ -2,15 +2,22 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
+    using System.Windows.Media.Imaging;
 
-    using Sysmeta.Xbmc.Client;
+    using Sysmeta.Xbmc.Remote.ViewModels.Movies;
+
+    using Movie = Sysmeta.Xbmc.Remote.Model.Movie;
+    using MovieFields = Sysmeta.Xbmc.Remote.Model.MovieFields;
 
     public interface IXbmcHost
     {
-        void ListMovies(Action<IEnumerable<Movie>> action);
+        void ListMovies(Action<IEnumerable<MovieListItemViewModel>> action);
 
-        void GetMovieDetails(int movieId, Action<Movie> action);
+        void GetMovieDetails(int movieId, Action<MovieListItemViewModel> action);
+
+        void LoadImage(Uri image, Action<BitmapImage> action);
     }
 
     public class XbmcHost : IXbmcHost
@@ -28,11 +35,11 @@
             this.client = new XbmcClient("http://FENPC100:8081/");
         }
 
-        public void ListMovies(Action<IEnumerable<Movie>> action)
+        public void ListMovies(Action<IEnumerable<MovieListItemViewModel>> action)
         {
             if (cache.HasValue("ListMovies"))
             {
-                action(cache.Get<IEnumerable<Movie>>("ListMovies"));
+                action(cache.Get<IEnumerable<MovieListItemViewModel>>("ListMovies"));
                 return;
             }
 
@@ -42,18 +49,40 @@
                     {
                         if (exception != null)
                         {
-                            action(Enumerable.Empty<Movie>());
+                            action(Enumerable.Empty<MovieListItemViewModel>());
                             progressService.Hide();
                         }
                         else
                         {
+                            var movies = new List<MovieListItemViewModel>();
                             foreach (var movie in result.Movies)
                             {
-                                cache.Add(movie.MovieId.ToString(), movie);
+                                movies.Add(new MovieListItemViewModel(this)
+                                    {
+                                        Id = movie.Id,
+                                        Title = movie.Title,
+                                        Director = movie.Director,
+                                        Genre = movie.Genre,
+                                        MPAA = movie.MPAA,
+                                        PlayCount = movie.PlayCount,
+                                        Rating = movie.Rating,
+                                        Runtime = movie.Runtime,
+                                        Tagline = movie.Tagline,
+                                        Year = movie.Year == 0 ? "N/A" : movie.Year.ToString(),
+                                        ThumbnailSource = movie.Thumbnail
+                                    });
                             }
 
-                            cache.Add("ListMovies", result.Movies);
-                            action(result.Movies);
+                            // Cache each movie per/id
+                            foreach (var movie in movies)
+                            {
+                                cache.Add(movie.Id.ToString(), movie);
+                            }
+
+                            // Cache the list operation
+                            cache.Add("ListMovies", movies);
+                            
+                            action(movies);
                             progressService.Hide();
                         }
                     },
@@ -89,7 +118,7 @@
                 MovieFields.Year);
         }
 
-        public void GetMovieDetails(int movieId, Action<Movie> action)
+        public void GetMovieDetails(int movieId, Action<MovieListItemViewModel> action)
         {
             string key = movieId.ToString();
 
@@ -99,7 +128,30 @@
                 return;
             }
 
-            action(this.cache.Get<Movie>(key));
+            action(this.cache.Get<MovieListItemViewModel>(key));
+        }
+
+        public void LoadImage(Uri image, Action<BitmapImage> action)
+        {
+
+            this.client.Vfs.GetFile(
+                image,
+                (bytes, exception) =>
+                    {
+                        if (exception == null)
+                        {
+                            var img = new BitmapImage();
+
+                            img.SetSource(new MemoryStream(bytes));
+
+                            action(img);
+                        }
+                        else
+                        {
+                            action(null);
+                        }
+
+                    });
         }
     }
 

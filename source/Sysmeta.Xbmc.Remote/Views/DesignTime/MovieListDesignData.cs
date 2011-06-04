@@ -1,7 +1,5 @@
 ﻿namespace Sysmeta.Xbmc.Remote.Views.DesignTime
 {
-    using System.Collections.ObjectModel;
-
     using Caliburn.Micro;
 
     public class MovieListDesignData
@@ -24,9 +22,8 @@
                     new MovieDesignData(),
                     new MovieDesignData(),
                 };
-
         }
 
-        public IObservableCollection<MovieDesignData> Movies { get; set; } 
+        public IObservableCollection<MovieDesignData> Movies { get; set; }
     }
 }

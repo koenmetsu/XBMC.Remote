@@ -4,6 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:Remote="clr-namespace:Sysmeta.Xbmc.Remote">
     <Application.Resources>
-        <Remote:XbmcBootstrapper x:Key="bootstrap" />
+        <Remote:Bootstrapper x:Key="bootstrap" />
     </Application.Resources>
 </Application>
