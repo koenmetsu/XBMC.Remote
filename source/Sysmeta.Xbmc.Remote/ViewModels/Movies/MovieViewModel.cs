@@ -7,7 +7,7 @@
 
     using Sysmeta.Xbmc.Remote.Services;
 
-    public class MovieListItemViewModel : PropertyChangedBase
+    public class MovieViewModel : PropertyChangedBase
     {
         private IXbmcHost host;
         
@@ -15,7 +15,7 @@
 
         private string runtime;
 
-        public MovieListItemViewModel(IXbmcHost host)
+        public MovieViewModel(IXbmcHost host)
         {
             this.host = host;
         }
@@ -104,7 +104,7 @@
 
             set
             {
-                if (string.IsNullOrEmpty(this.runtime))
+                if (string.IsNullOrEmpty(value))
                 {
                     this.runtime = "N/A";
                 }

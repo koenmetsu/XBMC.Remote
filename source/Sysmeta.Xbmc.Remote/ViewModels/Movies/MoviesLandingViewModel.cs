@@ -14,14 +14,14 @@
         public const string TitleString = "movies";
         public const string DescriptionString = "hello world";
 
-        public MoviesLandingViewModel(INavigationService navigationService, MovieTitleListViewModel titleList)
+        public MoviesLandingViewModel(INavigationService navigationService, MovieTitleListViewModel titleList, MovieGenresSelectorViewModel genres)
         {
             this.navigationService = navigationService;
             this.Title = TitleString;
             this.Description = DescriptionString;
             this.Image = new Uri("/Sysmeta.Xbmc.Remote;component/Images/Black/movies.png", UriKind.RelativeOrAbsolute);
 
-            this.Items = new IMenuItem[] { titleList };
+            this.Items = new IMenuItem[] { titleList, genres };
         }
 
         public string Title { get; set; }
@@ -37,6 +37,10 @@
             if (item.Title == MovieTitleListViewModel.TitleString)
             {
                 this.navigationService.UriFor<MovieTitleListViewModel>().Navigate();
+            }
+            else if(item.Title == MovieGenresSelectorViewModel.TitleString)
+            {
+                this.navigationService.UriFor<MovieGenresSelectorViewModel>().Navigate();
             }
         }
     }

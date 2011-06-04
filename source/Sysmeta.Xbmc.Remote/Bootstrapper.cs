@@ -33,6 +33,8 @@
             container.PerRequest<SettingsViewModel>();
             container.PerRequest<TvshowsLandingViewModel>();
             container.PerRequest<RemoteViewModel>();
+            container.PerRequest<GenreViewModel>();
+            container.PerRequest<MovieGenresSelectorViewModel>();
 
             container.RegisterSingleton(typeof(ICache), null, typeof(Cache));
             container.RegisterSingleton(typeof(IXbmcHost), null, typeof(XbmcHost));

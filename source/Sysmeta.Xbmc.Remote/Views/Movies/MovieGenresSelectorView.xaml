@@ -7,6 +7,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime"
+    xmlns:Controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives"
+    xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -22,20 +24,20 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="bla bla bla bla bla bla bla bla bla" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="genres" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="{Binding Description}" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="{Binding Title}" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox x:Name="genres" ItemsSource="{Binding Genres}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+            <Grid.Resources>
+                <DataTemplate x:Name="ListBoxItemTemplate">
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
+                    </StackPanel>
+                </DataTemplate>
+            </Grid.Resources>
+
+            <Controls:RadDataBoundListBox x:Name="genres" ItemsSource="{Binding Genres}" ItemTemplate="{StaticResource ListBoxItemTemplate}" cal:Message.Attach="[Event ItemTap] = [Action Selected($eventArgs)]" />
         </Grid>
     </Grid>
     

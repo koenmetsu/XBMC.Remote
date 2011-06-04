@@ -35,11 +35,11 @@
 
         public Uri Image { get; set; }
 
-        public IObservableCollection<MovieListItemViewModel> Movies { get; set; }
+        public IObservableCollection<MovieViewModel> Movies { get; set; }
 
         public void Selected(ListBoxItemTapEventArgs eventArgs)
         {
-            MovieListItemViewModel movie = (MovieListItemViewModel)eventArgs.Item.Content;
+            MovieViewModel movie = (MovieViewModel)eventArgs.Item.Content;
 
             this.navigationService.UriFor<MovieDetailedViewModel>()
                 .WithParam(p => p.MovieId, movie.Id)
@@ -52,7 +52,7 @@
 
             this.host.ListMovies(movies =>
                 {
-                    this.Movies = new BindableCollection<MovieListItemViewModel>(movies);
+                    this.Movies = new BindableCollection<MovieViewModel>(movies);
                     NotifyOfPropertyChange(() => Movies);
                 });
         }

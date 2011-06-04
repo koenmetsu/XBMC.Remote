@@ -106,8 +106,10 @@
     <Compile Include="Services\XbmcClient.cs" />
     <Compile Include="ViewModels\IMenuItem.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\Movies\GenreViewModel.cs" />
     <Compile Include="ViewModels\Movies\MovieDetailedViewModel.cs" />
-    <Compile Include="ViewModels\Movies\MovieListItemViewModel.cs" />
+    <Compile Include="ViewModels\Movies\MovieGenresSelectorViewModel.cs" />
+    <Compile Include="ViewModels\Movies\MovieViewModel.cs" />
     <Compile Include="ViewModels\Movies\MoviesLandingViewModel.cs" />
     <Compile Include="ViewModels\Movies\MovieTitleListViewModel.cs" />
     <Compile Include="ViewModels\Remote\RemoteViewModel.cs" />
@@ -122,6 +124,9 @@
     <Compile Include="Views\DesignTime\MoviesLandingDesignData.cs" />
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Movies\GenreView.xaml.cs">
+      <DependentUpon>GenreView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Movies\MovieDetailedView.xaml.cs">
       <DependentUpon>MovieDetailedView.xaml</DependentUpon>
@@ -156,6 +161,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Movies\GenreView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
