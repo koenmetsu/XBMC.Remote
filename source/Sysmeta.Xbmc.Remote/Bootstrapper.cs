@@ -35,6 +35,8 @@
             container.PerRequest<RemoteViewModel>();
             container.PerRequest<GenreViewModel>();
             container.PerRequest<MovieGenresSelectorViewModel>();
+            container.PerRequest<TvshowSeasonsViewModel>();
+            container.PerRequest<TvEpisodeListViewModel>();
 
             container.RegisterSingleton(typeof(ICache), null, typeof(Cache));
             container.RegisterSingleton(typeof(IXbmcHost), null, typeof(XbmcHost));
@@ -63,6 +65,8 @@
 
         static void AddCustomConventions()
         {
+            ConventionManager.AddElementConvention<MenuItem>(ItemsControl.ItemsSourceProperty, "DataContext", "Click");
+
             ConventionManager.AddElementConvention<Pivot>(Pivot.ItemsSourceProperty, "SelectedItem", "SelectionChanged").ApplyBinding =
                 (viewModelType, path, property, element, convention) =>
                 {

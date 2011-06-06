@@ -9,74 +9,86 @@ namespace Sysmeta.Xbmc.Remote.Services
 
     public class VideoLibrary
     {
-        private readonly JsonRpcClient _client;
-        private readonly Func<int> _getRequestId;
+        private readonly JsonRpcClient client;
+        private readonly Func<int> getRequestId;
 
         internal VideoLibrary(JsonRpcClient client, Func<int> getRequestId)
         {
-            _client = client;
-            _getRequestId = getRequestId;
+            this.client = client;
+            this.getRequestId = getRequestId;
         }
 
-        public void GetMovies(Action<MoviesResult, Exception> callback, params MovieFields[] fields)
+        public void GetTvshows(Action<TvshowResult, Exception> callback)
         {
-            var param = new JObject();
-            if (fields != null && fields.Length > 0)
-            {
-                var jfields = new JArray();
-                foreach (var field in fields)
-                {
-                    jfields.Add(field.ToString());
-                }
-                jfields.Add("imdbnumber");
-                param.Add(new JProperty("fields", jfields));
-            }
+            JObject args = new JObject();
+            args.Add(new JProperty("fields", Tvshow.Fields));
 
+            JsonRpcRequest request = new JsonRpcRequest
+            {
+                Credentials = null,
+                Id = GetRequestId(),
+                Method = "VideoLibrary.GetTVShows",
+                Parameters = args
+            };
+
+            this.client.Execute<TvshowResult>(request, (r, e) => callback(r.Result, e));
+        }
+
+        public void GetTvEpisodes(int tvshowId, int season, Action<TvEpisodesResult, Exception> callback)
+        {
+            JObject args = new JObject();
+            args.Add(new JProperty("tvshowid", tvshowId));
+            args.Add(new JProperty("season", season));
+
+            args.Add(new JProperty("fields", TvEpisode.Fields));
+
+            JsonRpcRequest request = new JsonRpcRequest
+            {
+                Credentials = null,
+                Id = GetRequestId(),
+                Method = "VideoLibrary.GetEpisodes",
+                Parameters = args
+            };
+
+            this.client.Execute<TvEpisodesResult>(request, (r, e) => callback(r.Result, e));
+        }
+
+        public void GetTvSeason(int tvshowId, Action<TvSeasonsResult, Exception> callback)
+        {
+            JObject args = new JObject();
+            args.Add(new JProperty("tvshowid", tvshowId));
+            args.Add(new JProperty("fields", TvSeason.Fields));
+
+            JsonRpcRequest request = new JsonRpcRequest
+            {
+                Credentials = null,
+                Id = GetRequestId(),
+                Method = "VideoLibrary.GetSeasons",
+                Parameters = args
+            };
+
+            this.client.Execute<TvSeasonsResult>(request, (r, e) => callback(r.Result, e));
+        }
+
+        public void GetMovies(Action<MoviesResult, Exception> callback)
+        {
+            var args = new JObject();
+            args.Add(new JProperty("fields", Movie.Fields));
+            
             var request = new JsonRpcRequest()
             {
                 Credentials = null,
                 Id = GetRequestId(),
                 Method = "VideoLibrary.GetMovies",
-                Parameters = param
+                Parameters = args
             };
 
-            _client.Execute<MoviesResult>(request, (rpcResponse, exception) => callback(rpcResponse.Result, exception));
-        }
-
-        public void GetMovieDetails(Action<Movie, Exception> callback, int movieId, params MovieFields[] fields)
-        {
-            var param = new JObject();
-
-            if (fields != null && fields.Length > 0)
-            {
-                var jfields = new JArray();
-                foreach (var field in fields)
-                {
-                    jfields.Add(field.ToString().ToLower());
-                }
-                param.Add(new JProperty("fields", jfields));
-            }
-
-            param.Add(new JProperty("movieid", movieId));
-
-            var request = new JsonRpcRequest()
-            {
-                Credentials = null,
-                Version = "2.0",
-                Id = GetRequestId(),
-                Method = "VideoLibrary.GetMovieDetails",
-                Parameters = param
-            };
-
-            _client.Execute<MoviesResult>(request, (rpcResponse, exception) =>
-                {
-                    callback(null, exception);
-                });
+            this.client.Execute<MoviesResult>(request, (rpcResponse, exception) => callback(rpcResponse.Result, exception));
         }
 
         int GetRequestId()
         {
-            return _getRequestId();
+            return this.getRequestId();
         }
     }
 }

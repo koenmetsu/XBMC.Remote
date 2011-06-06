@@ -17,11 +17,11 @@
         {
             client = new JsonRpcClient(this.BuildUrl(baseUrl), executeCallbackOnUIThread);
 
-            this.VideoLibrary = new VideoLibrary(client, GetRequestId);
+            this.Video = new VideoLibrary(client, GetRequestId);
             this.Vfs = new Vfs(new Uri(baseUrl), executeCallbackOnUIThread);
         }
 
-        public VideoLibrary VideoLibrary { get; private set; }
+        public VideoLibrary Video { get; private set; }
 
         public Vfs Vfs { get; private set; }
 
@@ -111,6 +111,22 @@
             };
 
             client.Execute<JToken>(request, (response, exception) => {});
+        }
+
+        public void PlayMovie(int id)
+        {
+            JObject args = new JObject();
+            args.Add(new JProperty("movieid", id));
+
+            var request = new JsonRpcRequest
+            {
+                Credentials = null,
+                Id = GetRequestId(),
+                Method = "XBMC.Play",
+                Parameters = args
+            };
+
+            client.Execute<JToken>(request, (response, exception) => { });
         }
 
         public void Quit()

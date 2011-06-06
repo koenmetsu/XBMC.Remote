@@ -1,6 +1,8 @@
 ﻿namespace Sysmeta.Xbmc.Remote.ViewModels.Movies
 {
     using System;
+    using System.Windows;
+    using System.Windows.Media;
     using System.Windows.Media.Imaging;
 
     using Caliburn.Micro;
@@ -59,7 +61,7 @@
         }
 
         private bool thumbnailResolved = false;
-        private WeakReference thumbnail;
+        private BitmapImage thumbnail;
         public BitmapImage Thumbnail
         {
             get
@@ -79,12 +81,12 @@
                     return null;
                 }
 
-                return (BitmapImage)this.thumbnail.Target;
+                return this.thumbnail;
             }
 
             set
             {
-                this.thumbnail = new WeakReference(value);
+                this.thumbnail = value;
                 NotifyOfPropertyChange(() => this.Thumbnail);
             }
         }
@@ -146,5 +148,15 @@
         public string Director { get; set; }
 
         public string Tagline { get; set; }
+
+        public void Play()
+        {
+            this.host.Play(this.Id);
+        }
+
+        public void Queue()
+        {
+
+        }
     }
 }

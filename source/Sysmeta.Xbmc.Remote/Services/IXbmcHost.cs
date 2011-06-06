@@ -10,6 +10,9 @@
 
     using Sysmeta.Xbmc.Remote.ViewModels.Movies;
 
+    using Sysmeta.Xbmc.Remote.ViewModels.Tvshows;
+
+    using Action = Caliburn.Micro.Action;
     using Movie = Sysmeta.Xbmc.Remote.Model.Movie;
     using MovieFields = Sysmeta.Xbmc.Remote.Model.MovieFields;
 
@@ -24,6 +27,16 @@
         void GetGenres(Action<IEnumerable<GenreViewModel>> action);
 
         void GetGenre(string genre, Action<GenreViewModel> action);
+
+        void Play(int movieId);
+
+        void GetTvshows(Action<IEnumerable<TvshowViewModel>> action);
+
+        void GetTvshow(int tvshowId, Action<TvshowViewModel> action);
+
+        void GetTvSeasons(int tvshowId, Action<IEnumerable<TvSeasonViewModel>> action);
+
+        void GetTvEpisodes(int tvshowId, int season, Action<IEnumerable<TvEpisodeViewModel>> action);
     }
 
     public class XbmcHost : IXbmcHost
@@ -44,6 +57,163 @@
             this.client = new XbmcClient("http://FENPC100:8081/");
         }
 
+        public void GetTvshows(Action<IEnumerable<TvshowViewModel>> action)
+        {
+            if (this.cache.HasValue("GetTvshows"))
+            {
+                action(this.cache.Get<IEnumerable<TvshowViewModel>>("GetTvshows"));
+                return;
+            }
+
+            progressService.Show();
+            this.client.Video.GetTvshows((shows, e) =>
+                                         {
+                                             if (e != null)
+                                             {
+                                                 action(Enumerable.Empty<TvshowViewModel>());
+                                                 progressService.Hide();
+                                             }
+                                             else
+                                             {
+                                                 var tvshows = new List<TvshowViewModel>();
+                                                 foreach (var tvshow in shows.Tvshows)
+                                                 {
+                                                     tvshows.Add(new TvshowViewModel(this)
+                                                                 {
+                                                                     Id = tvshow.Id,
+                                                                     Title = tvshow.Title,
+                                                                     Episodes = tvshow.Episode,
+                                                                     FanartSource = tvshow.Fanart,
+                                                                     Genre = tvshow.Genre,
+                                                                     PlayCount = tvshow.PlayCount,
+                                                                     Plot = tvshow.Plot,
+                                                                     Premiered = tvshow.Premiered.ToShortDateString(),
+                                                                     Rating = tvshow.Rating,
+                                                                     Studio = tvshow.Studio,
+                                                                     ThumbnailSource = tvshow.Thumbnail, 
+                                                                 });
+                                                 }
+
+                                                 this.cache.Add("GetTvshows", tvshows);
+                                                 foreach (var tvshow in tvshows)
+                                                 {
+                                                     this.cache.Add(this.GetTvshowCacheKey(tvshow.Id), tvshow);
+                                                 }
+
+                                                 action(tvshows);
+                                                 progressService.Hide();
+                                             }
+                                         });
+        }
+
+        public void GetTvshow(int tvshowId, Action<TvshowViewModel> action)
+        {
+            if (this.cache.HasValue(this.GetTvshowCacheKey(tvshowId)))
+            {
+                action(this.cache.Get<TvshowViewModel>(this.GetTvshowCacheKey(tvshowId)));
+            }
+            else
+            {
+                this.GetTvshows(shows => action(shows.Where(s => s.Id == tvshowId).FirstOrDefault()));
+            }
+        }
+
+        public void GetTvEpisodes(int tvshowId, int season, Action<IEnumerable<TvEpisodeViewModel>> action)
+        {
+            string cacheKey = this.GetEpisodesCacheKey(tvshowId, season);
+            if (this.cache.HasValue(cacheKey))
+            {
+                action(this.cache.Get<IEnumerable<TvEpisodeViewModel>>(cacheKey));
+                return;
+            }
+
+            progressService.Show();
+            this.client.Video.GetTvEpisodes(tvshowId, season, (result, exception) =>
+                {
+                    if (exception != null)
+                    {
+                        action(Enumerable.Empty<TvEpisodeViewModel>());
+                        progressService.Hide();
+                    }
+                    else
+                    {
+                        var episodes = new List<TvEpisodeViewModel>();
+                        foreach (var episode in result.Episodes)
+                        {
+                            var viewModel = new TvEpisodeViewModel()
+                                {
+                                    Id = episode.Id,
+                                    Title = episode.Title,
+                                    Year = episode.Year,
+                                    Rating = episode.Rating,
+                                    Director = episode.Director,
+                                    Plot = episode.Plot,
+                                    LastPlayed = episode.LastPlayed,
+                                    ShowTitle = episode.ShowTitle,
+                                    FirstAired = episode.FirstAired,
+                                    Duration = episode.Duration,
+                                    Season = episode.Season,
+                                    Episode = episode.Episode,
+                                    PlayCount = episode.PlayCount,
+                                    Writer = episode.Writer,
+                                    Studio = episode.Studio,
+                                    MPAA = episode.MPAA,
+                                    Premiered = episode.Premiered,
+                                    FanartSource = episode.Fanart
+                                };
+                            episodes.Add(viewModel);
+                        }
+
+                        this.cache.Add(cacheKey, episodes);
+
+                        action(episodes);
+                        progressService.Show();
+                    }
+                });
+        }
+
+        public void GetTvSeasons(int tvshowId, Action<IEnumerable<TvSeasonViewModel>> action)
+        {
+            string cacheKey = this.GetTvSeasonsCacheKey(tvshowId);
+
+            if (this.cache.HasValue(cacheKey))
+            {
+                action(this.cache.Get<IEnumerable<TvSeasonViewModel>>(cacheKey));
+                return;
+            }
+
+            progressService.Show();
+            this.client.Video.GetTvSeason(tvshowId, (result, exception) =>
+                {
+                    if (exception != null || result.Seasons == null)
+                    {
+                        action(Enumerable.Empty<TvSeasonViewModel>());
+                        progressService.Hide();
+                    }
+                    else
+                    {
+                        var seasons = new List<TvSeasonViewModel>();
+                        foreach (var season in result.Seasons)
+                        {
+                            var vm = new TvSeasonViewModel(this)
+                                {
+                                    TvshowId = tvshowId,
+                                    Season = season.Season,
+                                    Title = season.Title,
+                                    ThumbnailSource = season.Thumbnail,
+                                    Episodes = season.Episodes
+                                };
+                            seasons.Add(vm);
+                        }
+
+                        this.cache.Add(cacheKey, seasons);
+
+                        action(seasons);
+                        progressService.Hide();
+                    }
+                });
+        }
+
         public void ListMovies(Action<IEnumerable<MovieViewModel>> action)
         {
             if (cache.HasValue("ListMovies"))
@@ -53,7 +223,7 @@
             }
 
             progressService.Show();
-            this.client.VideoLibrary.GetMovies(
+            this.client.Video.GetMovies(
                 (result, exception) =>
                     {
                         if (exception != null)
@@ -85,7 +255,7 @@
                             // Cache each movie per/id
                             foreach (var movie in movies)
                             {
-                                cache.Add(movie.Id.ToString(), movie);
+                                cache.Add(this.GetMovieCacheKey(movie.Id), movie);
                             }
 
                             // Cache the list operation
@@ -94,42 +264,12 @@
                             action(movies);
                             progressService.Hide();
                         }
-                    },
-                MovieFields.Cast,
-                MovieFields.Country,
-                MovieFields.Director,
-                MovieFields.Fanart,
-                MovieFields.File,
-                MovieFields.Genre,
-                MovieFields.IMDBNumber,
-                MovieFields.LastPlayed,
-                MovieFields.MPAA,
-                MovieFields.OriginalTitle,
-                MovieFields.PlayCount,
-                MovieFields.Plot,
-                MovieFields.PlotOutline,
-                MovieFields.Premiered,
-                MovieFields.ProductionCode,
-                MovieFields.Rating,
-                MovieFields.Runtime,
-                MovieFields.Set,
-                MovieFields.Showlink,
-                MovieFields.StreamDetails,
-                MovieFields.Studio,
-                MovieFields.Tagline,
-                MovieFields.Thumbnail,
-                MovieFields.Title,
-                MovieFields.Top250,
-                MovieFields.Trailer,
-                MovieFields.Votes,
-                MovieFields.Writer,
-                MovieFields.WritingCredits,
-                MovieFields.Year);
+                    });
         }
 
         public void GetMovieDetails(int movieId, Action<MovieViewModel> action)
         {
-            string key = movieId.ToString();
+            string key = this.GetMovieCacheKey(movieId);
 
             if (!this.cache.HasValue(key))
             {
@@ -176,6 +316,11 @@
                         action(genres.Where(g => g.Name == genre).FirstOrDefault());
                     });
             }
+        }
+
+        public void Play(int movieId)
+        {
+            this.client.PlayMovie(movieId);
         }
 
         public void GetGenres(Action<IEnumerable<GenreViewModel>> action)
@@ -229,6 +374,26 @@
             }
         }
 
+
+        private string GetTvshowCacheKey(int tvshowId)
+        {
+            return string.Format("tvshowid{0}", tvshowId);
+        }
+
+        private string GetTvSeasonsCacheKey(int tvshowId)
+        {
+            return string.Format("GetTvSeasons{0}", tvshowId);
+        }
+
+        private string GetMovieCacheKey(int movieId)
+        {
+            return string.Format("movieid{0}", movieId);
+        }
+
+        private string GetEpisodesCacheKey(int tvshowId, int season)
+        {
+            return string.Format("episodes{0}{1}", tvshowId, season);
+        }
     }
 
     public interface ICache

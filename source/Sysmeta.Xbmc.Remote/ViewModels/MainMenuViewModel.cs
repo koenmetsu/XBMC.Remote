@@ -27,6 +27,10 @@
             {
                 this.navigationService.UriFor<MoviesLandingViewModel>().Navigate();
             }
+            else if (item.Title == TvshowsLandingViewModel.TitleString)
+            {
+                this.navigationService.UriFor<TvshowsLandingViewModel>().Navigate();
+            }
         }
     }
 }

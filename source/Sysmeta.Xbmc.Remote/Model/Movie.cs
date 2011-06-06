@@ -6,6 +6,25 @@
 
     public class Movie
     {
+        private static string[] _fields;
+
+        static Movie()
+        {
+            _fields = new string[] { "title", "genre", "year", "rating", "director", "file",
+                                    "trailer", "tagline", "plot", "plotoutline", "originaltitle", 
+                                    "lastplayed", "duration", "playcount", "writer", "studio", 
+                                    "mpaa", "movieid" };
+        }
+
+        internal static string[] Fields
+        {
+            get
+            {
+                return _fields;
+            }
+
+        }
+
         [JsonProperty("movieid")]
         public int Id { get; set; }
 
