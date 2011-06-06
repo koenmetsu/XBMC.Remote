@@ -151,7 +151,7 @@
 
         public void Play()
         {
-            this.host.Play(this.Id);
+            this.host.PlayMovie(this.Id);
         }
 
         public void Queue()

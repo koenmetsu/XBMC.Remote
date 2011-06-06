@@ -28,7 +28,9 @@
 
         void GetGenre(string genre, Action<GenreViewModel> action);
 
-        void Play(int movieId);
+        void PlayMovie(int movieId);
+
+        void PlayEpisode(int episodeId);
 
         void GetTvshows(Action<IEnumerable<TvshowViewModel>> action);
 
@@ -55,6 +57,11 @@
             this.progressService = progressService;
             this.navigationService = navigationService;
             this.client = new XbmcClient("http://FENPC100:8081/");
+        }
+
+        public void PlayEpisode(int episodeId)
+        {
+            this.client.PlayEpisode(episodeId);
         }
 
         public void GetTvshows(Action<IEnumerable<TvshowViewModel>> action)
@@ -140,7 +147,7 @@
                         var episodes = new List<TvEpisodeViewModel>();
                         foreach (var episode in result.Episodes)
                         {
-                            var viewModel = new TvEpisodeViewModel()
+                            var viewModel = new TvEpisodeViewModel(this)
                                 {
                                     Id = episode.Id,
                                     Title = episode.Title,
@@ -167,7 +174,7 @@
                         this.cache.Add(cacheKey, episodes);
 
                         action(episodes);
-                        progressService.Show();
+                        progressService.Hide();
                     }
                 });
         }
@@ -318,7 +325,7 @@
             }
         }
 
-        public void Play(int movieId)
+        public void PlayMovie(int movieId)
         {
             this.client.PlayMovie(movieId);
         }

@@ -19,5 +19,15 @@ namespace Sysmeta.Xbmc.Remote.Views.Tvshows
         {
             InitializeComponent();
         }
+
+        private void ContextMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.ListBox.IsEnabled = false;
+        }
+
+        private void ContextMenu_Unloaded(object sender, RoutedEventArgs e)
+        {
+            this.ListBox.IsEnabled = true;
+        }
     }
 }

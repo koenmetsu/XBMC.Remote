@@ -2,9 +2,17 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 {
     using System;
 
+    using Sysmeta.Xbmc.Remote.Services;
+
     public class TvEpisodeViewModel
     {
-        
+        private readonly IXbmcHost host;
+
+        public TvEpisodeViewModel(IXbmcHost host)
+        {
+            this.host = host;
+        }
+
         public int Id { get; set; }
 
         
@@ -56,5 +64,10 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
         public string Premiered { get; set; }
 
         public Uri FanartSource { get; set; }
+
+        public void Play()
+        {
+            this.host.PlayEpisode(this.Id);
+        }
     }
 }

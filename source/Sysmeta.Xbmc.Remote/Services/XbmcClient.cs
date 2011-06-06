@@ -129,6 +129,22 @@
             client.Execute<JToken>(request, (response, exception) => { });
         }
 
+        public void PlayEpisode(int id)
+        {
+            JObject args = new JObject();
+            args.Add(new JProperty("episodeid", id));
+
+            var request = new JsonRpcRequest
+            {
+                Credentials = null,
+                Id = GetRequestId(),
+                Method = "XBMC.Play",
+                Parameters = args
+            };
+
+            client.Execute<JToken>(request, (response, exception) => { });
+        }
+
         public void Quit()
         {
             var request = new JsonRpcRequest()
