@@ -31,6 +31,10 @@
             {
                 this.navigationService.UriFor<TvshowsLandingViewModel>().Navigate();
             }
+            else if (item.Title == SettingsViewModel.TitleString)
+            {
+                this.navigationService.UriFor<SettingsViewModel>().Navigate();
+            }
         }
     }
 }

@@ -37,6 +37,8 @@
             container.PerRequest<MovieGenresSelectorViewModel>();
             container.PerRequest<TvshowSeasonsViewModel>();
             container.PerRequest<TvEpisodeListViewModel>();
+            container.PerRequest<AboutViewModel>();
+            container.PerRequest<ServersViewModel>();
 
             container.RegisterSingleton(typeof(ICache), null, typeof(Cache));
             container.RegisterSingleton(typeof(IXbmcHost), null, typeof(XbmcHost));

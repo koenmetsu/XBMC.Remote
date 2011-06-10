@@ -116,6 +116,8 @@
     <Compile Include="ViewModels\Movies\MoviesLandingViewModel.cs" />
     <Compile Include="ViewModels\Movies\MovieTitleListViewModel.cs" />
     <Compile Include="ViewModels\Remote\RemoteViewModel.cs" />
+    <Compile Include="ViewModels\Settings\AboutViewModel.cs" />
+    <Compile Include="ViewModels\Settings\ServersViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModels\Tvshows\TvEpisodeListViewModel.cs" />
     <Compile Include="ViewModels\Tvshows\TvEpisodeViewModel.cs" />
@@ -165,6 +167,15 @@
     </Compile>
     <Compile Include="Views\ProgressBar\RelativeAnimatingContentControl.cs" />
     <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Views\Settings\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\ServersView.xaml.cs">
+      <DependentUpon>ServersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Settings\SettingsView.xaml.cs">
+      <DependentUpon>SettingsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Tvshows\TvEpisodeListView.xaml.cs">
       <DependentUpon>TvEpisodeListView.xaml</DependentUpon>
     </Compile>
@@ -223,6 +234,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Settings\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\ServersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Settings\SettingsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Tvshows\TvEpisodeListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -258,12 +281,12 @@
     <Resource Include="Images\Black\settings.png" />
     <Resource Include="Images\Black\star.png" />
     <Resource Include="Images\Black\tv.png" />
+    <Resource Include="Images\Black\about.png" />
+    <Resource Include="Images\Black\servers.png" />
     <Content Include="SplashScreenImage.jpg" />
     <Resource Include="Images\Black\xbmc_logo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Settings\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Sysmeta.JsonRpc\Sysmeta.JsonRpc.csproj">
       <Project>{76BA423A-6FB4-4D18-8DED-1F578DE7CD63}</Project>
