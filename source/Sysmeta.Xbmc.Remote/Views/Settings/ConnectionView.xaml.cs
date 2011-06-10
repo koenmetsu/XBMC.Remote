@@ -13,11 +13,19 @@ using Microsoft.Phone.Controls;
 
 namespace Sysmeta.Xbmc.Remote.Views.Settings
 {
-    public partial class ServersView : PhoneApplicationPage
+    using System.Windows.Data;
+
+    public partial class ConnectionView : PhoneApplicationPage
     {
-        public ServersView()
+        public ConnectionView()
         {
             InitializeComponent();
+        }
+
+        private void OnTextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            BindingExpression bindingExpression = ((TextBox)sender).GetBindingExpression(TextBox.TextProperty);
+            bindingExpression.UpdateSource();
         }
     }
 }

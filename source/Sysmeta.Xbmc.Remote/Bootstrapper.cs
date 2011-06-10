@@ -38,7 +38,10 @@
             container.PerRequest<TvshowSeasonsViewModel>();
             container.PerRequest<TvEpisodeListViewModel>();
             container.PerRequest<AboutViewModel>();
-            container.PerRequest<ServersViewModel>();
+            container.PerRequest<ConnectionsViewModel>();
+            container.PerRequest<ConnectionViewModel>();
+
+            container.RegisterSingleton(typeof(SettingsHost), null, typeof(SettingsHost));
 
             container.RegisterSingleton(typeof(ICache), null, typeof(Cache));
             container.RegisterSingleton(typeof(IXbmcHost), null, typeof(XbmcHost));

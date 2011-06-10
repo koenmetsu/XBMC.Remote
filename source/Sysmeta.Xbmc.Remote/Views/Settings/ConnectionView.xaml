@@ -1,0 +1,61 @@
+﻿<phone:PhoneApplicationPage 
+    x:Class="Sysmeta.Xbmc.Remote.Views.Settings.ConnectionView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:Views="clr-namespace:Sysmeta.Xbmc.Remote.Views" xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="False">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <Converters:NullOrEmptyStringToCollapsedVisibilityConverter x:Key="visibilityConverter" />
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,2,0,88">
+            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" />
+            <TextBlock x:Name="PageTitle" Text="connection" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,80,0" HorizontalAlignment="Right"/>
+        </StackPanel>
+
+        <Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
+            <StackPanel>
+                <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="XBMC Machine Address"/>
+                <TextBox Text="{Binding MachineAddress, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="OnTextBoxTextChanged"/>
+                <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="Port"/>
+                <Views:NumericTextBox Text="{Binding Port, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="OnTextBoxTextChanged"/>
+                <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="Username"/>
+                <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="OnTextBoxTextChanged"/>
+                <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="Password"/>
+                <PasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+            </StackPanel>
+        </Grid>
+        <Image Margin="0,2,340,104" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/add.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
+    </Grid>
+ 
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <cal:AppBarButton IconUri="/icons/appbar.check.rest.png"
+                                  Text="Save"
+                                  Message='Save' />
+            <cal:AppBarButton IconUri="/icons/appbar.cancel.rest.png"
+                                  Text="Cancel"
+                                  Message='Cancel' />
+            
+            <shell:ApplicationBar.MenuItems>
+                <cal:AppBarMenuItem Text="remove" Message="Remove" />
+                <cal:AppBarMenuItem Text="make active" Message="Activate" />
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+
+</phone:PhoneApplicationPage>

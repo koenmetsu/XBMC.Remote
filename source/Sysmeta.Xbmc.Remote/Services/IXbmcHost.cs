@@ -49,14 +49,17 @@
 
         private readonly INavigationService navigationService;
 
+        private readonly SettingsHost settingsHost;
+
         private XbmcClient client;
 
-        public XbmcHost(ICache cache, IProgressService progressService, INavigationService navigationService)
+        public XbmcHost(ICache cache, IProgressService progressService, INavigationService navigationService, SettingsHost settingsHost)
         {
             this.cache = cache;
             this.progressService = progressService;
             this.navigationService = navigationService;
-            this.client = new XbmcClient("http://FENPC100:8081/");
+            this.settingsHost = settingsHost;
+            this.client = new XbmcClient(this.settingsHost.Settings.Active.Url.ToString());
         }
 
         public void PlayEpisode(int episodeId)

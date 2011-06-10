@@ -11,14 +11,14 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
 
         public static string TitleString = "settings";
 
-        public SettingsViewModel(INavigationService navigationService, ServersViewModel servers, AboutViewModel about)
+        public SettingsViewModel(INavigationService navigationService, ConnectionsViewModel connections, AboutViewModel about)
         {
             this.navigationService = navigationService;
             this.Title = TitleString;
             this.Description = "settings settings settings";
             this.Image = new Uri("/Sysmeta.Xbmc.Remote;component/Images/Black/settings.png", UriKind.RelativeOrAbsolute);
 
-            this.MenuItems = new IMenuItem[] { servers, about };
+            this.MenuItems = new IMenuItem[] { connections, about };
         }
 
         public string Title { get; set; }
@@ -33,9 +33,9 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
             {
                 this.navigationService.UriFor<AboutViewModel>().Navigate();
             }
-            else if (item.Title == ServersViewModel.TitleString)
+            else if (item.Title == ConnectionsViewModel.TitleString)
             {
-                this.navigationService.UriFor<ServersViewModel>().Navigate();
+                this.navigationService.UriFor<ConnectionsViewModel>().Navigate();
             }
         }
     }
