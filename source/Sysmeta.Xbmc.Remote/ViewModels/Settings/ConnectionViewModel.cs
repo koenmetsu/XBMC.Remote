@@ -1,6 +1,7 @@
 namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
 {
     using System;
+    using System.Linq;
 
     using Caliburn.Micro;
 
@@ -27,8 +28,10 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
         {
             this.connection = connection;
 
-            this.MachineAddress = this.connection.Url.ToString();
+            this.SetConnectionParameters();
         }
+
+        public bool IsActive { get; set; }
 
         public string MachineAddress { get; set; }
 
@@ -40,14 +43,42 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
 
         public string Error { get; set; }
 
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+
+            if (this.MachineAddress != null)
+            {
+                var active =
+                    this.settingsHost.Settings.Connections.Where(
+                        c => c.Url == new Uri(string.Format("http://{0}:{1}", this.MachineAddress, this.Port))).FirstOrDefault();
+                if (active != null)
+                {
+                    this.connection = active;
+                    this.SetConnectionParameters();
+                }
+            }
+        }
+
         public void Save()
         {
-            this.settingsHost.AddConnection(new Connection
+            if (this.connection != null)
+            {
+                this.connection.Url = new Uri(string.Format("http://{0}:{1}", MachineAddress, Port));
+                this.connection.Username = this.connection.Username;
+                this.connection.Password = this.connection.Password;
+
+                this.settingsHost.Save();
+            }
+            else
+            {
+                this.settingsHost.AddConnection(new Connection
                 {
                     Url = new Uri(string.Format("http://{0}:{1}", MachineAddress, Port)),
                     Username = this.Username,
                     Password = this.Password
                 });
+            }
 
             this.navigationService.GoBack();
         }
@@ -55,6 +86,34 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
         public void Cancel()
         {
             this.navigationService.GoBack();
+        }
+
+        public void SetActive()
+        {
+            this.settingsHost.SetActiveConnection(this.connection);
+        }
+
+        public void Remove()
+        {
+            this.settingsHost.RemoveConnection(this.connection);
+        }
+
+        private void SetConnectionParameters()
+        {
+            this.MachineAddress = this.connection.Url.Host;
+            NotifyOfPropertyChange(() => this.MachineAddress);
+            this.Port = this.connection.Url.Port.ToString();
+            NotifyOfPropertyChange(() => this.Port);
+            this.Username = this.connection.Username;
+            NotifyOfPropertyChange(() => this.Username);
+            this.Password = this.connection.Password;
+            NotifyOfPropertyChange(() => this.Password);
+
+            if (settingsHost.Settings.Active != null && settingsHost.Settings.Active.Url == connection.Url)
+            {
+                this.IsActive = true;
+                NotifyOfPropertyChange(() => this.IsActive);
+            }
         }
     }
 }

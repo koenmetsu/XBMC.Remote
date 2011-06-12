@@ -19,5 +19,15 @@ namespace Sysmeta.Xbmc.Remote.Views.Settings
         {
             InitializeComponent();
         }
+
+        private void ContextMenu_Unloaded(object sender, RoutedEventArgs e)
+        {
+            this.Connections.IsEnabled = true;
+        }
+
+        private void ContextMenu_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.Connections.IsEnabled = false;
+        }
     }
 }

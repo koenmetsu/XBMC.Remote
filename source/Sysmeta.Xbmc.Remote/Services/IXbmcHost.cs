@@ -59,7 +59,7 @@
             this.progressService = progressService;
             this.navigationService = navigationService;
             this.settingsHost = settingsHost;
-            this.client = new XbmcClient(this.settingsHost.Settings.Active.Url.ToString());
+            //this.client = new XbmcClient(this.settingsHost.Settings.Active.Url.ToString());
         }
 
         public void PlayEpisode(int episodeId)

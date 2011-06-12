@@ -58,6 +58,26 @@ namespace Sysmeta.Xbmc.Remote.Services
             }
         }
 
+        public void RemoveConnection(Connection connection)
+        {
+            this.Settings.Connections.Remove(connection);
+            var newConnection = this.Settings.Connections.FirstOrDefault();
+            if (newConnection != null)
+            {
+                this.SetActiveConnection(newConnection);
+            }
+
+            if (this.isSaved)
+            {
+                this.SaveSettings();
+            }
+        }
+
+        public void Save()
+        {
+            this.SaveSettings();
+        }
+
         private void LoadSettings()
         {
             using (IsolatedStorageFile storageFile = IsolatedStorageFile.GetUserStoreForApplication())
@@ -111,6 +131,5 @@ namespace Sysmeta.Xbmc.Remote.Services
                 }
             }
         }
-
     }
 }

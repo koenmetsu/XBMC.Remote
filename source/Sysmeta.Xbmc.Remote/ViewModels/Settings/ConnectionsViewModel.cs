@@ -40,9 +40,25 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
             this.navigationService.UriFor<ConnectionViewModel>().Navigate();
         }
 
+        public void Selected(ConnectionViewModel connection)
+        {
+            this.navigationService.UriFor<ConnectionViewModel>()
+                .WithParam(c => c.MachineAddress, connection.MachineAddress)
+                .WithParam(c => c.Port, connection.Port)
+                .Navigate();
+        }
+
+        protected override void OnActivate()
+        {
+            base.OnActivate();
+
+            LoadConnections();
+        }
+
         private void LoadConnections()
         {
-            this.Connections = this.settingsHost.Settings.Connections.Select(c => new ConnectionViewModel(this.navigationService, settingsHost, c)).ToList();
+            this.Connections = this.settingsHost.Settings.Connections.Select(c => new ConnectionViewModel(this.navigationService, settingsHost, c)).OrderByDescending(model => model.IsActive).ToList();
+            this.NotifyOfPropertyChange(() => this.Connections);
         }
     }
 

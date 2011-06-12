@@ -5,35 +5,66 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime"
+	xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="False" d:DataContext="{d:DesignInstance Type=designData:ConnectionsViewDesignData, IsDesignTimeCreatable=True}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
+    	<Grid.Resources>
+    		<Converters:NullOrEmptyStringToCollapsedVisibilityConverter x:Key="visibilityConverter" />
+            <Converters:BooleanVisibilityConverter x:Key="booleanVisibilityConverter" />  	
+		</Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MinHeight="253"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,2,0,88">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,2,0,108">
             <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" />
             <TextBlock x:Name="PageTitle" Text="servers" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,80,0" HorizontalAlignment="Right"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <ListBox ItemsSource="{Binding Connections}">
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,-20,12,0">
+            <ListBox x:Name="Connections" ItemsSource="{Binding Connections}" Margin="0,-91,0,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding MachineAddress}" />
+                        <Grid Width="452" Height="70" cal:Message.Attach="[Event MouseLeftButtonUp] = [Action Selected($datacontext)]">
+                            <toolkit:ContextMenuService.ContextMenu>
+                                <toolkit:ContextMenu Loaded="ContextMenu_Loaded" Unloaded="ContextMenu_Unloaded">
+                                    <toolkit:MenuItem Header="set active" cal:Message.Attach="SetActive"/>
+                                    <toolkit:MenuItem Header="remove" cal:Message.Attach="Remove"/>
+                                </toolkit:ContextMenu>
+                            </toolkit:ContextMenuService.ContextMenu>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="Auto" MinWidth="396" />
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Width="50" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/point.png" Visibility="{Binding IsActive, Converter={StaticResource booleanVisibilityConverter}}" Margin="0,0,0,20"/>
+                            <StackPanel Height="100" Width="385" Grid.Column="1" Margin="5,0,0,-30">
+                    			<StackPanel Height="27" Orientation="Horizontal">
+                    				<TextBlock x:Name="MachineAddress" Text="{Binding MachineAddress}" d:LayoutOverrides="Width" />
+                    			</StackPanel>
+                    			<StackPanel Height="21" Orientation="Horizontal" Margin="10,0,0,0">
+                    				<TextBlock TextWrapping="Wrap" Text="Port:" Margin="0,0,3,0" FontSize="14.667" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    				<TextBlock x:Name="Port" TextWrapping="Wrap" Text="{Binding Port}" FontSize="14.667"/>
+                    			</StackPanel>
+                    			<StackPanel Height="21" Orientation="Horizontal" Margin="10,0,0,0" Visibility="{Binding Username, Converter={StaticResource visibilityConverter}}">
+                    				<TextBlock TextWrapping="Wrap" Text="Username:" Margin="0,0,3,0" FontSize="14.667" Foreground="{StaticResource PhoneSubtleBrush}"/>
+                    				<TextBlock x:Name="Username" TextWrapping="Wrap" Text="{Binding Username}" FontSize="14.667"/>
+                    			</StackPanel>
+                    		</StackPanel>
+                    	</Grid>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Image Margin="0,2,340,104" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/servers.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
+        <Image Margin="0,2,340,124" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/servers.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>

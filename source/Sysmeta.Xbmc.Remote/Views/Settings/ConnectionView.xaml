@@ -6,29 +6,30 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:Views="clr-namespace:Sysmeta.Xbmc.Remote.Views" xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="False" d:DataContext="{d:DesignInstance Type=designData:ConnectionViewDesignData, IsDesignTimeCreatable=True}">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
             <Converters:NullOrEmptyStringToCollapsedVisibilityConverter x:Key="visibilityConverter" />
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" MinHeight="144"/>
+            <RowDefinition Height="1"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,2,0,88">
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,2,0,14">
             <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" />
-            <TextBlock x:Name="PageTitle" Text="connection" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,80,0" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="PageTitle" Text="connection" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,2,0" HorizontalAlignment="Right"/>
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,0,12,0">
-            <StackPanel>
+        <Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,129,12,0">
+            <StackPanel Margin="0,-123,0,0">
                 <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="XBMC Machine Address"/>
                 <TextBox Text="{Binding MachineAddress, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="OnTextBoxTextChanged"/>
                 <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="Port"/>
@@ -39,7 +40,7 @@
                 <PasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
             </StackPanel>
         </Grid>
-        <Image Margin="0,2,340,104" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/add.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
+        <Image Margin="0,8,340,8" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/add.png" Stretch="Fill" HorizontalAlignment="Right" Width="128" Height="128" d:LayoutOverrides="VerticalAlignment"/>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>

@@ -134,6 +134,8 @@
     <Compile Include="Views\Converters\NullToCollapsedVisibilityConverter.cs" />
     <Compile Include="Views\Converters\NullToVisibleVisibilityConverter.cs" />
     <Compile Include="Views\Converters\ZeroVisibilityConverter.cs" />
+    <Compile Include="Views\DesignTime\ConnectionsViewDesignData.cs" />
+    <Compile Include="Views\DesignTime\ConnectionViewDesignData.cs" />
     <Compile Include="Views\DesignTime\TvEpisodeListDesignData.cs" />
     <Compile Include="Views\DesignTime\TvEpisodeListItemDesignData.cs" />
     <Compile Include="Views\DesignTime\TvshowLadingDesignViewModel.cs" />
@@ -305,6 +307,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Images\Black\add.png" />
+    <Resource Include="Images\Black\point.png" />
     <Content Include="SplashScreenImage.jpg" />
     <Resource Include="Images\Black\xbmc_logo.png" />
   </ItemGroup>
