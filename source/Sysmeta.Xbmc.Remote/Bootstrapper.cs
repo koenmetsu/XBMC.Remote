@@ -41,6 +41,7 @@
             container.PerRequest<AboutViewModel>();
             container.PerRequest<ConnectionsViewModel>();
             container.PerRequest<ConnectionViewModel>();
+            container.PerRequest<RecentlyAddedMoviesViewModel>();
 
             container.RegisterSingleton(typeof(SettingsHost), null, typeof(SettingsHost));
 

@@ -20,7 +20,7 @@
 			<Converters:NullToCollapsedVisibilityConverter x:Key="nullToCollapsed" />
 			<Converters:NullToVisibleVisibilityConverter x:Key="nullToVisible" />
 			<DataTemplate x:Key="ItemTemplate">
-				<Grid d:DesignWidth="201" d:DesignHeight="97" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=designData:TvshowDesignData}" Height="113" Width="456">
+                <Grid Background="Transparent" d:DesignWidth="201" d:DesignHeight="97" d:DataContext="{d:DesignInstance IsDesignTimeCreatable=True, Type=designData:TvshowDesignData}" Height="113" Width="456">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>

@@ -11,7 +11,7 @@
     d:DataContext="{d:DesignInstance Type=designData:TvshowSeasonListDesignData, IsDesignTimeCreatable=True}">
 	<UserControl.Resources>
 		<DataTemplate x:Key="DataTemplate1">
-            <Grid Height="133" Width="480" d:DataContext="{d:DesignInstance Type=designData:TvshowSeasonDesignData, IsDesignTimeCreatable=True}" Margin="3,0,0,3">
+            <Grid Background="Transparent" Height="133" Width="480" d:DataContext="{d:DesignInstance Type=designData:TvshowSeasonDesignData, IsDesignTimeCreatable=True}" Margin="3,0,0,3">
 				<Image HorizontalAlignment="Left" Width="100" Source="{Binding Thumbnail}"/>
 				<StackPanel Margin="110,0,0,0">
 					<TextBlock TextWrapping="Wrap" Text="{Binding Title}" FontSize="{StaticResource PhoneFontSizeExtraLarge}" />

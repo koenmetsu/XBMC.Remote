@@ -36,7 +36,7 @@
             <ListBox x:Name="listBox" Margin="0,-87,-12,0" ItemsSource="{Binding Items}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Margin="0,0,0,17" Width="432" cal:Message.Attach="[Event MouseLeftButtonUp] = [Action Selected($datacontext)]">
+                        <StackPanel Background="Transparent" Margin="0,0,0,17" Width="432" cal:Message.Attach="[Event MouseLeftButtonUp] = [Action Selected($datacontext)]">
                             <TextBlock Text="{Binding Title}" TextWrapping="Wrap" Style="{StaticResource PhoneTextExtraLargeStyle}"/>
                             <TextBlock Text="{Binding Description}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
                         </StackPanel>

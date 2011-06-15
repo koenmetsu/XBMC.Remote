@@ -45,7 +45,7 @@
                 </Setter>
             </Style>
             <DataTemplate x:Key="ListBoxItemTemplate">
-                <StackPanel>
+                <StackPanel Background="Transparent">
                     <toolkit:ContextMenuService.ContextMenu>
                         <toolkit:ContextMenu Loaded="ContextMenu_Loaded" Unloaded="ContextMenu_Unloaded">
                             <toolkit:MenuItem Header="play now" cal:Message.Attach="Play"/>

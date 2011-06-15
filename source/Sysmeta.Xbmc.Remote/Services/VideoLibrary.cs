@@ -23,7 +23,7 @@ namespace Sysmeta.Xbmc.Remote.Services
             JObject args = new JObject();
             args.Add(new JProperty("fields", Tvshow.Fields));
 
-            JsonRpcRequest request = new JsonRpcRequest
+            var request = new JsonRpcRequest
             {
                 Credentials = null,
                 Id = GetRequestId(),
@@ -42,7 +42,7 @@ namespace Sysmeta.Xbmc.Remote.Services
 
             args.Add(new JProperty("fields", TvEpisode.Fields));
 
-            JsonRpcRequest request = new JsonRpcRequest
+            var request = new JsonRpcRequest
             {
                 Credentials = null,
                 Id = GetRequestId(),
@@ -59,7 +59,7 @@ namespace Sysmeta.Xbmc.Remote.Services
             args.Add(new JProperty("tvshowid", tvshowId));
             args.Add(new JProperty("fields", TvSeason.Fields));
 
-            JsonRpcRequest request = new JsonRpcRequest
+            var request = new JsonRpcRequest
             {
                 Credentials = null,
                 Id = GetRequestId(),
@@ -84,6 +84,24 @@ namespace Sysmeta.Xbmc.Remote.Services
             };
 
             this.client.Execute<MoviesResult>(request, (rpcResponse, exception) => callback(rpcResponse.Result, exception));
+        }
+
+        public void GetRecentlyAddedMovies(Action<MoviesResult, Exception> callback)
+        {
+            var args = new JObject();
+            args.Add(new JProperty("fields", Movie.Fields));
+            args.Add(new JProperty("start", 0));
+            args.Add(new JProperty("end", 6));
+
+            var request = new JsonRpcRequest()
+            {
+                Credentials = null,
+                Id = GetRequestId(),
+                Method = "VideoLibrary.GetRecentlyAddedMovies",
+                Parameters = args
+            };
+
+            this.client.Execute<MoviesResult>(request, (rpcResponse, exception) => callback(rpcResponse.Result, exception));            
         }
 
         int GetRequestId()

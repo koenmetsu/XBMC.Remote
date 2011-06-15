@@ -18,7 +18,7 @@
         <Converters1:ThemedImageConverter x:Key="imageConverter" />
             <Converters:ZeroVisibilityConverter x:Key="zeroConverter" />
 		<DataTemplate x:Key="DataTemplate1">
-            <StackPanel>
+            <StackPanel Background="Transparent">
                 <toolkit:ContextMenuService.ContextMenu>
                     <toolkit:ContextMenu Loaded="ContextMenu_Loaded" Unloaded="ContextMenu_Unloaded">
                         <toolkit:MenuItem Header="play now" cal:Message.Attach="Play"/>

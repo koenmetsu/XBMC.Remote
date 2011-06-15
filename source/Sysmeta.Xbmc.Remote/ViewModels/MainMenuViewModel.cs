@@ -1,6 +1,7 @@
 ﻿namespace Sysmeta.Xbmc.Remote.ViewModels
 {
     using System.Collections.Generic;
+    using System.Windows.Controls;
 
     using Caliburn.Micro;
 
@@ -13,6 +14,8 @@
     {
         private readonly INavigationService navigationService;
 
+        private bool enabled;
+
         public MainMenuViewModel(INavigationService navigationService, MoviesLandingViewModel movies, TvshowsLandingViewModel tvshows, RemoteViewModel remote, SettingsViewModel settings)
         {
             this.navigationService = navigationService;
@@ -23,6 +26,11 @@
 
         public void Selected(IMenuItem item)
         {
+            if (!this.enabled)
+            {
+                return;
+            }
+
             if (item.Title == MoviesLandingViewModel.TitleString)
             {
                 this.navigationService.UriFor<MoviesLandingViewModel>().Navigate();
@@ -35,6 +43,18 @@
             {
                 this.navigationService.UriFor<SettingsViewModel>().Navigate();
             }
+        }
+
+        private void ManipulationDelta(object sender, System.Windows.Input.ManipulationDeltaEventArgs e)
+        {
+            enabled = false;
+            ((StackPanel)sender).ManipulationDelta -= this.ManipulationDelta;
+        }
+
+        public void Manipulation(object sender, System.Windows.Input.ManipulationStartedEventArgs e)
+        {
+            enabled = true;
+            ((StackPanel)sender).ManipulationDelta += this.ManipulationDelta;
         }
     }
 }

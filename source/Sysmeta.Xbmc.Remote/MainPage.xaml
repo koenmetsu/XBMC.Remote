@@ -28,8 +28,9 @@
 				</DataTemplate>
 			</controls:Panorama.TitleTemplate>
 
-            <controls:PanoramaItem x:Name="MainMenu" Header="menu" />            
-            <controls:PanoramaItem Header="current" />
+            <controls:PanoramaItem x:Name="MainMenu" Header="menu" />
+            <controls:PanoramaItem x:Name="RecentlyAddedMovies" Header="recent">
+            </controls:PanoramaItem>
 			
         </controls:Panorama>
 

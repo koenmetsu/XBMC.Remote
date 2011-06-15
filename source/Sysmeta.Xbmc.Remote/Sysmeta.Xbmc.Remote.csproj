@@ -120,6 +120,7 @@
     <Compile Include="ViewModels\Movies\MovieViewModel.cs" />
     <Compile Include="ViewModels\Movies\MoviesLandingViewModel.cs" />
     <Compile Include="ViewModels\Movies\MovieTitleListViewModel.cs" />
+    <Compile Include="ViewModels\RecentlyAddedMoviesViewModel.cs" />
     <Compile Include="ViewModels\Remote\RemoteViewModel.cs" />
     <Compile Include="ViewModels\Settings\AboutViewModel.cs" />
     <Compile Include="ViewModels\Settings\ConnectionViewModel.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="Views\Converters\ZeroVisibilityConverter.cs" />
     <Compile Include="Views\DesignTime\ConnectionsViewDesignData.cs" />
     <Compile Include="Views\DesignTime\ConnectionViewDesignData.cs" />
+    <Compile Include="Views\DesignTime\RecentlyAddedMoviesViewDesignData.cs" />
     <Compile Include="Views\DesignTime\TvEpisodeListDesignData.cs" />
     <Compile Include="Views\DesignTime\TvEpisodeListItemDesignData.cs" />
     <Compile Include="Views\DesignTime\TvEpisodeViewDesignData.cs" />
@@ -166,6 +168,9 @@
     </Compile>
     <Compile Include="Views\Movies\MovieTitleListView.xaml.cs">
       <DependentUpon>MovieTitleListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RecentlyAddedMoviesView.xaml.cs">
+      <DependentUpon>RecentlyAddedMoviesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Tvshows\TvEpisodeView.xaml.cs">
       <DependentUpon>TvEpisodeView.xaml</DependentUpon>
@@ -236,6 +241,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Movies\MovieTitleListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\RecentlyAddedMoviesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

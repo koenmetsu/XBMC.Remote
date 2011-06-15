@@ -50,7 +50,7 @@
                 </Setter>
             </Style>
             <DataTemplate x:Key="ListBoxItemTemplate">
-                <StackPanel>
+                <StackPanel Background="Transparent">
                     <toolkit:ContextMenuService.ContextMenu>
                         <toolkit:ContextMenu Loaded="ContextMenuLoaded" Unloaded="ContextMenuUnloaded">
                             <toolkit:MenuItem Header="play now" cal:Message.Attach="Play"/>

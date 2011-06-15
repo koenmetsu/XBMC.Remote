@@ -35,7 +35,7 @@
             <ListBox x:Name="Connections" ItemsSource="{Binding Connections}" Margin="0,-91,0,0">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Grid Width="452" Height="70" cal:Message.Attach="[Event MouseLeftButtonUp] = [Action Selected($datacontext)]">
+                        <Grid Background="Transparent" Width="452" Height="70" cal:Message.Attach="[Event MouseLeftButtonUp] = [Action Selected($datacontext)]">
                             <toolkit:ContextMenuService.ContextMenu>
                                 <toolkit:ContextMenu Loaded="ContextMenu_Loaded" Unloaded="ContextMenu_Unloaded">
                                     <toolkit:MenuItem Header="set active" cal:Message.Attach="SetActive"/>

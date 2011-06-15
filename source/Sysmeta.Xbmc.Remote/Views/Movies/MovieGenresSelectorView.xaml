@@ -31,7 +31,7 @@
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.Resources>
                 <DataTemplate x:Name="ListBoxItemTemplate">
-                    <StackPanel>
+                    <StackPanel Background="Transparent">
                         <TextBlock Text="{Binding Name}" Style="{StaticResource PhoneTextExtraLargeStyle}" />
                     </StackPanel>
                 </DataTemplate>

@@ -40,6 +40,8 @@
         void GetTvSeasons(int tvshowId, Action<IEnumerable<TvSeason>> action);
 
         void GetTvEpisodes(int tvshowId, int season, Action<IEnumerable<TvEpisode>> action);
+
+        void GetRecentlyAddedMovies(Action<IEnumerable<Movie>> action);
     }
 
     public class XbmcHost : IXbmcHost
@@ -152,6 +154,33 @@
                         this.cache.Add(cacheKey, episodes);
 
                         action(episodes);
+                        progressService.Hide();
+                    }
+                });
+        }
+
+        public void GetRecentlyAddedMovies(Action<IEnumerable<Movie>> action)
+        {
+            this.SetClient();
+
+            if (this.cache.HasValue("GetRecentlyAddedMovies"))
+            {
+                action(this.cache.Get<IEnumerable<Movie>>("GetRecentlyAddedMovies"));
+                return;
+            }
+
+            this.client.Video.GetRecentlyAddedMovies((result, exception) =>
+                {
+                    if (exception != null)
+                    {
+                        action(Enumerable.Empty<Movie>());
+                        progressService.Hide();
+                    }
+                    else
+                    {
+                        this.cache.Add("GetRecentlyAddedMovies", result.Movies);
+
+                        action(result.Movies);
                         progressService.Hide();
                     }
                 });
