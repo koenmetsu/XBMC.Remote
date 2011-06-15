@@ -29,7 +29,7 @@
             container.PerRequest<MainMenuViewModel>();
             container.PerRequest<MoviesLandingViewModel>();
             container.PerRequest<MovieTitleListViewModel>();
-            container.PerRequest<MovieDetailedViewModel>();
+            container.PerRequest<MovieViewModel>();
             container.PerRequest<SettingsViewModel>();
             container.PerRequest<TvshowsLandingViewModel>();
             container.PerRequest<RemoteViewModel>();
@@ -37,6 +37,7 @@
             container.PerRequest<MovieGenresSelectorViewModel>();
             container.PerRequest<TvshowSeasonsViewModel>();
             container.PerRequest<TvEpisodeListViewModel>();
+            container.PerRequest<TvEpisodeViewModel>();
             container.PerRequest<AboutViewModel>();
             container.PerRequest<ConnectionsViewModel>();
             container.PerRequest<ConnectionViewModel>();

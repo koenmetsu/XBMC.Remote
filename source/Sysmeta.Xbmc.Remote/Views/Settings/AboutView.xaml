@@ -5,8 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Converters="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
@@ -14,6 +13,9 @@
     shell:SystemTray.IsVisible="False">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <Converters:ThemedImageConverter x:Key="imageConverter" />
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -26,6 +28,6 @@
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
-        <Image Margin="0,2,340,104" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/about.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
+        <Image Margin="0,2,340,104" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/about.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
     </Grid>
 </phone:PhoneApplicationPage>

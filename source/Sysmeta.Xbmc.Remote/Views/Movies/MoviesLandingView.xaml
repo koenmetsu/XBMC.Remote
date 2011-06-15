@@ -7,8 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-    xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime"
-    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime" xmlns:Converters="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
@@ -18,6 +17,9 @@
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <Converters:ThemedImageConverter x:Key="imageConverter" />
+        </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
@@ -42,6 +44,6 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Image Margin="0,2,340,104" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/movies.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
+        <Image Margin="0,2,340,104" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/movies.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
     </Grid>
 </phone:PhoneApplicationPage>

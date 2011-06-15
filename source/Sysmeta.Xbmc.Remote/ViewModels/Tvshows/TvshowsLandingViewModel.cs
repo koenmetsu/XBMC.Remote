@@ -6,6 +6,8 @@ using Sysmeta.Xbmc.Remote.Services;
 
 namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 {
+    using System.Linq;
+
     using Telerik.Windows.Controls;
 
     public class TvshowsLandingViewModel : Screen, IMenuItem
@@ -22,12 +24,12 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
             this.navigationService = navigationService;
             this.Title = TitleString;
             this.Description = "tv shows are awsome";
-            this.Image = new Uri("/Sysmeta.Xbmc.Remote;component/Images/Black/tv.png", UriKind.RelativeOrAbsolute);
+            this.Image = "/Sysmeta.Xbmc.Remote;component/Images/{0}/tv.png";
         }
 
         public string Title { get; set; }
         public string Description { get; set; }
-        public Uri Image { get; set; }
+        public string Image { get; set; }
 
         public IEnumerable<TvshowViewModel> Shows { get; set; }
 
@@ -48,7 +50,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
             host.GetTvshows(shows =>
                             {
-                                this.Shows = shows;
+                                this.Shows = shows.Select(s => new TvshowViewModel(host, navigationService, s)).ToList();
                                 NotifyOfPropertyChange(() => this.Shows);
                             });
         }

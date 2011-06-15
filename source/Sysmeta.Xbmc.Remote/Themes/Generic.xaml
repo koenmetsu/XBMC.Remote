@@ -9,7 +9,7 @@
 <ResourceDictionary
   xmlns="http://schemas.microsoft.com/client/2007"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:ProgressBar1="clr-namespace:Sysmeta.Xbmc.Remote.Views.ProgressBar">
+  xmlns:ProgressBar1="clr-namespace:Sysmeta.Xbmc.Remote.Views.ProgressBar" xmlns:local="clr-namespace:Sysmeta.Xbmc.Remote.Views">
 
     <Style TargetType="ProgressBar1:PerformanceProgressBar">
         <!-- This control only benefits indeterminate situations so it is only
@@ -139,5 +139,4 @@
             </Setter.Value>
         </Setter>
     </Style>
-
 </ResourceDictionary>

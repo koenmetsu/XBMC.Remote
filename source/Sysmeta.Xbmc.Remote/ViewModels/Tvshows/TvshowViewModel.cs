@@ -5,20 +5,64 @@
 
     using Caliburn.Micro;
 
+    using Sysmeta.Xbmc.Remote.Model;
     using Sysmeta.Xbmc.Remote.Services;
 
     public class TvshowViewModel : PropertyChangedBase
     {
+        private readonly Tvshow tvshow;
+
         private readonly IXbmcHost host;
 
-        public TvshowViewModel(IXbmcHost host)
+        private readonly INavigationService navigationService;
+
+        public TvshowViewModel(IXbmcHost host, INavigationService navigationService)
         {
             this.host = host;
+            this.navigationService = navigationService;
         }
 
-        public int Id { get; set; }
+        internal TvshowViewModel(IXbmcHost host, INavigationService navigationService, Tvshow tvshow)
+            : this(host, navigationService)
+        {
+            this.tvshow = tvshow;
+        }
 
-        public string Title { get; set; }
+        private int id = -1;
+        public int Id
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return this.id;
+                }
+
+                if (this.id == -1)
+                {
+                    this.id = this.tvshow.Id;
+                }
+
+                return this.id;
+            }
+            set
+            {
+                this.id = value;
+            }
+        }
+
+        public string Title
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return null;
+                }
+
+                return this.tvshow.Title;
+            }
+        }
 
         private bool thumbnailResolved = false;
         private BitmapImage thumbnail;
@@ -26,14 +70,25 @@
         {
             get
             {
+                if (this.tvshow == null)
+                {
+                    return null;
+                }
+
                 // Images is resolved when the View asks for them
-                if (!this.thumbnailResolved && this.ThumbnailSource != null)
+                if (!this.thumbnailResolved && this.ThumbnailSource != null && this.tvshow.ThumbnailImage == null)
                 {
                     this.host.LoadImage(this.ThumbnailSource, image =>
                         {
                             this.thumbnailResolved = true;
+                            this.tvshow.ThumbnailImage = image;
                             this.Thumbnail = image;
                         });
+                }
+
+                if (this.tvshow.ThumbnailImage != null)
+                {
+                    return this.tvshow.ThumbnailImage;
                 }
 
                 if (this.thumbnail == null)
@@ -51,24 +106,123 @@
             }
         }
 
-        public Uri ThumbnailSource { get; set; }
+        public Uri ThumbnailSource
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return null;
+                }
 
-        public string Plot { get; set; }
+                return this.tvshow.Thumbnail;
+            }
+        }
 
-        public string Genre { get; set; }
+        public string Plot
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return null;
+                }
 
-        public float Rating { get; set; }
+                return this.tvshow.Plot;
+            }
+        }
 
-        public int Episodes { get; set; }
+        public string Genre
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return null;
+                }
 
-        public BitmapImage Fanart { get; set; } 
+                return this.tvshow.Genre;
+            }
+        }
 
-        public Uri FanartSource { get; set; }
+        public float Rating
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return 0;
+                }
 
-        public int PlayCount { get; set; }
+                return this.tvshow.Rating;
+            }
+        }
 
-        public string Studio { get; set; }
+        public int Episodes
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return 0;
+                }
 
-        public string Premiered { get; set; }
+                return this.tvshow.Episode;
+            }
+        }
+
+        public BitmapImage Fanart { get; set; }
+
+        public Uri FanartSource
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return null;
+                }
+
+                return this.tvshow.Fanart;
+            }
+        }
+
+        public int PlayCount
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return 0;
+                }
+
+                return this.tvshow.PlayCount;
+            }
+        }
+
+        public string Studio
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return null;
+                }
+
+                return this.tvshow.Studio;
+            }
+        }
+
+        public string Premiered
+        {
+            get
+            {
+                if (this.tvshow == null)
+                {
+                    return null;
+                }
+
+                return this.tvshow.Premiered.ToString();
+            }
+        }
     }
 }

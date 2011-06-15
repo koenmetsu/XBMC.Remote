@@ -9,4 +9,5 @@ namespace Sysmeta.Xbmc.Remote
             this.InitializeComponent();
         }
     }
+
 }

@@ -9,11 +9,11 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Remote
         {
             this.Title = "remote";
             this.Description = "remote control bla bla bla";
-            this.Image = new Uri("/Sysmeta.Xbmc.Remote;component/Images/Black/remote.png", UriKind.RelativeOrAbsolute);
+            this.Image = "/Sysmeta.Xbmc.Remote;component/Images/{0}/remote.png";
         }
 
         public string Title { get; set; }
         public string Description { get; set; }
-        public System.Uri Image { get; set; }
+        public string Image { get; set; }
     }
 }

@@ -41,8 +41,8 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Movies
         {
             MovieViewModel movie = (MovieViewModel)eventArgs.Item.Content;
 
-            this.navigationService.UriFor<MovieDetailedViewModel>()
-                .WithParam(p => p.MovieId, movie.Id)
+            this.navigationService.UriFor<MovieViewModel>()
+                .WithParam(p => p.Id, movie.Id)
                 .Navigate();
         }
     }

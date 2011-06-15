@@ -30,7 +30,7 @@
 
         public string Description { get; set; }
 
-        public Uri Image { get; set; }
+        public string Image { get; set; }
 
         public IObservableCollection<GenreViewModel> Genres { get; set; }
 

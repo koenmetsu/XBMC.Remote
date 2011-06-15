@@ -8,6 +8,6 @@
 
         string Description { get; set; }
 
-        Uri Image { get; set; }
+        string Image { get; set; }
     }
 }

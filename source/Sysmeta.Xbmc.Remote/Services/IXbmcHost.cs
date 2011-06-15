@@ -8,6 +8,7 @@
 
     using Caliburn.Micro;
 
+    using Sysmeta.Xbmc.Remote.Model;
     using Sysmeta.Xbmc.Remote.ViewModels.Movies;
 
     using Sysmeta.Xbmc.Remote.ViewModels.Tvshows;
@@ -18,9 +19,9 @@
 
     public interface IXbmcHost
     {
-        void ListMovies(Action<IEnumerable<MovieViewModel>> action);
+        void ListMovies(Action<IEnumerable<Movie>> action);
 
-        void GetMovieDetails(int movieId, Action<MovieViewModel> action);
+        void GetMovieDetails(int movieId, Action<Movie> action);
 
         void LoadImage(Uri image, Action<BitmapImage> action);
 
@@ -32,13 +33,13 @@
 
         void PlayEpisode(int episodeId);
 
-        void GetTvshows(Action<IEnumerable<TvshowViewModel>> action);
+        void GetTvshows(Action<IEnumerable<Tvshow>> action);
 
-        void GetTvshow(int tvshowId, Action<TvshowViewModel> action);
+        void GetTvshow(int tvshowId, Action<Tvshow> action);
 
-        void GetTvSeasons(int tvshowId, Action<IEnumerable<TvSeasonViewModel>> action);
+        void GetTvSeasons(int tvshowId, Action<IEnumerable<TvSeason>> action);
 
-        void GetTvEpisodes(int tvshowId, int season, Action<IEnumerable<TvEpisodeViewModel>> action);
+        void GetTvEpisodes(int tvshowId, int season, Action<IEnumerable<TvEpisode>> action);
     }
 
     public class XbmcHost : IXbmcHost
@@ -53,25 +54,29 @@
 
         private XbmcClient client;
 
+        private Uri currentUri;
+
         public XbmcHost(ICache cache, IProgressService progressService, INavigationService navigationService, SettingsHost settingsHost)
         {
             this.cache = cache;
             this.progressService = progressService;
             this.navigationService = navigationService;
             this.settingsHost = settingsHost;
-            //this.client = new XbmcClient(this.settingsHost.Settings.Active.Url.ToString());
         }
 
         public void PlayEpisode(int episodeId)
         {
+            this.SetClient();
             this.client.PlayEpisode(episodeId);
         }
 
-        public void GetTvshows(Action<IEnumerable<TvshowViewModel>> action)
+        public void GetTvshows(Action<IEnumerable<Tvshow>> action)
         {
+            this.SetClient();
+
             if (this.cache.HasValue("GetTvshows"))
             {
-                action(this.cache.Get<IEnumerable<TvshowViewModel>>("GetTvshows"));
+                action(this.cache.Get<IEnumerable<Tvshow>>("GetTvshows"));
                 return;
             }
 
@@ -80,28 +85,15 @@
                                          {
                                              if (e != null)
                                              {
-                                                 action(Enumerable.Empty<TvshowViewModel>());
+                                                 action(Enumerable.Empty<Tvshow>());
                                                  progressService.Hide();
                                              }
                                              else
                                              {
-                                                 var tvshows = new List<TvshowViewModel>();
+                                                 var tvshows = new List<Tvshow>();
                                                  foreach (var tvshow in shows.Tvshows)
                                                  {
-                                                     tvshows.Add(new TvshowViewModel(this)
-                                                                 {
-                                                                     Id = tvshow.Id,
-                                                                     Title = tvshow.Title,
-                                                                     Episodes = tvshow.Episode,
-                                                                     FanartSource = tvshow.Fanart,
-                                                                     Genre = tvshow.Genre,
-                                                                     PlayCount = tvshow.PlayCount,
-                                                                     Plot = tvshow.Plot,
-                                                                     Premiered = tvshow.Premiered.ToShortDateString(),
-                                                                     Rating = tvshow.Rating,
-                                                                     Studio = tvshow.Studio,
-                                                                     ThumbnailSource = tvshow.Thumbnail, 
-                                                                 });
+                                                     tvshows.Add(tvshow);
                                                  }
 
                                                  this.cache.Add("GetTvshows", tvshows);
@@ -116,11 +108,13 @@
                                          });
         }
 
-        public void GetTvshow(int tvshowId, Action<TvshowViewModel> action)
+        public void GetTvshow(int tvshowId, Action<Tvshow> action)
         {
+            this.SetClient();
+
             if (this.cache.HasValue(this.GetTvshowCacheKey(tvshowId)))
             {
-                action(this.cache.Get<TvshowViewModel>(this.GetTvshowCacheKey(tvshowId)));
+                action(this.cache.Get<Tvshow>(this.GetTvshowCacheKey(tvshowId)));
             }
             else
             {
@@ -128,12 +122,14 @@
             }
         }
 
-        public void GetTvEpisodes(int tvshowId, int season, Action<IEnumerable<TvEpisodeViewModel>> action)
+        public void GetTvEpisodes(int tvshowId, int season, Action<IEnumerable<TvEpisode>> action)
         {
+            this.SetClient();
+
             string cacheKey = this.GetEpisodesCacheKey(tvshowId, season);
             if (this.cache.HasValue(cacheKey))
             {
-                action(this.cache.Get<IEnumerable<TvEpisodeViewModel>>(cacheKey));
+                action(this.cache.Get<IEnumerable<TvEpisode>>(cacheKey));
                 return;
             }
 
@@ -142,36 +138,15 @@
                 {
                     if (exception != null)
                     {
-                        action(Enumerable.Empty<TvEpisodeViewModel>());
+                        action(Enumerable.Empty<TvEpisode>());
                         progressService.Hide();
                     }
                     else
                     {
-                        var episodes = new List<TvEpisodeViewModel>();
+                        var episodes = new List<TvEpisode>();
                         foreach (var episode in result.Episodes)
                         {
-                            var viewModel = new TvEpisodeViewModel(this)
-                                {
-                                    Id = episode.Id,
-                                    Title = episode.Title,
-                                    Year = episode.Year,
-                                    Rating = episode.Rating,
-                                    Director = episode.Director,
-                                    Plot = episode.Plot,
-                                    LastPlayed = episode.LastPlayed,
-                                    ShowTitle = episode.ShowTitle,
-                                    FirstAired = episode.FirstAired,
-                                    Duration = episode.Duration,
-                                    Season = episode.Season,
-                                    Episode = episode.Episode,
-                                    PlayCount = episode.PlayCount,
-                                    Writer = episode.Writer,
-                                    Studio = episode.Studio,
-                                    MPAA = episode.MPAA,
-                                    Premiered = episode.Premiered,
-                                    FanartSource = episode.Fanart
-                                };
-                            episodes.Add(viewModel);
+                            episodes.Add(episode);
                         }
 
                         this.cache.Add(cacheKey, episodes);
@@ -182,13 +157,15 @@
                 });
         }
 
-        public void GetTvSeasons(int tvshowId, Action<IEnumerable<TvSeasonViewModel>> action)
+        public void GetTvSeasons(int tvshowId, Action<IEnumerable<TvSeason>> action)
         {
+            this.SetClient();
+
             string cacheKey = this.GetTvSeasonsCacheKey(tvshowId);
 
             if (this.cache.HasValue(cacheKey))
             {
-                action(this.cache.Get<IEnumerable<TvSeasonViewModel>>(cacheKey));
+                action(this.cache.Get<IEnumerable<TvSeason>>(cacheKey));
                 return;
             }
 
@@ -197,23 +174,16 @@
                 {
                     if (exception != null || result.Seasons == null)
                     {
-                        action(Enumerable.Empty<TvSeasonViewModel>());
+                        action(Enumerable.Empty<TvSeason>());
                         progressService.Hide();
                     }
                     else
                     {
-                        var seasons = new List<TvSeasonViewModel>();
+                        var seasons = new List<TvSeason>();
                         foreach (var season in result.Seasons)
                         {
-                            var vm = new TvSeasonViewModel(this)
-                                {
-                                    TvshowId = tvshowId,
-                                    Season = season.Season,
-                                    Title = season.Title,
-                                    ThumbnailSource = season.Thumbnail,
-                                    Episodes = season.Episodes
-                                };
-                            seasons.Add(vm);
+                            season.TvshowId = tvshowId;
+                            seasons.Add(season);
                         }
 
                         this.cache.Add(cacheKey, seasons);
@@ -224,11 +194,13 @@
                 });
         }
 
-        public void ListMovies(Action<IEnumerable<MovieViewModel>> action)
+        public void ListMovies(Action<IEnumerable<Movie>> action)
         {
+            this.SetClient();
+
             if (cache.HasValue("ListMovies"))
             {
-                action(cache.Get<IEnumerable<MovieViewModel>>("ListMovies"));
+                action(cache.Get<IEnumerable<Movie>>("ListMovies"));
                 return;
             }
 
@@ -238,28 +210,15 @@
                     {
                         if (exception != null)
                         {
-                            action(Enumerable.Empty<MovieViewModel>());
+                            action(Enumerable.Empty<Movie>());
                             progressService.Hide();
                         }
                         else
                         {
-                            var movies = new List<MovieViewModel>();
+                            var movies = new List<Movie>();
                             foreach (var movie in result.Movies)
                             {
-                                movies.Add(new MovieViewModel(this)
-                                    {
-                                        Id = movie.Id,
-                                        Title = movie.Title,
-                                        Director = movie.Director,
-                                        Genre = movie.Genre,
-                                        MPAA = movie.MPAA,
-                                        PlayCount = movie.PlayCount,
-                                        Rating = movie.Rating,
-                                        Runtime = movie.Runtime,
-                                        Tagline = movie.Tagline,
-                                        Year = movie.Year == 0 ? "N/A" : movie.Year.ToString(),
-                                        ThumbnailSource = movie.Thumbnail
-                                    });
+                                movies.Add(movie);
                             }
 
                             // Cache each movie per/id
@@ -277,21 +236,24 @@
                     });
         }
 
-        public void GetMovieDetails(int movieId, Action<MovieViewModel> action)
+        public void GetMovieDetails(int movieId, Action<Movie> action)
         {
+            this.SetClient();
+
             string key = this.GetMovieCacheKey(movieId);
 
             if (!this.cache.HasValue(key))
             {
-                action(null);
+                this.ListMovies(movies => action(movies.Where(m => m.Id == movieId).FirstOrDefault()));
                 return;
             }
 
-            action(this.cache.Get<MovieViewModel>(key));
+            action(this.cache.Get<Movie>(key));
         }
 
         public void LoadImage(Uri image, Action<BitmapImage> action)
         {
+            this.SetClient();
 
             this.client.Vfs.GetFile(
                 image,
@@ -315,6 +277,8 @@
 
         public void GetGenre(string genre, Action<GenreViewModel> action)
         {
+            this.SetClient();
+
             if (this.cache.HasValue(genre))
             {
                 action(this.cache.Get<GenreViewModel>(genre));
@@ -330,11 +294,15 @@
 
         public void PlayMovie(int movieId)
         {
+            this.SetClient();
+
             this.client.PlayMovie(movieId);
         }
 
         public void GetGenres(Action<IEnumerable<GenreViewModel>> action)
         {
+            this.SetClient();
+
             if (this.cache.HasValue("GetGenres"))
             {
                 action(this.cache.Get<IEnumerable<GenreViewModel>>("GetGenres"));
@@ -356,7 +324,7 @@
                                 lookup.Add(genre, vm);
                             }
 
-                            vm.Movies.Add(movie);
+                            vm.Movies.Add(new MovieViewModel(this, navigationService, movie));
                         }
                     }
 
@@ -384,7 +352,6 @@
             }
         }
 
-
         private string GetTvshowCacheKey(int tvshowId)
         {
             return string.Format("tvshowid{0}", tvshowId);
@@ -404,6 +371,16 @@
         {
             return string.Format("episodes{0}{1}", tvshowId, season);
         }
+
+        private void SetClient()
+        {
+            if (this.settingsHost.Settings.Active != null && this.currentUri != this.settingsHost.Settings.Active.Url)
+            {
+                this.currentUri = this.settingsHost.Settings.Active.Url;
+                this.client = new XbmcClient(this.settingsHost.Settings.Active.Url.ToString());
+                this.cache.Clear();
+            }
+        }
     }
 
     public interface ICache
@@ -411,6 +388,7 @@
         void Add(string key, object value);
         T Get<T>(string key);
         bool HasValue(string key);
+        void Clear();
     }
 
     public class Cache : ICache
@@ -430,6 +408,11 @@
         public bool HasValue(string key)
         {
             return this.cache.ContainsKey(key);
+        }
+
+        public void Clear()
+        {
+            this.cache.Clear();
         }
     }
 }

@@ -8,7 +8,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro"
-    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity" xmlns:Converters="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="768" 
     d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
@@ -17,11 +17,14 @@
     shell:SystemTray.IsVisible="False">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.Resources>
+            <Converters:ThemedImageConverter x:Key="imageConverter" />
+        </Grid.Resources>
 
         <controls:Panorama Title="">
         	<controls:Panorama.TitleTemplate>
         		<DataTemplate>
-					<Image Height="98" Margin="8,80,72,0" Stretch="Fill" VerticalAlignment="Top" Source="Images/Black/xbmc_logo.png"/>
+                    <Image Height="98" Margin="8,80,72,0" Stretch="Fill" VerticalAlignment="Top" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/xbmc_logo.png"/>
 				</DataTemplate>
 			</controls:Panorama.TitleTemplate>
 

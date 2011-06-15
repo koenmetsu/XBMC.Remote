@@ -8,13 +8,18 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
     using Sysmeta.Xbmc.Remote.Services;
 
+    using Telerik.Windows.Controls;
+
     public class TvEpisodeListViewModel : Screen
     {
         private readonly IXbmcHost host;
 
-        public TvEpisodeListViewModel(IXbmcHost host)
+        private readonly INavigationService navigationService;
+
+        public TvEpisodeListViewModel(IXbmcHost host, INavigationService navigationService)
         {
             this.host = host;
+            this.navigationService = navigationService;
         }
 
         public string SeasonTitle { get; set; }
@@ -27,13 +32,25 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
         public IEnumerable<TvEpisodeViewModel> Episodes { get; set; }
 
+        public void Selected(ListBoxItemTapEventArgs eventArgs)
+        {
+            TvEpisodeViewModel movie = (TvEpisodeViewModel)eventArgs.Item.Content;
+
+            this.navigationService.UriFor<TvEpisodeViewModel>()
+                .WithParam(p => p.Season, movie.Season)
+                .WithParam(p => p.Id, movie.Id)
+                .WithParam(p => p.TvshowId, this.TvshowId )
+                .WithParam(p => p.Episode, movie.Episode)
+                .Navigate();
+        }
+
         protected override void OnActivate()
         {
             base.OnActivate();
 
             this.host.GetTvEpisodes(this.TvshowId, this.Season, episodes =>
                 {
-                    this.Episodes = episodes.OrderBy(e => e.Episode).ToList();
+                    this.Episodes = episodes.OrderBy(e => e.Episode).Select(e => new TvEpisodeViewModel(host, navigationService, e)).ToList();
 
                     this.SeasonTitle = string.Format("Season {0}", this.Season);
                     this.TvshowName = this.Episodes.First().ShowTitle;

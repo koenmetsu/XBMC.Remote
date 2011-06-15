@@ -1,6 +1,7 @@
 ﻿namespace Sysmeta.Xbmc.Remote.Model
 {
     using System;
+    using System.Windows.Media.Imaging;
 
     using Newtonsoft.Json;
 
@@ -12,7 +13,7 @@
         {
             _fields = new string[] { "title", "genre", "year", "rating", "director", "file",
                                     "trailer", "tagline", "plot", "plotoutline", "originaltitle", 
-                                    "lastplayed", "duration", "playcount", "writer", "studio", 
+                                    "lastplayed", "runtime", "playcount", "writer", "studio", 
                                     "mpaa", "movieid" };
         }
 
@@ -117,6 +118,8 @@
 
         [JsonProperty("thumbnail")]
         public Uri Thumbnail { get; set; }
+
+        public BitmapImage ThumbnailImage { get; set; }
 
         [JsonProperty("file")]
         public string File { get; set; }

@@ -19,7 +19,7 @@
             this.navigationService = navigationService;
             this.Title = TitleString;
             this.Description = DescriptionString;
-            this.Image = new Uri("/Sysmeta.Xbmc.Remote;component/Images/Black/movies.png", UriKind.RelativeOrAbsolute);
+            this.Image = "/Sysmeta.Xbmc.Remote;component/Images/{0}/movies.png";
 
             this.Items = new IMenuItem[] { titleList, genres };
         }
@@ -28,7 +28,7 @@
 
         public string Description { get; set; }
 
-        public Uri Image { get; set; }
+        public string Image { get; set; }
 
         public IEnumerable<IMenuItem> Items { get; set; }
 

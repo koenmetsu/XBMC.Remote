@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
     xmlns:telerikPrimitives="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives" 
-    xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" x:Class="Sysmeta.Xbmc.Remote.Views.Tvshows.TvshowsLandingView" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
+    xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:Converters1="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" x:Class="Sysmeta.Xbmc.Remote.Views.Tvshows.TvshowsLandingView" FontFamily="{StaticResource PhoneFontFamilyNormal}" 
     FontSize="{StaticResource PhoneFontSizeNormal}" 
     Foreground="{StaticResource PhoneForegroundBrush}" 
     SupportedOrientations="Portrait" 
@@ -16,6 +16,7 @@
 
 	<Grid x:Name="LayoutRoot" Background="Transparent">
 		<Grid.Resources>
+            <Converters1:ThemedImageConverter x:Key="imageConverter" />
 			<Converters:NullToCollapsedVisibilityConverter x:Key="nullToCollapsed" />
 			<Converters:NullToVisibleVisibilityConverter x:Key="nullToVisible" />
 			<DataTemplate x:Key="ItemTemplate">
@@ -50,7 +51,7 @@
                 d:LayoutOverrides="Height" 
                 ItemTemplate="{StaticResource ItemTemplate}" />
 		</Grid>
-        <Image Margin="0,2,340,104" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/tv.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
+        <Image Margin="0,2,340,104" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/tv.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
 	</Grid>
  
 	<!--Sample code showing usage of ApplicationBar-->

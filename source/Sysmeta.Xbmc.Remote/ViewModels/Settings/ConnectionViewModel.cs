@@ -8,6 +8,8 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
     using Sysmeta.Xbmc.Remote.Model;
     using Sysmeta.Xbmc.Remote.Services;
 
+    using Action = System.Action;
+
     public class ConnectionViewModel : Screen
     {
         private readonly INavigationService navigationService;
@@ -16,6 +18,8 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
 
         private Connection connection;
 
+        private readonly Action changed;
+
         public ConnectionViewModel(INavigationService navigationService, SettingsHost settingsHost)
         {
             this.navigationService = navigationService;
@@ -23,10 +27,11 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
             this.Port = "8080";
         }
 
-        internal ConnectionViewModel(INavigationService navigationService, SettingsHost settingsHost, Connection connection)
+        internal ConnectionViewModel(INavigationService navigationService, SettingsHost settingsHost, Connection connection, Action changed)
             : this (navigationService, settingsHost)
         {
             this.connection = connection;
+            this.changed = changed;
 
             this.SetConnectionParameters();
         }
@@ -91,11 +96,27 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
         public void SetActive()
         {
             this.settingsHost.SetActiveConnection(this.connection);
+
+            if (this.changed != null)
+            {
+                this.changed();
+            }
         }
 
         public void Remove()
         {
             this.settingsHost.RemoveConnection(this.connection);
+            
+            if (this.changed != null)
+            {
+                this.changed();
+            }
+        }
+
+        public void RemoveAndNavigateBack()
+        {
+            this.settingsHost.RemoveConnection(this.connection);
+            this.navigationService.GoBack();
         }
 
         private void SetConnectionParameters()

@@ -6,8 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:Views="clr-namespace:Sysmeta.Xbmc.Remote.Views" xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime"
-    FontSize="{StaticResource PhoneFontSizeNormal}"
+    xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime" xmlns:Converters1="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
@@ -16,6 +15,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
             <Converters:NullOrEmptyStringToCollapsedVisibilityConverter x:Key="visibilityConverter" />
+            <Converters1:ThemedImageConverter x:Key="imageConverter" />
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="144"/>
@@ -40,7 +40,7 @@
                 <PasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
             </StackPanel>
         </Grid>
-        <Image Margin="0,8,340,8" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/add.png" Stretch="Fill" HorizontalAlignment="Right" Width="128" Height="128" d:LayoutOverrides="VerticalAlignment"/>
+        <Image Margin="0,8,340,8" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/add.png" Stretch="Fill" HorizontalAlignment="Right" Width="128" Height="128" d:LayoutOverrides="VerticalAlignment"/>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>
@@ -53,7 +53,7 @@
                                   Message='Cancel' />
             
             <shell:ApplicationBar.MenuItems>
-                <cal:AppBarMenuItem Text="remove" Message="Remove" />
+                <cal:AppBarMenuItem Text="remove" Message="RemoveAndNavigateBack" />
                 <cal:AppBarMenuItem Text="make active" Message="Activate" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

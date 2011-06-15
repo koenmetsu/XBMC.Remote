@@ -3,6 +3,8 @@
     using System;
 
     using System.Collections.Generic;
+    using System.Windows.Media.Imaging;
+
     using Newtonsoft.Json;
 
     public class Tvshow
@@ -61,6 +63,8 @@
 
         [JsonProperty("premiered")]
         public DateTime Premiered { get; set; }
+
+        public BitmapImage ThumbnailImage { get; set; }
     }
 
     public class TvshowResult

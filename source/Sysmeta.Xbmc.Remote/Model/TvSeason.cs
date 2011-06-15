@@ -2,6 +2,7 @@ namespace Sysmeta.Xbmc.Remote.Model
 {
     using System;
     using System.Collections.Generic;
+    using System.Windows.Media.Imaging;
 
     using Newtonsoft.Json;
 
@@ -15,6 +16,8 @@ namespace Sysmeta.Xbmc.Remote.Model
                                     "season", "episode", "playcount", "studio", "mpaa" };
         }
 
+        public int TvshowId { get; set; }
+
         public static string[] Fields
         {
             get
@@ -22,7 +25,7 @@ namespace Sysmeta.Xbmc.Remote.Model
                 return fields;
             }
         }
-        
+
         [JsonProperty("title")]
         public string Title { get; set; }
 
@@ -37,6 +40,8 @@ namespace Sysmeta.Xbmc.Remote.Model
 
         [JsonProperty("episode")]
         public int Episodes { get; set; }
+
+        public BitmapImage ThumbnailImage { get; set; }
     }
 
     public class TvSeasonsResult

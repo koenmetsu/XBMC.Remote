@@ -1,6 +1,8 @@
 namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     using Caliburn.Micro;
 
@@ -24,6 +26,16 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
         public string Plot { get; set; }
 
+        public string Genre { get; set; }
+
+        public string Premiered { get; set; }
+
+        public float Rating { get; set; }
+
+        public string Studio { get; set; }
+
+        public int Year { get; set; }
+
         public TvshowSeasonsListViewModel SeasonList { get; set; }
 
         protected override void OnActivate()
@@ -40,13 +52,25 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
                     this.Title = show.Title;
                     this.Plot = show.Plot;
-                });
-            this.host.GetTvSeasons(this.TvShowId, seasons =>
-                {
-                    this.SeasonList = new TvshowSeasonsListViewModel(navigationService) { Seasons = seasons };
-
-                    NotifyOfPropertyChange(() => this.SeasonList);
+                    this.Genre = show.Genre;
+                    this.Premiered = show.Premiered.ToShortDateString();
+                    this.Rating = show.Rating;
+                    this.Studio = show.Studio;
+                    this.Year = show.Year;
+                    NotifyOfPropertyChange(() => this.Plot);
                     NotifyOfPropertyChange(() => this.Title);
+                    NotifyOfPropertyChange(() => this.Genre);
+                    NotifyOfPropertyChange(() => this.Premiered);
+                    NotifyOfPropertyChange(() => this.Rating);
+                    NotifyOfPropertyChange(() => this.Studio);
+                    NotifyOfPropertyChange(() => this.Year);
+
+                    this.host.GetTvSeasons(this.TvShowId, seasons =>
+                    {
+                        this.SeasonList = new TvshowSeasonsListViewModel(navigationService) { Seasons = seasons.Select(s => new TvSeasonViewModel(host, navigationService, s)) };
+
+                        NotifyOfPropertyChange(() => this.SeasonList);
+                    });
                 });
         }
     }

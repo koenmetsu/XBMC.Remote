@@ -16,10 +16,11 @@
     mc:Ignorable="d" d:DesignHeight="800" d:DesignWidth="480"
     shell:SystemTray.IsVisible="False"
     xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime"
-    xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" d:DataContext="{d:DesignInstance Type=designData:MovieListDesignData, IsDesignTimeCreatable=True}">
+    xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" xmlns:Converters1="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" d:DataContext="{d:DesignInstance Type=designData:MovieListDesignData, IsDesignTimeCreatable=True}">
     
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.Resources>
+            <Converters1:ThemedImageConverter x:Key="imageConverter" />
             <Converters:NullOrEmptyStringToCollapsedVisibilityConverter x:Key="visibilityConverter" />
             <Converters:ZeroVisibilityConverter x:Key="zeroConverter" />
             <Style TargetType="telerikPrimitives:RadDataBoundListBoxItem" x:Key="ItemContainerStyle">
@@ -91,11 +92,7 @@
                                     <Image Source="{Binding Thumbnail}" Width="67" Height="92" Grid.Row="0" Stretch="Fill"
                      HorizontalAlignment="Left" VerticalAlignment="Top" />
                                 </Border>
-                                <Border BorderThickness="1" BorderBrush="{StaticResource PhoneBorderBrush}" Grid.Row="1" Background="{StaticResource PhoneBackgroundBrush}"
-                    Padding="3, 0, 3, 0" Margin="0,0,0,10">
-                                    <TextBlock Text="{Binding Runtime}" FontSize="14" Foreground="{StaticResource PhoneSubtleBrush}"
-                         HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Border>
+                                <TextBlock Text="{Binding Runtime}" FontSize="14" Foreground="{StaticResource PhoneSubtleBrush}" Margin="5,3,6,3" Grid.Row="1" d:LayoutOverrides="Width, Height" />
                             </Grid>
                             <Grid Grid.Column="2" Margin="15, 0, 0, 0">
                                 <Grid.RowDefinitions>
@@ -108,7 +105,7 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="{Binding Title}" FontSize="16" FontWeight="Bold" Grid.Row="0" TextWrapping="Wrap" />
                                 <StackPanel Orientation="Horizontal" Grid.Row="1">
-                                    <Image Margin="0,2,0,0" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/star.png" Width="16" Height="16"/>
+                                    <Image Margin="0,2,0,0" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/star.png" Width="16" Height="16"/>
                                     <TextBlock Text="{Binding Rating}" FontSize="15" VerticalAlignment="Center" FontWeight="SemiBold" Margin="8, 0, 8, 0" />
                                     <Rectangle VerticalAlignment="Stretch" Width="1" Fill="{StaticResource PhoneSubtleBrush}" Margin="0, 3, 8, 3" 
                          Visibility="{Binding MPAA, Converter={StaticResource visibilityConverter}}" />
@@ -116,11 +113,10 @@
                       Visibility="{Binding MPAA, Converter={StaticResource visibilityConverter}}">
                                         <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding MPAA}" Foreground="{StaticResource PhoneSubtleBrush}" FontFamily="Georgia" FontWeight="Bold" FontSize="14"/>
                                     </Border>
-                                    <Rectangle VerticalAlignment="Stretch" Width="1" Fill="{StaticResource PhoneSubtleBrush}" Margin="8,3"
-                         Visibility="{Binding PlayCount, Converter={StaticResource zeroConverter}}"/>
-                                    <Image Margin="0,2,0,0" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/seen16.png" Width="16" Height="16" 
-                     Visibility="{Binding PlayCount, Converter={StaticResource zeroConverter}}"/>
-
+                                    <Rectangle VerticalAlignment="Stretch" Width="1" Fill="{StaticResource PhoneSubtleBrush}" Margin="8,3" Visibility="{Binding PlayCount, Converter={StaticResource zeroConverter}}"/>
+                                    <StackPanel Margin="0,2,0,0" Visibility="{Binding PlayCount, Converter={StaticResource zeroConverter}}" Height="16" Width="16">
+                                        <Image Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/seen16.png" Width="16" Height="16" />
+                                    </StackPanel>
                                 </StackPanel>
                                 <StackPanel Orientation="Horizontal" Grid.Row="2">
                                     <TextBlock Text="Genre: " FontSize="17" FontWeight="Bold"

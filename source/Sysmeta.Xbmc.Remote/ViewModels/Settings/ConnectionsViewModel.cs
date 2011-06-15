@@ -22,7 +22,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
             this.settingsHost = settingsHost;
             this.Title = TitleString;
             this.Description = "the list of XBMC servers";
-            this.Image = new Uri("/Sysmeta.Xbmc.Remote;component/Images/Black/servers.png", UriKind.RelativeOrAbsolute);
+            this.Image = "/Sysmeta.Xbmc.Remote;component/Images/{0}/servers.png";
 
             LoadConnections();
         }
@@ -31,7 +31,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
 
         public string Description { get; set; }
 
-        public Uri Image { get; set; }
+        public string Image { get; set; }
 
         public IEnumerable<ConnectionViewModel> Connections { get; set; }
 
@@ -57,7 +57,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
 
         private void LoadConnections()
         {
-            this.Connections = this.settingsHost.Settings.Connections.Select(c => new ConnectionViewModel(this.navigationService, settingsHost, c)).OrderByDescending(model => model.IsActive).ToList();
+            this.Connections = this.settingsHost.Settings.Connections.Select(c => new ConnectionViewModel(this.navigationService, settingsHost, c, () => this.LoadConnections())).OrderByDescending(model => model.IsActive).ToList();
             this.NotifyOfPropertyChange(() => this.Connections);
         }
     }

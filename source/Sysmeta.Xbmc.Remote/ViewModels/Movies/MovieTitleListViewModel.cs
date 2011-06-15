@@ -1,6 +1,7 @@
 ﻿namespace Sysmeta.Xbmc.Remote.ViewModels.Movies
 {
     using System;
+    using System.Linq;
     using System.Windows;
     using System.Windows.Controls;
 
@@ -35,7 +36,7 @@
 
         public string Description { get; set; }
 
-        public Uri Image { get; set; }
+        public string Image { get; set; }
 
         public IObservableCollection<MovieViewModel> Movies { get; set; }
 
@@ -43,8 +44,8 @@
         {
             MovieViewModel movie = (MovieViewModel)eventArgs.Item.Content;
 
-            this.navigationService.UriFor<MovieDetailedViewModel>()
-                .WithParam(p => p.MovieId, movie.Id)
+            this.navigationService.UriFor<MovieViewModel>()
+                .WithParam(p => p.Id, movie.Id)
                 .Navigate();
         }
 
@@ -54,7 +55,7 @@
 
             this.host.ListMovies(movies =>
                 {
-                    this.Movies = new BindableCollection<MovieViewModel>(movies);
+                    this.Movies = new BindableCollection<MovieViewModel>(movies.Select(m => new MovieViewModel(host, navigationService, m)));
                     NotifyOfPropertyChange(() => Movies);
                 });
         }

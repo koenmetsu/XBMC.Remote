@@ -12,13 +12,13 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
         {
             this.Title = TitleString;
             this.Description = "about bla bla bla";
-            this.Image = new Uri("/Sysmeta.Xbmc.Remote;component/Images/Black/about.png", UriKind.RelativeOrAbsolute);
+            this.Image = "/Sysmeta.Xbmc.Remote;component/Images/{0}/about.png";
         }
 
         public string Title { get; set; }
 
         public string Description { get; set; }
 
-        public Uri Image { get; set; }
+        public string Image { get; set; }
     }
 }

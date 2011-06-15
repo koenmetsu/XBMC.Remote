@@ -13,9 +13,9 @@ using Microsoft.Phone.Controls;
 
 namespace Sysmeta.Xbmc.Remote.Views.Movies
 {
-    public partial class MovieDetailedView : PhoneApplicationPage
+    public partial class MovieView : PhoneApplicationPage
     {
-        public MovieDetailedView()
+        public MovieView()
         {
             InitializeComponent();
         }

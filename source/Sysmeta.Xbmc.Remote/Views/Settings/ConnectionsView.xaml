@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime"
 	xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" xmlns:Converters1="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
@@ -17,7 +17,8 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
     	<Grid.Resources>
     		<Converters:NullOrEmptyStringToCollapsedVisibilityConverter x:Key="visibilityConverter" />
-            <Converters:BooleanVisibilityConverter x:Key="booleanVisibilityConverter" />  	
+            <Converters:BooleanVisibilityConverter x:Key="booleanVisibilityConverter" />
+            <Converters1:ThemedImageConverter x:Key="imageConverter" />
 		</Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="253"/>
@@ -45,7 +46,7 @@
                                 <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="Auto" MinWidth="396" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Width="50" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/point.png" Visibility="{Binding IsActive, Converter={StaticResource booleanVisibilityConverter}}" Margin="0,0,0,20"/>
+                            <Image Grid.Column="0" Width="50" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/point.png" Visibility="{Binding IsActive, Converter={StaticResource booleanVisibilityConverter}}" Margin="0,0,0,20"/>
                             <StackPanel Height="100" Width="385" Grid.Column="1" Margin="5,0,0,-30">
                     			<StackPanel Height="27" Orientation="Horizontal">
                     				<TextBlock x:Name="MachineAddress" Text="{Binding MachineAddress}" d:LayoutOverrides="Width" />
@@ -64,7 +65,7 @@
                 </ListBox.ItemTemplate>
             </ListBox>
         </Grid>
-        <Image Margin="0,2,340,124" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/servers.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
+        <Image Margin="0,2,340,124" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/servers.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
     </Grid>
  
     <phone:PhoneApplicationPage.ApplicationBar>

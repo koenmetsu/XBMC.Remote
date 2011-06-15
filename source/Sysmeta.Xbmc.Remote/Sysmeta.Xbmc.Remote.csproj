@@ -57,6 +57,9 @@
     <Reference Include="Caliburn.Micro.Extensions">
       <HintPath>..\..\packages\Caliburn.Micro\Caliburn.Micro.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="Coding4Fun.Phone.Controls">
+      <HintPath>..\..\..\..\..\Users\fen\Desktop\Coding4Fun.Phone\bin\Release\Coding4Fun.Phone.Controls.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL" />
@@ -113,7 +116,6 @@
     <Compile Include="ViewModels\IMenuItem.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\Movies\GenreViewModel.cs" />
-    <Compile Include="ViewModels\Movies\MovieDetailedViewModel.cs" />
     <Compile Include="ViewModels\Movies\MovieGenresSelectorViewModel.cs" />
     <Compile Include="ViewModels\Movies\MovieViewModel.cs" />
     <Compile Include="ViewModels\Movies\MoviesLandingViewModel.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="Views\DesignTime\ConnectionViewDesignData.cs" />
     <Compile Include="Views\DesignTime\TvEpisodeListDesignData.cs" />
     <Compile Include="Views\DesignTime\TvEpisodeListItemDesignData.cs" />
+    <Compile Include="Views\DesignTime\TvEpisodeViewDesignData.cs" />
     <Compile Include="Views\DesignTime\TvshowLadingDesignViewModel.cs" />
     <Compile Include="Views\DesignTime\MainMenuDesignData.cs" />
     <Compile Include="Views\DesignTime\MovieDesignData.cs" />
@@ -152,8 +155,8 @@
     <Compile Include="Views\Movies\GenreView.xaml.cs">
       <DependentUpon>GenreView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Movies\MovieDetailedView.xaml.cs">
-      <DependentUpon>MovieDetailedView.xaml</DependentUpon>
+    <Compile Include="Views\Movies\MovieView.xaml.cs">
+      <DependentUpon>MovieView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Movies\MovieGenresSelectorView.xaml.cs">
       <DependentUpon>MovieGenresSelectorView.xaml</DependentUpon>
@@ -164,7 +167,7 @@
     <Compile Include="Views\Movies\MovieTitleListView.xaml.cs">
       <DependentUpon>MovieTitleListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Movies\TvEpisodeView.xaml.cs">
+    <Compile Include="Views\Tvshows\TvEpisodeView.xaml.cs">
       <DependentUpon>TvEpisodeView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\NumericTextBox.cs" />
@@ -220,7 +223,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Movies\MovieDetailedView.xaml">
+    <Page Include="Views\Movies\MovieView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -236,7 +239,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Movies\TvEpisodeView.xaml">
+    <Page Include="Views\Tvshows\TvEpisodeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -289,14 +292,14 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\Black\movies.png" />
-    <Resource Include="Images\Black\remote.png" />
-    <Resource Include="Images\Black\seen16.png" />
-    <Resource Include="Images\Black\settings.png" />
-    <Resource Include="Images\Black\star.png" />
-    <Resource Include="Images\Black\tv.png" />
-    <Resource Include="Images\Black\about.png" />
-    <Resource Include="Images\Black\servers.png" />
+    <Resource Include="Images\light\movies.png" />
+    <Resource Include="Images\light\remote.png" />
+    <Resource Include="Images\light\seen16.png" />
+    <Resource Include="Images\light\settings.png" />
+    <Resource Include="Images\light\star.png" />
+    <Resource Include="Images\light\tv.png" />
+    <Resource Include="Images\light\about.png" />
+    <Resource Include="Images\light\servers.png" />
     <Content Include="icons\appbar.cancel.rest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -306,10 +309,26 @@
     <Content Include="icons\appbar.new.rest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Resource Include="Images\Black\add.png" />
-    <Resource Include="Images\Black\point.png" />
+    <Resource Include="Images\light\add.png" />
+    <Resource Include="Images\light\point.png" />
+    <Resource Include="Images\light\star_big.png" />
+    <Resource Include="Images\light\seen_big.png" />
+    <Resource Include="Images\light\appbar.transport.play.rest.png" />
+    <Resource Include="Images\dark\about.png" />
+    <Resource Include="Images\dark\add.png" />
+    <Resource Include="Images\dark\movies.png" />
+    <Resource Include="Images\dark\point.png" />
+    <Resource Include="Images\dark\remote.png" />
+    <Resource Include="Images\dark\seen_big.png" />
+    <Resource Include="Images\dark\servers.png" />
+    <Resource Include="Images\dark\settings.png" />
+    <Resource Include="Images\dark\star_big.png" />
+    <Resource Include="Images\dark\tv.png" />
+    <Resource Include="Images\dark\xbmc_logo.png" />
+    <Resource Include="Images\dark\seen16.png" />
+    <Resource Include="Images\dark\star.png" />
     <Content Include="SplashScreenImage.jpg" />
-    <Resource Include="Images\Black\xbmc_logo.png" />
+    <Resource Include="Images\light\xbmc_logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Sysmeta.JsonRpc\Sysmeta.JsonRpc.csproj">

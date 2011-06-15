@@ -7,7 +7,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime" xmlns:Controls="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Primitives" FontFamily="{StaticResource PhoneFontFamilyNormal}"
-	xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" FontSize="{StaticResource PhoneFontSizeNormal}"
+	xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:Converters1="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
@@ -15,6 +15,7 @@
     d:DataContext="{d:DesignInstance Type=designData:TvEpisodeListDesignData, IsDesignTimeCreatable=True}">
 	<phone:PhoneApplicationPage.Resources>
 		            <Converters:NullOrEmptyStringToCollapsedVisibilityConverter x:Key="visibilityConverter" />
+        <Converters1:ThemedImageConverter x:Key="imageConverter" />
             <Converters:ZeroVisibilityConverter x:Key="zeroConverter" />
 		<DataTemplate x:Key="DataTemplate1">
             <StackPanel>
@@ -30,12 +31,13 @@
             	    <StackPanel Margin="115,0,0,0">
 	            	    <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="{Binding Title}" VerticalAlignment="Top"/>
 					    <StackPanel Orientation="Horizontal">
-						    <Image Margin="0,2,0,0" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/star.png" Width="16" Height="16"/>
+                            <Image Margin="0,2,0,0" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/star.png" Width="16" Height="16"/>
                             <TextBlock Text="{Binding Rating}" FontSize="15" VerticalAlignment="Center" FontWeight="SemiBold" Margin="8, 0, 8, 0" />
 						    <Rectangle VerticalAlignment="Stretch" Width="1" Fill="{StaticResource PhoneSubtleBrush}" Margin="8,3"
                              Visibility="{Binding PlayCount, Converter={StaticResource zeroConverter}}"/>
-                                        <Image Margin="0,2,0,0" Source="/Sysmeta.Xbmc.Remote;component/Images/Black/seen16.png" Width="16" Height="16" 
-                         Visibility="{Binding PlayCount, Converter={StaticResource zeroConverter}}"/>
+							 <StackPanel Margin="0,2,0,0" Visibility="{Binding PlayCount, Converter={StaticResource zeroConverter}}" Height="16" Width="16">
+                               <Image Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/seen16.png" Width="16" Height="16" />
+						 	</StackPanel>
 					    </StackPanel>
 				    </StackPanel>
 			    </Grid>
@@ -59,7 +61,7 @@
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="2,0,12,0" Grid.Column="1">
-            <Controls:RadDataBoundListBox x:Name="ListBox" ItemsSource="{Binding Episodes}" ItemTemplate="{StaticResource DataTemplate1}" />
+            <Controls:RadDataBoundListBox x:Name="ListBox" cal:Message.Attach="[Event ItemTap] = [Action Selected($eventArgs)]" ItemsSource="{Binding Episodes}" ItemTemplate="{StaticResource DataTemplate1}" />
         </Grid>
     </Grid>
 </phone:PhoneApplicationPage>
