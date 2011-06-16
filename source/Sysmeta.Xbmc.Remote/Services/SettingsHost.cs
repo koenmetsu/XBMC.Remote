@@ -86,7 +86,8 @@ namespace Sysmeta.Xbmc.Remote.Services
             {
                 if (!storageFile.FileExists(SettingsFileName))
                 {
-                    this.appSettings = new Settings();
+                    var demo = new Connection() { Url = new Uri("http://demo:1234") };
+                    this.appSettings = new Settings() {Active = demo, Connections = { demo }};
                     return;
                 }
 

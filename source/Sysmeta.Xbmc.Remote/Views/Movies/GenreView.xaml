@@ -54,7 +54,7 @@
                     <toolkit:ContextMenuService.ContextMenu>
                         <toolkit:ContextMenu Loaded="ContextMenuLoaded" Unloaded="ContextMenuUnloaded">
                             <toolkit:MenuItem Header="play now" cal:Message.Attach="Play"/>
-                            <toolkit:MenuItem Header="queue" cal:Message.Attach="Queue"/>
+                            <!--<toolkit:MenuItem Header="queue" cal:Message.Attach="Queue"/>-->
                         </toolkit:ContextMenu>
                     </toolkit:ContextMenuService.ContextMenu>
 

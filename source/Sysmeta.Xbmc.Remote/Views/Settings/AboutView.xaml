@@ -5,7 +5,7 @@
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Converters="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Converters="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" xmlns:Micro="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
@@ -27,7 +27,21 @@
             <TextBlock x:Name="PageTitle" Text="about" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,150,0" HorizontalAlignment="Right"/>
         </StackPanel>
 
-        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>
+        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <StackPanel Micro:Message.Attach="[Event MouseLeftButtonUp]=[Action OpenProjectHomepage]">
+				<TextBlock Text="project/site"
+						   Style="{StaticResource PhoneTextLargeStyle}" />
+				<TextBlock Text="github.com/fen/Xbmc.Remote/"
+						   Style="{StaticResource PhoneTextAccentStyle}" />
+			</StackPanel>
+
+            <StackPanel Margin="0,20,0,0" Micro:Message.Attach="[Event MouseLeftButtonUp]=[Action OpenIconsHomepage]">
+				<TextBlock Text="icons under CC BY-NC-SA 3.0"
+						   Style="{StaticResource PhoneTextLargeStyle}" />
+				<TextBlock Text="yankoa.deviantart.com"
+						   Style="{StaticResource PhoneTextAccentStyle}" />
+			</StackPanel>
+       	</StackPanel>
         <Image Margin="0,2,340,104" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/about.png" Stretch="Fill" HorizontalAlignment="Right" Width="128"/>
     </Grid>
 </phone:PhoneApplicationPage>

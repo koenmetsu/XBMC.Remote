@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Sysmeta.JsonRpc")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Fredrik Eriksson")]
 [assembly: AssemblyProduct("Sysmeta.JsonRpc")]
-[assembly: AssemblyCopyright("")]
+[assembly: AssemblyCopyright("Copyright © Fredrik Eriksson 2011")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
