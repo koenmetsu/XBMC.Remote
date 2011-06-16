@@ -23,7 +23,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
             this.host = host;
             this.navigationService = navigationService;
             this.Title = TitleString;
-            this.Description = "tv shows are awsome";
+            this.Description = "browse your tv shows library";
             this.Image = "/Sysmeta.Xbmc.Remote;component/Images/{0}/tv.png";
         }
 
@@ -50,6 +50,12 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
             host.GetTvshows(shows =>
                             {
+                                if (shows == null)
+                                {
+                                    this.navigationService.GoBack();
+                                    return;
+                                }
+
                                 this.Shows = shows.Select(s => new TvshowViewModel(host, navigationService, s)).ToList();
                                 NotifyOfPropertyChange(() => this.Shows);
                             });

@@ -6,7 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:cal="clr-namespace:Caliburn.Micro;assembly=Caliburn.Micro" xmlns:Views="clr-namespace:Sysmeta.Xbmc.Remote.Views" xmlns:Converters="clr-namespace:Sysmeta.Xbmc.Remote.Views.Converters" FontFamily="{StaticResource PhoneFontFamilyNormal}"
-    xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime" xmlns:Converters1="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" FontSize="{StaticResource PhoneFontSizeNormal}"
+    xmlns:designData="clr-namespace:Sysmeta.Xbmc.Remote.Views.DesignTime" xmlns:Converters1="clr-namespace:Coding4Fun.Phone.Controls.Converters;assembly=Coding4Fun.Phone.Controls" xmlns:Binding="clr-namespace:Coding4Fun.Phone.Controls.Binding;assembly=Coding4Fun.Phone.Controls" FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="728" d:DesignWidth="480"
@@ -24,7 +24,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,2,0,14">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" />
+            <TextBlock x:Name="ApplicationTitle" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" Text="   " />
             <TextBlock x:Name="PageTitle" Text="connection" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,2,0" HorizontalAlignment="Right"/>
         </StackPanel>
 
@@ -37,7 +37,7 @@
                 <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="Username"/>
                 <TextBox Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="OnTextBoxTextChanged"/>
                 <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="Password"/>
-                <PasswordBox Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=Explicit}"/>
+                <PasswordBox Password="{Binding Password, Mode=TwoWay}" Binding:TextBinding.UpdateSourceOnChange="True"/>
             </StackPanel>
         </Grid>
         <Image Margin="0,8,340,8" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/add.png" Stretch="Fill" HorizontalAlignment="Right" Width="128" Height="128" d:LayoutOverrides="VerticalAlignment"/>

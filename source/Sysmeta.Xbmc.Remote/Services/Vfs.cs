@@ -1,24 +1,29 @@
 namespace Sysmeta.Xbmc.Remote.Services
 {
     using System;
+    using System.IO;
+    using System.Net;
 
     using Sysmeta.JsonRpc;
 
-    public class Vfs
+    public class Vfs : IVfs
     {
         private Uri baseUrl;
 
+        private ICredentials credentials;
+
         private readonly bool executeCallbackOnUiThread;
 
-        public Vfs(Uri url, bool executeCallbackOnUIThread = true)
+        public Vfs(Uri url, ICredentials credentials, bool executeCallbackOnUIThread = true)
         {
             this.baseUrl = url;
+            this.credentials = credentials;
             executeCallbackOnUiThread = executeCallbackOnUIThread;
         }
 
         public void GetFile(Uri uri, Action<byte[], Exception> callback)
         {
-            var client = new HttpClient(this.executeCallbackOnUiThread);
+            var client = new HttpClient(this.executeCallbackOnUiThread) { Credentials = this.credentials };
             client.Url = BuildUrl(uri);
             
             client.Get(response =>

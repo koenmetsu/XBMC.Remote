@@ -23,8 +23,8 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,2,0,88">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" />
-            <TextBlock x:Name="PageTitle" Text="about" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,80,0" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="ApplicationTitle" Text="  " Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" />
+            <TextBlock x:Name="PageTitle" Text="about" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,150,0" HorizontalAlignment="Right"/>
         </StackPanel>
 
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0"></Grid>

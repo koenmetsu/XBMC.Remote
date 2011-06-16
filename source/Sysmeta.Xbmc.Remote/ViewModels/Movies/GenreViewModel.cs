@@ -31,6 +31,12 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Movies
 
             this.host.GetGenre(this.Name, model =>
                 {
+                    if (model == null)
+                    {
+                        this.navigationService.GoBack();
+                        return;
+                    }
+
                     this.Movies = model.Movies;
                     NotifyOfPropertyChange(() => this.Movies);
                     NotifyOfPropertyChange(() => this.Name);

@@ -11,7 +11,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
         public AboutViewModel()
         {
             this.Title = TitleString;
-            this.Description = "about bla bla bla";
+            this.Description = "about this application";
             this.Image = "/Sysmeta.Xbmc.Remote;component/Images/{0}/about.png";
         }
 

@@ -1,21 +1,25 @@
-namespace Sysmeta.Xbmc.Remote.Services
+﻿namespace Sysmeta.Xbmc.Remote.Services
 {
     using System;
+    using System.Net;
 
     using Newtonsoft.Json.Linq;
 
     using Sysmeta.JsonRpc;
     using Sysmeta.Xbmc.Remote.Model;
 
-    public class VideoLibrary
+    public class VideoLibrary : IVideoLibrary
     {
         private readonly JsonRpcClient client;
         private readonly Func<int> getRequestId;
 
-        internal VideoLibrary(JsonRpcClient client, Func<int> getRequestId)
+        private readonly ICredentials credentials;
+
+        internal VideoLibrary(JsonRpcClient client, Func<int> getRequestId, ICredentials credentials)
         {
             this.client = client;
             this.getRequestId = getRequestId;
+            this.credentials = credentials;
         }
 
         public void GetTvshows(Action<TvshowResult, Exception> callback)
@@ -25,13 +29,23 @@ namespace Sysmeta.Xbmc.Remote.Services
 
             var request = new JsonRpcRequest
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "VideoLibrary.GetTVShows",
                 Parameters = args
             };
 
-            this.client.Execute<TvshowResult>(request, (r, e) => callback(r.Result, e));
+            this.client.Execute<TvshowResult>(request, (r, e) =>
+                {
+                    if (r == null)
+                    {
+                        callback(null, e);
+                    }
+                    else
+                    {
+                        callback(r.Result, e);
+                    }
+                });
         }
 
         public void GetTvEpisodes(int tvshowId, int season, Action<TvEpisodesResult, Exception> callback)
@@ -44,13 +58,23 @@ namespace Sysmeta.Xbmc.Remote.Services
 
             var request = new JsonRpcRequest
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "VideoLibrary.GetEpisodes",
                 Parameters = args
             };
 
-            this.client.Execute<TvEpisodesResult>(request, (r, e) => callback(r.Result, e));
+            this.client.Execute<TvEpisodesResult>(request, (r, e) =>
+                {
+                    if (r == null)
+                    {
+                        callback(null, e);
+                    }
+                    else
+                    {
+                        callback(r.Result, e);
+                    }
+                });
         }
 
         public void GetTvSeason(int tvshowId, Action<TvSeasonsResult, Exception> callback)
@@ -61,13 +85,23 @@ namespace Sysmeta.Xbmc.Remote.Services
 
             var request = new JsonRpcRequest
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "VideoLibrary.GetSeasons",
                 Parameters = args
             };
 
-            this.client.Execute<TvSeasonsResult>(request, (r, e) => callback(r.Result, e));
+            this.client.Execute<TvSeasonsResult>(request, (r, e) =>
+                {
+                    if (r == null)
+                    {
+                        callback(null, e);
+                    }
+                    else
+                    {
+                        callback(r.Result, e);
+                    }
+                });
         }
 
         public void GetMovies(Action<MoviesResult, Exception> callback)
@@ -77,13 +111,23 @@ namespace Sysmeta.Xbmc.Remote.Services
             
             var request = new JsonRpcRequest()
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "VideoLibrary.GetMovies",
                 Parameters = args
             };
 
-            this.client.Execute<MoviesResult>(request, (rpcResponse, exception) => callback(rpcResponse.Result, exception));
+            this.client.Execute<MoviesResult>(request, (rpcResponse, exception) =>
+                {
+                    if (rpcResponse == null)
+                    {
+                        callback(null, exception);
+                    }
+                    else
+                    {
+                        callback(rpcResponse.Result, exception);
+                    }
+                });
         }
 
         public void GetRecentlyAddedMovies(Action<MoviesResult, Exception> callback)
@@ -95,13 +139,23 @@ namespace Sysmeta.Xbmc.Remote.Services
 
             var request = new JsonRpcRequest()
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "VideoLibrary.GetRecentlyAddedMovies",
                 Parameters = args
             };
 
-            this.client.Execute<MoviesResult>(request, (rpcResponse, exception) => callback(rpcResponse.Result, exception));            
+            this.client.Execute<MoviesResult>(request, (rpcResponse, exception) =>
+                {
+                    if (rpcResponse == null)
+                    {
+                        callback(null, exception);
+                    }
+                    else
+                    {
+                        callback(rpcResponse.Result, exception);
+                    }
+                });            
         }
 
         int GetRequestId()

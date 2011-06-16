@@ -21,15 +21,25 @@ namespace Sysmeta.Xbmc.Remote.ViewModels
         {
             this.host = host;
             this.navigationService = navigationService;
-
-            host.GetRecentlyAddedMovies(movies =>
-                {
-                    this.Movies = movies.Select(m => new MovieViewModel(host, navigationService, m)).ToList();
-                    NotifyOfPropertyChange(() => this.Movies);
-                });
         }
 
         public IEnumerable<MovieViewModel> Movies { get; set; }
+
+        public void Update()
+        {
+            host.GetRecentlyAddedMovies(movies =>
+            {
+                if (movies == null)
+                {
+                    this.Movies = Enumerable.Empty<MovieViewModel>();
+                    NotifyOfPropertyChange(() => this.Movies);
+                    return;
+                }
+
+                this.Movies = movies.Select(m => new MovieViewModel(host, navigationService, m)).ToList();
+                NotifyOfPropertyChange(() => this.Movies);
+            });
+        }
 
         public void Selected(MovieViewModel item)
         {

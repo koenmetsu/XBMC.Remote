@@ -15,7 +15,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
         {
             this.navigationService = navigationService;
             this.Title = TitleString;
-            this.Description = "settings settings settings";
+            this.Description = "application settings";
             this.Image = "/Sysmeta.Xbmc.Remote;component/Images/{0}/settings.png";
 
             this.MenuItems = new IMenuItem[] { connections, about };

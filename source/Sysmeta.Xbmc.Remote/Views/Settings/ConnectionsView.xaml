@@ -26,8 +26,8 @@
         </Grid.RowDefinitions>
 
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,2,0,108">
-            <TextBlock x:Name="ApplicationTitle" Text="MY APPLICATION" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" />
-            <TextBlock x:Name="PageTitle" Text="servers" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,80,0" HorizontalAlignment="Right"/>
+            <TextBlock x:Name="ApplicationTitle" Style="{StaticResource PhoneTextNormalStyle}" HorizontalAlignment="Right" Margin="12,0,80,0" Text="   " />
+            <TextBlock x:Name="PageTitle" Text="connections" Style="{StaticResource PhoneTextTitle1Style}" Margin="0,0,5,0" HorizontalAlignment="Right" FontSize="65.333"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
@@ -46,7 +46,9 @@
                                 <ColumnDefinition Width="50" />
                                 <ColumnDefinition Width="Auto" MinWidth="396" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Width="50" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/point.png" Visibility="{Binding IsActive, Converter={StaticResource booleanVisibilityConverter}}" Margin="0,0,0,20"/>
+                            <StackPanel Grid.Column="0" Margin="0,0,0,20" Visibility="{Binding IsActive, Converter={StaticResource booleanVisibilityConverter}}" Width="50" Height="50">
+                                <Image Width="50" Source="{Binding Converter={StaticResource imageConverter}}" DataContext="/Sysmeta.Xbmc.Remote;component/Images/{0}/point.png"  />
+                            </StackPanel>
                             <StackPanel Height="100" Width="385" Grid.Column="1" Margin="5,0,0,-30">
                     			<StackPanel Height="27" Orientation="Horizontal">
                     				<TextBlock x:Name="MachineAddress" Text="{Binding MachineAddress}" d:LayoutOverrides="Width" />

@@ -54,9 +54,13 @@
 
         private readonly SettingsHost settingsHost;
 
-        private XbmcClient client;
+        private IXbmcClient client;
 
         private Uri currentUri;
+
+        private string currentUsername;
+
+        private string currentPassword;
 
         public XbmcHost(ICache cache, IProgressService progressService, INavigationService navigationService, SettingsHost settingsHost)
         {
@@ -74,7 +78,11 @@
 
         public void GetTvshows(Action<IEnumerable<Tvshow>> action)
         {
-            this.SetClient();
+            if (!this.SetClient())
+            {
+                action(null);
+                return;
+            }
 
             if (this.cache.HasValue("GetTvshows"))
             {
@@ -161,7 +169,11 @@
 
         public void GetRecentlyAddedMovies(Action<IEnumerable<Movie>> action)
         {
-            this.SetClient();
+            if (!this.SetClient())
+            {
+                action(null);
+                return;
+            }
 
             if (this.cache.HasValue("GetRecentlyAddedMovies"))
             {
@@ -225,7 +237,11 @@
 
         public void ListMovies(Action<IEnumerable<Movie>> action)
         {
-            this.SetClient();
+            if (!this.SetClient())
+            {
+                action(null);
+                return;
+            }
 
             if (cache.HasValue("ListMovies"))
             {
@@ -306,7 +322,11 @@
 
         public void GetGenre(string genre, Action<GenreViewModel> action)
         {
-            this.SetClient();
+            if (!this.SetClient())
+            {
+                action(null);
+                return;
+            }
 
             if (this.cache.HasValue(genre))
             {
@@ -330,7 +350,11 @@
 
         public void GetGenres(Action<IEnumerable<GenreViewModel>> action)
         {
-            this.SetClient();
+            if (!this.SetClient())
+            {
+                action(null);
+                return;
+            }
 
             if (this.cache.HasValue("GetGenres"))
             {
@@ -401,47 +425,36 @@
             return string.Format("episodes{0}{1}", tvshowId, season);
         }
 
-        private void SetClient()
+        private bool SetClient()
         {
-            if (this.settingsHost.Settings.Active != null && this.currentUri != this.settingsHost.Settings.Active.Url)
+            var active = this.settingsHost.Settings.Active;
+
+            if (active != null && this.currentUri == active.Url && this.currentUsername == active.Username && this.currentPassword == active.Password)
             {
-                this.currentUri = this.settingsHost.Settings.Active.Url;
-                this.client = new XbmcClient(this.settingsHost.Settings.Active.Url.ToString());
-                this.cache.Clear();
+                return true;
             }
-        }
-    }
 
-    public interface ICache
-    {
-        void Add(string key, object value);
-        T Get<T>(string key);
-        bool HasValue(string key);
-        void Clear();
-    }
+            if (active != null && (this.currentUri != active.Url || this.currentUsername != active.Username || this.currentPassword != active.Password))
+            {
+                if (active.Url.Host == "demo" && active.Url.Port == 1234)
+                {
+                    this.currentUri = active.Url;
+                    this.client = new DemoXbmcClient();
+                    this.cache.Clear();
+                }
+                else
+                {
+                    this.currentUri = active.Url;
+                    this.currentUsername = active.Username;
+                    this.currentPassword = active.Password;
+                    this.client = new XbmcClient(active.Url.ToString(), active.Username, active.Password);
+                    this.cache.Clear();
+                }
 
-    public class Cache : ICache
-    {
-        private Dictionary<string, object> cache = new Dictionary<string, object>(); 
+                return true;
+            }
 
-        public void Add(string key, object value)
-        {
-            cache[key] = value;
-        }
-
-        public T Get<T>(string key)
-        {
-            return (T)this.cache[key];
-        }
-
-        public bool HasValue(string key)
-        {
-            return this.cache.ContainsKey(key);
-        }
-
-        public void Clear()
-        {
-            this.cache.Clear();
+            return false;
         }
     }
 }

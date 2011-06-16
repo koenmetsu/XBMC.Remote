@@ -61,6 +61,8 @@
 
         private readonly bool executeCallbackOnUiThread;
 
+        private ICredentials credentials;
+
         public JsonRpcClient(Uri baseUrl, bool executeCallbackOnUIThread = true)
         {
             this.baseUrl = baseUrl;

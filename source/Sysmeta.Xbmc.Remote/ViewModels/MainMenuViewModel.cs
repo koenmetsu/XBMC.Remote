@@ -19,7 +19,7 @@
         public MainMenuViewModel(INavigationService navigationService, MoviesLandingViewModel movies, TvshowsLandingViewModel tvshows, RemoteViewModel remote, SettingsViewModel settings)
         {
             this.navigationService = navigationService;
-            this.MenuItems = new IMenuItem[] { movies, tvshows, remote, settings };
+            this.MenuItems = new IMenuItem[] { movies, tvshows, settings };
         }
 
         public IEnumerable<IMenuItem> MenuItems { get; set; }

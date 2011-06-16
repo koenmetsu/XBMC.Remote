@@ -1,6 +1,7 @@
 ﻿namespace Sysmeta.Xbmc.Remote.Services
 {
     using System;
+    using System.Net;
     using System.Threading;
 
     using Newtonsoft.Json.Linq;
@@ -8,28 +9,35 @@
     using Sysmeta.JsonRpc;
     using Sysmeta.Xbmc.Remote.Model;
 
-    public class XbmcClient
+    public class XbmcClient : IXbmcClient
     {
         private readonly JsonRpcClient client;
         private int idCounter = 1;
 
-        public XbmcClient(string baseUrl, bool executeCallbackOnUIThread = true)
+        private ICredentials credentials;
+
+        public XbmcClient(string baseUrl, string username, string password, bool executeCallbackOnUIThread = true)
         {
             client = new JsonRpcClient(this.BuildUrl(baseUrl), executeCallbackOnUIThread);
 
-            this.Video = new VideoLibrary(client, GetRequestId);
-            this.Vfs = new Vfs(new Uri(baseUrl), executeCallbackOnUIThread);
+            if (!string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
+            {
+                this.credentials = new NetworkCredential(username, password);
+            }
+
+            this.Video = new VideoLibrary(client, GetRequestId, this.credentials);
+            this.Vfs = new Vfs(new Uri(baseUrl), this.credentials, executeCallbackOnUIThread);
         }
 
-        public VideoLibrary Video { get; private set; }
+        public IVideoLibrary Video { get; private set; }
 
-        public Vfs Vfs { get; private set; }
+        public IVfs Vfs { get; private set; }
 
         public void Log(string message)
         {
             var request = new JsonRpcRequest
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "XBMC.Log",
                 Parameters = new JArray { message  }
@@ -43,7 +51,7 @@
             // All the log levels are lowercase characters.
             var request = new JsonRpcRequest()
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "XBMC.Log",
                 Parameters = new JArray { message, level.ToString().ToLower() }
@@ -56,7 +64,7 @@
         {
             var request = new JsonRpcRequest()
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "XBMC.ToggleMute"
             };
@@ -68,7 +76,7 @@
         {
             var request = new JsonRpcRequest()
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "XBMC.SetVolume",
                 Parameters = new JArray { volume }
@@ -81,7 +89,7 @@
         {
             var request = new JsonRpcRequest()
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "XBMC.GetVolume"
             };
@@ -105,7 +113,7 @@
         {
             var request = new JsonRpcRequest()
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "XBMC.Play"
             };
@@ -120,7 +128,7 @@
 
             var request = new JsonRpcRequest
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "XBMC.Play",
                 Parameters = args
@@ -136,7 +144,7 @@
 
             var request = new JsonRpcRequest
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "XBMC.Play",
                 Parameters = args
@@ -149,7 +157,7 @@
         {
             var request = new JsonRpcRequest()
             {
-                Credentials = null,
+                Credentials = this.credentials,
                 Id = GetRequestId(),
                 Method = "XBMC.Quit"
             };

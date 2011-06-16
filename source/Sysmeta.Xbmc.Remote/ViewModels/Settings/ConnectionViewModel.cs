@@ -70,9 +70,11 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
             if (this.connection != null)
             {
                 this.connection.Url = new Uri(string.Format("http://{0}:{1}", MachineAddress, Port));
-                this.connection.Username = this.connection.Username;
-                this.connection.Password = this.connection.Password;
+                this.connection.Username = this.Username;
+                this.connection.Password = this.Password;
 
+                this.settingsHost.SetActiveConnection(connection);
+                
                 this.settingsHost.Save();
             }
             else

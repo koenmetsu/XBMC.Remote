@@ -19,9 +19,9 @@
 
         private readonly IXbmcHost host;
 
-        public const string TitleString = "by title";
+        public const string TitleString = "title";
 
-        public const string DescriptionString = "todo bla bla bla";
+        public const string DescriptionString = "browse by movie title";
 
         public MovieTitleListViewModel(INavigationService navigationService, IXbmcHost host)
         {
@@ -55,6 +55,12 @@
 
             this.host.ListMovies(movies =>
                 {
+                    if (movies == null)
+                    {
+                        this.navigationService.GoBack();
+                        return;
+                    }
+
                     this.Movies = new BindableCollection<MovieViewModel>(movies.Select(m => new MovieViewModel(host, navigationService, m)));
                     NotifyOfPropertyChange(() => Movies);
                 });

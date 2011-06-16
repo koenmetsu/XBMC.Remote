@@ -46,12 +46,17 @@ namespace Sysmeta.Xbmc.Remote.Services
 
         public void SetActiveConnection(Connection connection)
         {
-            if (this.Settings.Active == null)
+            if (connection == null)
+            {
+                this.Settings.Active = null;
+                this.SaveSettings();
+            }
+            else if (this.Settings.Active == null)
             {
                 this.Settings.Active = connection;
                 this.SaveSettings();
             }
-            else if (this.Settings.Active.Url != connection.Url)
+            else if (this.Settings.Active.Url != connection.Url || this.Settings.Active.Username != connection.Username || this.Settings.Active.Password != connection.Password)
             {
                 this.Settings.Active = connection;
                 this.SaveSettings();
@@ -62,10 +67,7 @@ namespace Sysmeta.Xbmc.Remote.Services
         {
             this.Settings.Connections.Remove(connection);
             var newConnection = this.Settings.Connections.FirstOrDefault();
-            if (newConnection != null)
-            {
-                this.SetActiveConnection(newConnection);
-            }
+            this.SetActiveConnection(newConnection);
 
             if (this.isSaved)
             {

@@ -20,7 +20,7 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>Sysmeta.Xbmc.Remote.xap</XapFilename>
+    <XapFilename>Xbmc.Browser.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>Sysmeta.Xbmc.Remote.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
@@ -106,7 +106,15 @@
     <Compile Include="Model\TvSeason.cs" />
     <Compile Include="Model\Tvshow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Cache.cs" />
+    <Compile Include="Services\DemoVfs.cs" />
+    <Compile Include="Services\DemoVideoLibrary.cs" />
+    <Compile Include="Services\DemoXbmcClient.cs" />
+    <Compile Include="Services\ICache.cs" />
     <Compile Include="Services\IProgressService.cs" />
+    <Compile Include="Services\IVfs.cs" />
+    <Compile Include="Services\IVideoLibrary.cs" />
+    <Compile Include="Services\IXbmcClient.cs" />
     <Compile Include="Services\IXbmcHost.cs" />
     <Compile Include="Services\SettingsHost.cs" />
     <Compile Include="Services\Vfs.cs" />
@@ -290,6 +298,35 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Images\Demo\001d4636.tbn" />
+    <EmbeddedResource Include="Images\Demo\0d5ee9b4.tbn" />
+    <EmbeddedResource Include="Images\Demo\107a3d25.tbn" />
+    <EmbeddedResource Include="Images\Demo\1242c0a8.tbn" />
+    <EmbeddedResource Include="Images\Demo\2cc36602.tbn" />
+    <EmbeddedResource Include="Images\Demo\2efe0c22.tbn" />
+    <EmbeddedResource Include="Images\Demo\2f478cc7.tbn" />
+    <EmbeddedResource Include="Images\Demo\3145107b.tbn" />
+    <EmbeddedResource Include="Images\Demo\40424448.tbn" />
+    <EmbeddedResource Include="Images\Demo\4a5ddf2a.tbn" />
+    <EmbeddedResource Include="Images\Demo\534b7569.tbn" />
+    <EmbeddedResource Include="Images\Demo\5363d34a.tbn" />
+    <EmbeddedResource Include="Images\Demo\6157c47a.tbn" />
+    <EmbeddedResource Include="Images\Demo\63c997e0.tbn" />
+    <EmbeddedResource Include="Images\Demo\65e5c555.tbn" />
+    <EmbeddedResource Include="Images\Demo\7ad68a24.tbn" />
+    <EmbeddedResource Include="Images\Demo\8917327c.tbn" />
+    <EmbeddedResource Include="Images\Demo\8ff6746d.tbn" />
+    <EmbeddedResource Include="Images\Demo\b42d93a1.tbn" />
+    <EmbeddedResource Include="Images\Demo\d1ae99e8.tbn" />
+    <EmbeddedResource Include="Images\Demo\e5af7158.tbn" />
+    <EmbeddedResource Include="Images\Demo\f7fc8691.tbn" />
+    <EmbeddedResource Include="Images\Demo\f81c8006.tbn" />
+    <EmbeddedResource Include="Images\Demo\f84ca5a8.tbn" />
+    <EmbeddedResource Include="Images\Demo\ff2b872c.tbn" />
+    <EmbeddedResource Include="Images\Demo\01cd1dea.tbn" />
+    <EmbeddedResource Include="Images\Demo\b8edf222.tbn" />
+    <EmbeddedResource Include="Images\Demo\c9e0aea1.tbn" />
+    <EmbeddedResource Include="Images\Demo\d968bc59.tbn" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml" />

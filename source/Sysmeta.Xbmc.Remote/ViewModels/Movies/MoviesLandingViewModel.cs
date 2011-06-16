@@ -12,7 +12,7 @@
         private readonly INavigationService navigationService;
 
         public const string TitleString = "movies";
-        public const string DescriptionString = "hello world";
+        public const string DescriptionString = "browse your movies library";
 
         public MoviesLandingViewModel(INavigationService navigationService, MovieTitleListViewModel titleList, MovieGenresSelectorViewModel genres)
         {

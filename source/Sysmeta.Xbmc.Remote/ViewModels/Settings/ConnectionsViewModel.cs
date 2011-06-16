@@ -14,14 +14,14 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
 
         private readonly SettingsHost settingsHost;
 
-        public static string TitleString = "servers";
+        public static string TitleString = "connections";
 
         public ConnectionsViewModel(INavigationService navigationService, SettingsHost settingsHost)
         {
             this.navigationService = navigationService;
             this.settingsHost = settingsHost;
             this.Title = TitleString;
-            this.Description = "the list of XBMC servers";
+            this.Description = "list of XBMC connections";
             this.Image = "/Sysmeta.Xbmc.Remote;component/Images/{0}/servers.png";
 
             LoadConnections();

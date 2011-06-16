@@ -22,7 +22,7 @@
             this.host = host;
             this.navigationService = navigationService;
             this.Title = TitleString;
-            this.Description = "bla bla bla genre is coolers";
+            this.Description = "browse by movies genre";
             this.Image = null;
         }
 
@@ -40,6 +40,12 @@
 
             this.host.GetGenres(genres =>
                 {
+                    if (genres == null)
+                    {
+                        this.navigationService.GoBack();
+                        return;
+                    }
+
                     this.Genres = new BindableCollection<GenreViewModel>(genres);
                     NotifyOfPropertyChange(() => this.Genres);
                 });
