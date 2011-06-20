@@ -57,8 +57,8 @@
     <Reference Include="Caliburn.Micro.Extensions">
       <HintPath>..\..\packages\Caliburn.Micro\Caliburn.Micro.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Coding4Fun.Phone.Controls">
-      <HintPath>..\..\..\..\..\Users\fen\Desktop\Coding4Fun.Phone\bin\Release\Coding4Fun.Phone.Controls.dll</HintPath>
+    <Reference Include="Coding4Fun.Phone.Controls, Version=1.4.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Coding4Fun.Phone.Controls\Coding4Fun.Phone.Controls.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls" />
@@ -76,15 +76,17 @@
     </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Telerik.Windows.Controls.Data, Version=2011.1.420.1037, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2011\Binaries\WindowsPhone\Telerik.Windows.Controls.Data.dll</HintPath>
+      <HintPath>..\..\packages\Telerik\Telerik.Windows.Controls.Data.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Controls.Primitives, Version=2011.1.420.1037, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2011\Binaries\WindowsPhone\Telerik.Windows.Controls.Primitives.dll</HintPath>
+      <HintPath>..\..\packages\Telerik\Telerik.Windows.Controls.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Telerik.Windows.Core, Version=2011.1.420.1037, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\..\Program Files (x86)\Telerik\RadControls for Windows Phone 7 Q1 2011\Binaries\WindowsPhone\Telerik.Windows.Core.dll</HintPath>
+      <HintPath>..\..\packages\Telerik\Telerik.Windows.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Telerik.Windows.Data, Version=2011.1.420.1037, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL" />
+    <Reference Include="Telerik.Windows.Data, Version=2011.1.420.1037, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Telerik\Telerik.Windows.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -329,7 +331,9 @@
     <EmbeddedResource Include="Images\Demo\d968bc59.tbn" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
-    <None Include="Properties\WMAppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="ApplicationIcon.png">
