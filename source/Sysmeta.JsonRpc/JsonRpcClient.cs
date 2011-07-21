@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Net;
+    using System.Runtime.Serialization;
+
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
     using Sysmeta.JsonRpc;
@@ -88,7 +90,14 @@
                     }
                     else
                     {
-                        callback(ConvertToJsonRpcResponse<T>(response), null);
+                        Exception exception = null;
+                        var data = ConvertToJsonRpcResponse<T>(response);
+                        if (data == null)
+                        {
+                            exception = new JsonRpcDeserializationException();
+                        }
+
+                        callback(data, exception);
                     }
                 });
         }
@@ -111,7 +120,31 @@
 
         private JsonRpcResponse<T> ConvertToJsonRpcResponse<T>(HttpResponse httpResponse)
         {
-            return JsonConvert.DeserializeObject<JsonRpcResponse<T>>(httpResponse.Content);
+            try
+            {
+                return JsonConvert.DeserializeObject<JsonRpcResponse<T>>(httpResponse.Content);
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
+    }
+
+    public class JsonRpcDeserializationException : Exception
+    {
+        public JsonRpcDeserializationException()
+        {
+        }
+
+        public JsonRpcDeserializationException(string message)
+            : base(message)
+        {
+        }
+
+        public JsonRpcDeserializationException(string message, Exception inner)
+            : base(message, inner)
+        {
         }
     }
 }
