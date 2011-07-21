@@ -32,10 +32,10 @@ namespace Sysmeta.Xbmc.Remote.Model
         public string Title { get; set; }
 
         [JsonProperty("year")]
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         [JsonProperty("rating")]
-        public float Rating { get; set; }
+        public string Rating { get; set; }
 
         [JsonProperty("director")]
         public string Director { get; set; }
@@ -53,16 +53,16 @@ namespace Sysmeta.Xbmc.Remote.Model
         public string FirstAired { get; set; }
 
         [JsonProperty("duration")]
-        public int Duration { get; set; }
+        public string Duration { get; set; }
 
         [JsonProperty("season")]
-        public int Season { get; set; }
+        public string Season { get; set; }
 
         [JsonProperty("episode")]
-        public int Episode { get; set; }
+        public string Episode { get; set; }
 
         [JsonProperty("playcount")]
-        public int PlayCount { get; set; }
+        public string PlayCount { get; set; }
 
         [JsonProperty("writer")]
         public string Writer { get; set; }
@@ -77,7 +77,7 @@ namespace Sysmeta.Xbmc.Remote.Model
         public string Premiered { get; set; }
 
         [JsonProperty("fanart")]
-        public Uri Fanart { get; set; }
+        public string Fanart { get; set; }
     }
 
     public class TvEpisodesResult

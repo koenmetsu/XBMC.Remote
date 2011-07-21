@@ -30,16 +30,16 @@ namespace Sysmeta.Xbmc.Remote.Model
         public string Title { get; set; }
 
         [JsonProperty("season")]
-        public int Season { get; set; }
+        public string Season { get; set; }
 
         [JsonProperty("thumbnail")]
-        public Uri Thumbnail { get; set; }
+        public string Thumbnail { get; set; }
 
         [JsonProperty("fanart")]
-        public Uri Fanart { get; set; }
+        public string Fanart { get; set; }
 
         [JsonProperty("episode")]
-        public int Episodes { get; set; }
+        public string Episodes { get; set; }
 
         public BitmapImage ThumbnailImage { get; set; }
     }

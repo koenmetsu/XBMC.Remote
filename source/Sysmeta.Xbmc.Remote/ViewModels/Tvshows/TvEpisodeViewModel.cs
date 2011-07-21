@@ -78,13 +78,13 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
                 if (this.year == null)
                 {
-                    if (this.episode.Year == 0)
+                    if (string.IsNullOrEmpty(this.episode.Year))
                     {
                         this.year = "N/A";
                     }
                     else
                     {
-                        this.year = this.episode.Year.ToString();
+                        this.year = this.episode.Year;
                     }
                 }
 
@@ -92,7 +92,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
             }
         }
 
-
+        private float rating = -1;
         public float Rating
         {
             get
@@ -102,7 +102,17 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
                     return 0;
                 }
 
-                return this.episode.Rating;
+                if (this.rating != -1)
+                {
+                    return this.rating;
+                }
+
+                if (!float.TryParse(this.episode.Rating, out this.rating))
+                {
+                    this.rating = 0;
+                }
+
+                return rating;
             }
         }
 
@@ -185,7 +195,9 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
                     return null;
                 }
 
-                int duration = this.episode.Duration;
+                int duration = 0;
+
+                int.TryParse(this.episode.Year, out duration);
 
                 if (duration == 0)
                 {
@@ -216,7 +228,10 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
                 if (this.season == -1)
                 {
-                    this.season = this.episode.Season;
+                    if (!int.TryParse(this.episode.Season, out this.season))
+                    {
+                        this.season = 0;
+                    }
                 }
 
                 return this.season;
@@ -248,7 +263,10 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
                 if (this.episodeNr == -1)
                 {
-                    this.episodeNr = this.episode.Episode;
+                    if (!int.TryParse(this.episode.Episode, out episodeNr))
+                    {
+                        this.episodeNr = 0;
+                    }
                 }
 
                 return this.episodeNr;
@@ -268,6 +286,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
             }
         }
 
+        private int playCount = -1;
         public int PlayCount
         {
             get
@@ -277,7 +296,17 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
                     return 0;
                 }
 
-                return this.episode.PlayCount;
+                if (playCount != -1)
+                {
+                    return playCount;
+                }
+
+                if (!int.TryParse(this.episode.PlayCount, out this.playCount))
+                {
+                    this.playCount = 0;
+                }
+
+                return playCount;
             }
         }
 
@@ -336,6 +365,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
             }
         }
 
+        private Uri fanartSource;
         public Uri FanartSource
         {
             get
@@ -345,7 +375,14 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
                     return null;
                 }
 
-                return this.episode.Fanart;
+                if (this.fanartSource != null)
+                {
+                    return this.fanartSource;
+                }
+
+                Uri.TryCreate(this.episode.Fanart, UriKind.RelativeOrAbsolute, out fanartSource);
+
+                return this.fanartSource;
             }
         }
 
@@ -362,7 +399,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
             {
                 this.host.GetTvEpisodes(this.TvshowId, this.season, episodes =>
                     {
-                        var ep = episodes.Where(e => e.Episode == this.episodeNr).FirstOrDefault();
+                        var ep = episodes.Where(e => e.Episode == this.episodeNr.ToString()).FirstOrDefault();
                         if (ep == null)
                         {
                             this.navigationService.GoBack();

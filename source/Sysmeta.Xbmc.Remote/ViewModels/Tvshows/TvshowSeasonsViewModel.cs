@@ -53,10 +53,18 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
                     this.Title = show.Title;
                     this.Plot = show.Plot;
                     this.Genre = show.Genre;
-                    this.Premiered = show.Premiered.ToShortDateString();
-                    this.Rating = show.Rating;
+                    this.Premiered = show.Premiered;
+                    
+                    float rating = 0;
+                    float.TryParse(show.Rating, out rating);
+                    this.Rating = rating;
+
                     this.Studio = show.Studio;
-                    this.Year = show.Year;
+
+                    int year = 0;
+                    int.TryParse(show.Year, out year);
+                    this.Year = year;
+
                     NotifyOfPropertyChange(() => this.Plot);
                     NotifyOfPropertyChange(() => this.Title);
                     NotifyOfPropertyChange(() => this.Genre);

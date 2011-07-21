@@ -178,7 +178,7 @@
 
                 if (this.year == null)
                 {
-                    this.year = string.IsNullOrEmpty(movie.Year.Trim()) ? "N/A" : movie.Year;
+                    this.year = string.IsNullOrEmpty(movie.Year) ? "N/A" : movie.Year;
                 }
 
                 return this.year;

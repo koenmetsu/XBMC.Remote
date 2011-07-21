@@ -35,10 +35,10 @@
         public string Label { get; set; }
 
         [JsonProperty("year")]
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         [JsonProperty("thumbnail")]
-        public Uri Thumbnail { get; set; }
+        public string Thumbnail { get; set; }
 
         [JsonProperty("plot")]
         public string Plot { get; set; }
@@ -47,22 +47,22 @@
         public string Genre { get; set; }
 
         [JsonProperty("rating")]
-        public float Rating { get; set; }
+        public string Rating { get; set; }
 
         [JsonProperty("episode")]
-        public int Episode { get; set; }
+        public string Episode { get; set; }
 
         [JsonProperty("fanart")]
-        public Uri Fanart { get; set; }
+        public string Fanart { get; set; }
 
         [JsonProperty("playcount")]
-        public int PlayCount { get; set; }
+        public string PlayCount { get; set; }
 
         [JsonProperty("studio")]
         public string Studio { get; set; }
 
         [JsonProperty("premiered")]
-        public DateTime Premiered { get; set; }
+        public string Premiered { get; set; }
 
         public BitmapImage ThumbnailImage { get; set; }
     }

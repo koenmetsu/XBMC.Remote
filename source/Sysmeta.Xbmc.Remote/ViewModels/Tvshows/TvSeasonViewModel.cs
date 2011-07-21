@@ -107,6 +107,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
             }
         }
 
+        private Uri thumbnailSource;
         public Uri ThumbnailSource
         {
             get
@@ -116,10 +117,13 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
                     return null;
                 }
 
-                return this.tvSeason.Thumbnail;
+                Uri.TryCreate(this.tvSeason.Thumbnail, UriKind.Absolute, out this.thumbnailSource);
+
+                return this.thumbnailSource;
             }
         }
 
+        private int episodes = -1;
         public int Episodes
         {
             get
@@ -129,10 +133,19 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
                     return 0;
                 }
 
-                return this.tvSeason.Episodes;
+                if (this.episodes == -1)
+                {
+                    if (!int.TryParse(this.tvSeason.Episodes, out this.episodes))
+                    {
+                        this.episodes = 0;
+                    }
+                }
+
+                return this.episodes;
             }
         }
 
+        private int season = -1;
         public int Season
         {
             get
@@ -142,7 +155,15 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
                     return 0;
                 }
 
-                return this.tvSeason.Season;
+                if (this.season == -1)
+                {
+                    if (!int.TryParse(this.tvSeason.Season, out this.season))
+                    {
+                        this.season = 0;
+                    }
+                }
+
+                return this.season;
             }
         }
     }

@@ -106,6 +106,7 @@
             }
         }
 
+        private Uri thumbnailSource;
         public Uri ThumbnailSource
         {
             get
@@ -115,7 +116,9 @@
                     return null;
                 }
 
-                return this.tvshow.Thumbnail;
+                Uri.TryCreate(this.tvshow.Thumbnail, UriKind.Absolute, out this.thumbnailSource);
+
+                return this.thumbnailSource;
             }
         }
 
@@ -145,6 +148,7 @@
             }
         }
 
+        private float rating = -1;
         public float Rating
         {
             get
@@ -154,10 +158,19 @@
                     return 0;
                 }
 
-                return this.tvshow.Rating;
+                if (this.rating == -1)
+                {
+                    if (!float.TryParse(this.tvshow.Rating, out this.rating))
+                    {
+                        this.rating = 0;
+                    }
+                }
+
+                return this.rating;
             }
         }
 
+        private int episodes = -1;
         public int Episodes
         {
             get
@@ -167,12 +180,21 @@
                     return 0;
                 }
 
-                return this.tvshow.Episode;
+                if (this.episodes == -1)
+                {
+                    if (!int.TryParse(this.tvshow.Episode, out this.episodes))
+                    {
+                        this.episodes = 0;
+                    }
+                }
+
+                return this.episodes;
             }
         }
 
         public BitmapImage Fanart { get; set; }
 
+        private Uri fanartSource;
         public Uri FanartSource
         {
             get
@@ -182,10 +204,13 @@
                     return null;
                 }
 
-                return this.tvshow.Fanart;
+                Uri.TryCreate(this.tvshow.Fanart, UriKind.Absolute, out fanartSource);
+
+                return this.fanartSource;
             }
         }
 
+        private int playCount = -1;
         public int PlayCount
         {
             get
@@ -195,7 +220,15 @@
                     return 0;
                 }
 
-                return this.tvshow.PlayCount;
+                if (this.playCount == -1)
+                {
+                    if (!int.TryParse(this.tvshow.PlayCount, out this.playCount))
+                    {
+                        this.playCount = 0;
+                    }
+                }
+
+                return this.playCount;
             }
         }
 

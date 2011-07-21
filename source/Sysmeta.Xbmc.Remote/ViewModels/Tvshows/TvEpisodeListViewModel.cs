@@ -50,7 +50,12 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
 
             this.host.GetTvEpisodes(this.TvshowId, this.Season, episodes =>
                 {
-                    this.Episodes = episodes.OrderBy(e => e.Episode).Select(e => new TvEpisodeViewModel(host, navigationService, e)).ToList();
+                    this.Episodes = episodes.OrderBy(e =>
+                        {
+                            int ep = 0;
+                            int.TryParse(e.Episode, out ep);
+                            return ep;
+                        }).Select(e => new TvEpisodeViewModel(host, navigationService, e)).ToList();
 
                     this.SeasonTitle = string.Format("Season {0}", this.Season);
                     this.TvshowName = this.Episodes.First().ShowTitle;
