@@ -39,10 +39,10 @@
         public string Genre { get; set; }
 
         [JsonProperty("year")]
-        public int Year { get; set; }
+        public string Year { get; set; }
 
         [JsonProperty("rating")]
-        public float Rating { get; set; }
+        public string Rating { get; set; }
 
         [JsonProperty("director")]
         public string Director { get; set; }
@@ -66,7 +66,7 @@
         public string LastPlayed { get; set; }
 
         [JsonProperty("playcount")]
-        public int PlayCount { get; set; }
+        public string PlayCount { get; set; }
 
         [JsonProperty("writer")]
         public string Writer { get; set; }
@@ -114,10 +114,10 @@
         public string WritingCredits { get; set; }
 
         [JsonProperty("fanart")]
-        public Uri Fanart { get; set; }
+        public string Fanart { get; set; }
 
         [JsonProperty("thumbnail")]
-        public Uri Thumbnail { get; set; }
+        public string Thumbnail { get; set; }
 
         public BitmapImage ThumbnailImage { get; set; }
 

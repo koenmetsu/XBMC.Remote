@@ -817,16 +817,16 @@
                                     Id = 1,
                                     MPAA = @"Rated R",
                                     OriginalTitle = @"12 Monkeys",
-                                    PlayCount = 1,
+                                    PlayCount = "1",
                                     Plot = @"In the year 2035, convict James Cole volunteers reluctantly to be sent back in time by scientists to discover the origin of a deadly virus that wiped out nearly all of the earth's population decades earlier. But when Cole is sent mistakenly to 1990 instead of 1996, he's arrested and locked up in a mental hospital, where he meets a psychiatrist and the son of a famous virus expert.",
-                                    Rating = 8.2f,
+                                    Rating = "8.2",
                                     Runtime = @"130",
                                     Studio = @"Universal Studios",
                                     Tagline = @"The future is history",
-                                    Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/f/f7fc8691.tbn"),
+                                    Thumbnail = "special://masterprofile/Thumbnails/Video/f/f7fc8691.tbn",
                                     Title = @"12 Monkeys",
                                     Writer = @"David Webb Peoples / Janet Peoples",
-                                    Year = 1995
+                                    Year = "1995"
                                 },new Movie
                                     {
                                         Director = @"Doug Liman",
@@ -834,16 +834,16 @@
                                         Id = 4,
                                         MPAA = @"Rated PG-13",
                                         OriginalTitle = @"The Bourne Identity",
-                                        PlayCount = 0,
+                                        PlayCount = "0",
                                         Plot = @"Wounded to the brink of death and suffering from amnesia, Jason Bourne is rescued at sea by a fisherman. With nothing to go on but a Swiss bank account number, he starts to reconstruct his life, but finds that many people he encounters want him dead. Bourne realizes, though, that he has the combat and mental skills of a world-class spy, but who does he work for?",
-                                        Rating = 8.6f,
+                                        Rating = "8.6",
                                         Runtime = @"119",
                                         Studio = @"Universal Pictures",
                                         Tagline = @"He was the perfect weapon until he became the target.",
-                                        Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/e/e5af7158.tbn"),
+                                        Thumbnail = "special://masterprofile/Thumbnails/Video/e/e5af7158.tbn",
                                         Title = @"The Bourne Identity",
                                         Writer = @"Tony Gilroy / W. Blake Herron",
-                                        Year = 2002
+                                        Year = "2002"
                                     },new Movie
                                         {
                                             Director = @"George P. Cosmatos",
@@ -851,16 +851,16 @@
                                             Id = 15,
                                             MPAA = @"Rated R",
                                             OriginalTitle = @"Rambo: First Blood Part II",
-                                            PlayCount = 0,
+                                            PlayCount = "0",
                                             Plot = @"Col. Troutman recruits ex-Green Beret John Rambo for a highly secret and dangerous mission. Teamed with freedom fighter Co Bao, Rambo goes deep into Vietnam to rescue POWs. Deserted by his own team, he's left in a hostile jungle to fight for his life, avenge the death of a woman and bring corrupt officials to justice.",
-                                            Rating = 6f,
+                                            Rating = "6",
                                             Runtime = @"94",
                                             Studio = @"Anabasis N.V.",
                                             Tagline = @"What most people call hell, he calls home.",
-                                            Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/8/8917327c.tbn"),
+                                            Thumbnail = "special://masterprofile/Thumbnails/Video/8/8917327c.tbn",
                                             Title = @"Rambo: First Blood Part II",
                                             Writer = @"Sylvester Stallone / James Cameron",
-                                            Year = 1985
+                                            Year = "1985"
                                         },new Movie
                                             {
                                                 Director = @"Stuart Baird",
@@ -868,16 +868,16 @@
                                                 Id = 19,
                                                 MPAA = @"Rated PG-13",
                                                 OriginalTitle = @"Star Trek: Nemesis",
-                                                PlayCount = 0,
+                                                PlayCount = "0",
                                                 Plot = @"Break out your Vulcan ears: The crew of the USS Enterprise is back. This time around, the Next Generation crew members -- including Capt. Picard, Cmdr. Riker and, of course, Data -- are dispatched as peace ambassadors to their longtime foes, the Romulans. There, they encounter a mysterious new enemy that thwarts not only the armistice process, but Earth itself!",
-                                                Rating = 6.6f,
+                                                Rating = "6.6",
                                                 Runtime = @"117",
                                                 Studio = @"Paramount Pictures",
                                                 Tagline = @"A generation's final journey... begins.",
-                                                Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/f/f84ca5a8.tbn"),
+                                                Thumbnail = "special://masterprofile/Thumbnails/Video/f/f84ca5a8.tbn",
                                                 Title = @"Star Trek: Nemesis",
                                                 Writer = @"John Logan",
-                                                Year = 2002
+                                                Year = "2002"
                                             },new Movie
                                                 {
                                                     Director = @"John Glen",
@@ -885,16 +885,16 @@
                                                     Id = 23,
                                                     MPAA = @"Rated PG",
                                                     OriginalTitle = @"A View to a Kill",
-                                                    PlayCount = 0,
+                                                    PlayCount = "0",
                                                     Plot = @"A newly developed microchip designed by Zorin Industries for the British Government that can survive the electromagnetic radiation caused by a nuclear explosion has landed in the hands of the KGB. James Bond must find out how and why. His suspicions soon lead him to big industry leader Max Zorin. The 14th film from the Legendary James Bond series starring Roger Moore as a British super agent.",
-                                                    Rating = 6.4f,
+                                                    Rating = "6.4",
                                                     Runtime = @"131",
                                                     Studio = @"Danjag S.A. / EON Productions / United Artists / Metro-Goldwyn-Mayer",
                                                     Tagline = @"Has James Bond finally met his match?",
-                                                    Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/2/2efe0c22.tbn"),
+                                                    Thumbnail = "special://masterprofile/Thumbnails/Video/2/2efe0c22.tbn",
                                                     Title = @"A View to a Kill",
                                                     Writer = @"Richard Maibaum / Michael J. Wilson",
-                                                    Year = 1985
+                                                    Year = "1985"
                                                 },new Movie
                                                     {
                                                         Director = @"Val Guest / Ken Hughes / John Huston / Joseph McGrath / Robert Parrish",
@@ -902,16 +902,16 @@
                                                         Id = 24,
                                                         MPAA = null,
                                                         OriginalTitle = @"Casino Royale",
-                                                        PlayCount = 0,
+                                                        PlayCount = "0",
                                                         Plot = @"Sir James Bond is called back out of retirement to stop SMERSH. In order to trick SMERSH, Bond thinks up the ultimate plan. That every agent will be named James Bond. One of the Bonds, whose real name is Evelyn Tremble is sent to take on Le Chiffre in a game of baccarat, but all the Bonds get more than they can handle, especially when the ultimate villain turns out to be Bonds nephew.",
-                                                        Rating = 8.6f,
+                                                        Rating = "8.6",
                                                         Runtime = @"131",
                                                         Studio = null,
                                                         Tagline = null,
-                                                        Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/3/3145107b.tbn"),
+                                                        Thumbnail = "special://masterprofile/Thumbnails/Video/3/3145107b.tbn",
                                                         Title = @"Casino Royale",
                                                         Writer = @"Wolf Mankowitz / John Law / Michael Sayers",
-                                                        Year = 1967
+                                                        Year = "1967"
                                                     },new Movie
                                                         {
                                                             Director = @"Guy Hamilton",
@@ -919,16 +919,16 @@
                                                             Id = 25,
                                                             MPAA = @"Rated PG",
                                                             OriginalTitle = @"Diamonds Are Forever",
-                                                            PlayCount = 0,
+                                                            PlayCount = "0",
                                                             Plot = @"Diamonds are stolen only to be sold again in the international market. James Bond infiltrates a smuggling mission to find out who�s guilty. The mission takes him to Las Vegas where Bong meets his archenemy Blofeld. The seventh film from the Legendary James Bond series starring Sean Connery as a British super agent.",
-                                                            Rating = 6.6f,
+                                                            Rating = "6.6",
                                                             Runtime = @"120",
                                                             Studio = @"Danjag S.A. / EON Productions",
                                                             Tagline = @"Bond is back...with the girls",
-                                                            Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/8/8ff6746d.tbn"),
+                                                            Thumbnail = "special://masterprofile/Thumbnails/Video/8/8ff6746d.tbn",
                                                             Title = @"Diamonds Are Forever",
                                                             Writer = @"Richard Maibaum / Tom Mankiewicz",
-                                                            Year = 1971
+                                                            Year = "1971"
                                                         },new Movie
                                                             {
                                                                 Director = @"Lee Tamahori",
@@ -936,16 +936,16 @@
                                                                 Id = 26,
                                                                 MPAA = @"Rated PG-13",
                                                                 OriginalTitle = @"Die Another Day",
-                                                                PlayCount = 0,
+                                                                PlayCount = "0",
                                                                 Plot = @"The ever-daring James Bond taking on a North Korean leader who undergoes DNA replacement procedures that allow him to assume different identities. American agent Jinx Johnson assists Bond in thwarting the villain's plans to exploit a satellite that is powered by solar energy.",
-                                                                Rating = 7f,
+                                                                Rating = "7",
                                                                 Runtime = @"133",
                                                                 Studio = @"EON Productions / Danjag S.A. / Metro-Goldwyn-Mayer (MGM) / United Artists",
                                                                 Tagline = @"Events don't get any bigger than...",
-                                                                Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/2/2f478cc7.tbn"),
+                                                                Thumbnail = "special://masterprofile/Thumbnails/Video/2/2f478cc7.tbn",
                                                                 Title = @"Die Another Day",
                                                                 Writer = null,
-                                                                Year = 2002
+                                                                Year = "2002"
                                                             },new Movie
                                                                 {
                                                                     Director = @"Terence Young",
@@ -953,16 +953,16 @@
                                                                     Id = 27,
                                                                     MPAA = @"Rated PG",
                                                                     OriginalTitle = @"Dr. No",
-                                                                    PlayCount = 0,
+                                                                    PlayCount = "0",
                                                                     Plot = @"The mysterious scientist Dr. No sabotages the American space program from his secret base in Jamaica. The Secret Service sends it�s best agent after this him. Dr. No is the first film of legendary James Bond series starring Sean Connery in the role of a British super agent. ",
-                                                                    Rating = 7.4f,
+                                                                    Rating = "7.4",
                                                                     Runtime = @"111",
                                                                     Studio = @"EON Productions",
                                                                     Tagline = @"NOW meet the most extraordinary gentleman spy in all fiction!",
-                                                                    Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/d/d1ae99e8.tbn"),
+                                                                    Thumbnail = "special://masterprofile/Thumbnails/Video/d/d1ae99e8.tbn",
                                                                     Title = @"Dr. No",
                                                                     Writer = @"Richard Maibaum / Johanna Harwood / Berkely Mather",
-                                                                    Year = 1962
+                                                                    Year = "1962"
                                                                 },new Movie
                                                                     {
                                                                         Director = @"John Glen",
@@ -970,16 +970,16 @@
                                                                         Id = 28,
                                                                         MPAA = @"Rated PG",
                                                                         OriginalTitle = @"For Your Eyes Only",
-                                                                        PlayCount = 0,
+                                                                        PlayCount = "0",
                                                                         Plot = @"A British spy ship has sunk and on board was a hi-tech encryption device. James Bond is sent to find the device that holds British launching instructions before the enemy Soviets get to it first. The twelfth film from the Legendary James Bond series starring Roger Moore as a British super agent.",
-                                                                        Rating = 7.8f,
+                                                                        Rating = "7.8",
                                                                         Runtime = @"127",
                                                                         Studio = @"Danjag S.A. / EON Productions / United Artists",
                                                                         Tagline = @"No one comes close to James Bond, 007.",
-                                                                        Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/4/4a5ddf2a.tbn"),
+                                                                        Thumbnail = "special://masterprofile/Thumbnails/Video/4/4a5ddf2a.tbn",
                                                                         Title = @"For Your Eyes Only",
                                                                         Writer = @"Richard Maibaum / Michael J. Wilson",
-                                                                        Year = 1981
+                                                                        Year = "1981"
                                                                     },new Movie
                                                                         {
                                                                             Director = @"Terence Young",
@@ -987,16 +987,16 @@
                                                                             Id = 29,
                                                                             MPAA = @"Rated PG",
                                                                             OriginalTitle = @"From Russia with Love",
-                                                                            PlayCount = 0,
+                                                                            PlayCount = "0",
                                                                             Plot = @"Bond is back and on the loose in exotic Istanbul looking for a super-secret coding machine. He's involved with a beautiful Russian spy and has the SPECTRE organization after him, including villainess Rosa Klebb (she of the killer shoe). Lots of exciting escapes but not an overreliance on the gadgetry of the later films. The second Bond feature, thought by many to be the best.",
-                                                                            Rating = 8.6f,
+                                                                            Rating = "8.6",
                                                                             Runtime = @"110",
                                                                             Studio = @"EON Productions",
                                                                             Tagline = @"The world's masters of murder pull out all the stops to destroy Agent 007!",
-                                                                            Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/0/001d4636.tbn"),
+                                                                            Thumbnail = "special://masterprofile/Thumbnails/Video/0/001d4636.tbn",
                                                                             Title = @"From Russia with Love",
                                                                             Writer = @"Richard Maibaum",
-                                                                            Year = 1963
+                                                                            Year = "1963"
                                                                         },new Movie
                                                                             {
                                                                                 Director = @"Martin Campbell",
@@ -1004,16 +1004,16 @@
                                                                                 Id = 30,
                                                                                 MPAA = @"Rated PG-13",
                                                                                 OriginalTitle = @"GoldenEye",
-                                                                                PlayCount = 0,
+                                                                                PlayCount = "0",
                                                                                 Plot = @"James Bond must unmask the mysterious head of the Janus Syndicate and prevent his one time ally - Alec Trevelyan Agent 006 - from utilising the GoldenEye weapons system to inflict devastating revenge on Britain. --- The 17th film from the legendary James Bond series and the first starring Pierce Brosnan.",
-                                                                                Rating = 7.6f,
+                                                                                Rating = "7.6",
                                                                                 Runtime = @"130",
                                                                                 Studio = @"Danjag S.A. / EON Productions / Metro-Goldwyn-Mayer / United Artists",
                                                                                 Tagline = @"When the world is the target and the threat is real, you can still depend on one man.",
-                                                                                Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/5/534b7569.tbn"),
+                                                                                Thumbnail = "special://masterprofile/Thumbnails/Video/5/534b7569.tbn",
                                                                                 Title = @"GoldenEye",
                                                                                 Writer = @"Jeffrey Caine / Bruce Feirstein",
-                                                                                Year = 1995
+                                                                                Year = "1995"
                                                                             },new Movie
                                                                                 {
                                                                                     Director = @"Guy Hamilton",
@@ -1021,16 +1021,16 @@
                                                                                     Id = 31,
                                                                                     MPAA = @"Rated PG",
                                                                                     OriginalTitle = @"Goldfinger",
-                                                                                    PlayCount = 0,
+                                                                                    PlayCount = "0",
                                                                                     Plot = @"Someone is planning a major robbery of Gold that could destroy the economy. James Bond is dispatched by the MI6 and the Bank of England to find the people responsible and stop them. This is the third film from the  legendary James Bond series starring Sean Connery as the British super agent.",
-                                                                                    Rating = 9.2f,
+                                                                                    Rating = "9.2",
                                                                                     Runtime = @"112",
                                                                                     Studio = @"EON Productions",
                                                                                     Tagline = @"Everything he touches turns into excitement!",
-                                                                                    Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/1/107a3d25.tbn"),
+                                                                                    Thumbnail = "special://masterprofile/Thumbnails/Video/1/107a3d25.tbn",
                                                                                     Title = @"Goldfinger",
                                                                                     Writer = @"Richard Maibaum / Paul Dehn",
-                                                                                    Year = 1964
+                                                                                    Year = "1964"
                                                                                 },new Movie
                                                                                     {
                                                                                         Director = @"John Glen",
@@ -1038,16 +1038,16 @@
                                                                                         Id = 32,
                                                                                         MPAA = @"Rated PG-13",
                                                                                         OriginalTitle = @"Licence to Kill",
-                                                                                        PlayCount = 0,
+                                                                                        PlayCount = "0",
                                                                                         Plot = @"James Bond and his American colleague Felix Leiter arrest the drug lord Sanchez who succeeds in escaping and takes revenge on Felix and his wife. Bond knows but just one thing: revenge. The 16th film from the Legendary James Bond series starring Timothy Dalton as a British super agent.",
-                                                                                        Rating = 6.4f,
+                                                                                        Rating = "6.4",
                                                                                         Runtime = @"133",
                                                                                         Studio = @"Danjag S.A. / EON Productions / United Artists",
                                                                                         Tagline = @"His bad side is a dangerous place to be.",
-                                                                                        Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/0/0d5ee9b4.tbn"),
+                                                                                        Thumbnail = "special://masterprofile/Thumbnails/Video/0/0d5ee9b4.tbn",
                                                                                         Title = @"Licence to Kill",
                                                                                         Writer = @"Michael J. Wilson / Richard Maibaum",
-                                                                                        Year = 1989
+                                                                                        Year = "1989"
                                                                                     },new Movie
                                                                                         {
                                                                                             Director = @"Guy Hamilton",
@@ -1055,16 +1055,16 @@
                                                                                             Id = 33,
                                                                                             MPAA = @"Rated PG",
                                                                                             OriginalTitle = @"Live and Let Die",
-                                                                                            PlayCount = 0,
+                                                                                            PlayCount = "0",
                                                                                             Plot = @"James Bond must investigate a mysterious murder case of a British agent in New York. Soon he finds himself up against a big gangster boss named Mr. Big. This the eight film of the James Bond series and the first one to star Roger Moore as the British undercover agent 007.",
-                                                                                            Rating = 7.6f,
+                                                                                            Rating = "7.6",
                                                                                             Runtime = @"121",
                                                                                             Studio = @"Danjag S.A. / EON Productions",
                                                                                             Tagline = @"Roger M007re is James Bond.",
-                                                                                            Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/6/63c997e0.tbn"),
+                                                                                            Thumbnail = "special://masterprofile/Thumbnails/Video/6/63c997e0.tbn",
                                                                                             Title = @"Live and Let Die",
                                                                                             Writer = @"Tom Mankiewicz",
-                                                                                            Year = 1973
+                                                                                            Year = "1973"
                                                                                         },new Movie
                                                                                             {
                                                                                                 Director = @"Lewis Gilbert",
@@ -1072,16 +1072,16 @@
                                                                                                 Id = 34,
                                                                                                 MPAA = @"Rated PG",
                                                                                                 OriginalTitle = @"Moonraker",
-                                                                                                PlayCount = 0,
+                                                                                                PlayCount = "0",
                                                                                                 Plot = @"During the transportation of a Space Shuttle a Boeing 747 crashes in the Atlantic Ocean yet when they go to look for the destroyed shuttle it is not there. James bond investigates the missing mission space shuttle and soon learns that the shuttles owner Hugo Drax wants to kill all of mankind. The showdown is about to take place in outer space. The eleventh film from the Legendary James Bond series",
-                                                                                                Rating = 7.2f,
+                                                                                                Rating = "7.2",
                                                                                                 Runtime = @"126",
                                                                                                 Studio = @"Danjag S.A. / EON Productions / Les Productions Artistes Associ�s",
                                                                                                 Tagline = @"Outer space now belongs to 007.",
-                                                                                                Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/b/b42d93a1.tbn"),
+                                                                                                Thumbnail = "special://masterprofile/Thumbnails/Video/b/b42d93a1.tbn",
                                                                                                 Title = @"Moonraker",
                                                                                                 Writer = @"Christopher Wood",
-                                                                                                Year = 1979
+                                                                                                Year = "1979"
                                                                                             },new Movie
                                                                                                 {
                                                                                                     Director = @"Irvin Kershner",
@@ -1089,16 +1089,16 @@
                                                                                                     Id = 35,
                                                                                                     MPAA = @"Rated PG",
                                                                                                     OriginalTitle = @"Never Say Never Again",
-                                                                                                    PlayCount = 0,
+                                                                                                    PlayCount = "0",
                                                                                                     Plot = @"James Bond (Sean Connery) returns as the secret agent 007 one more time to battle the evil organization SPECTRE. Bond must defeat Largo,who has stolen two atomic warheads for nuclear blackmail. But Bond has an ally in largo's girlfriend, the willowy Domino (Kim Basinger),who falls for Bond and seeks revenge. This is the last time for Sean Connery as Her Majesty's Secret Agent 007.",
-                                                                                                    Rating = 5.6f,
+                                                                                                    Rating = "5.6",
                                                                                                     Runtime = @"133",
                                                                                                     Studio = @"PSO International / TaliaFilm II Productions / Warner Bros. Pictures / Woodcote",
                                                                                                     Tagline = @"Sean Connery is James Bond 007",
-                                                                                                    Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/1/1242c0a8.tbn"),
+                                                                                                    Thumbnail = "special://masterprofile/Thumbnails/Video/1/1242c0a8.tbn",
                                                                                                     Title = @"Never Say Never Again",
                                                                                                     Writer = null,
-                                                                                                    Year = 1983
+                                                                                                    Year = "1983"
                                                                                                 },new Movie
                                                                                                     {
                                                                                                         Director = @"John Glen",
@@ -1106,16 +1106,16 @@
                                                                                                         Id = 36,
                                                                                                         MPAA = @"Rated PG",
                                                                                                         OriginalTitle = @"Octopussy",
-                                                                                                        PlayCount = 0,
+                                                                                                        PlayCount = "0",
                                                                                                         Plot = @"James Bond is sent to investigate after a fellow �00� agent is found dead with a priceless Farberge egg. James bond follows the mystery and uncovers a smuggling scandal and a Russian General who wants to provoke a new World War. The 13th film from the Legendary James Bond series starring Roger Moore as a British super agent.",
-                                                                                                        Rating = 7.6f,
+                                                                                                        Rating = "7.6",
                                                                                                         Runtime = @"131",
                                                                                                         Studio = @"EON Productions / Danjag S.A. / United Artists / Metro-Goldwyn-Mayer",
                                                                                                         Tagline = @"Nobody does him better.",
-                                                                                                        Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/6/65e5c555.tbn"),
+                                                                                                        Thumbnail = "special://masterprofile/Thumbnails/Video/6/65e5c555.tbn",
                                                                                                         Title = @"Octopussy",
                                                                                                         Writer = @"George MacDonald Fraser / Richard Maibaum / Michael J. Wilson",
-                                                                                                        Year = 1983
+                                                                                                        Year = "1983"
                                                                                                     },new Movie
                                                                                                         {
                                                                                                             Director = @"Peter R. Hunt",
@@ -1123,16 +1123,16 @@
                                                                                                             Id = 37,
                                                                                                             MPAA = @"Rated PG",
                                                                                                             OriginalTitle = @"On Her Majesty's Secret Service",
-                                                                                                            PlayCount = 0,
+                                                                                                            PlayCount = "0",
                                                                                                             Plot = @"Bond tracks archnemesis Ernst Blofeld to a mountaintop retreat where he's training an army of beautiful but lethal women. Along the way, Bond falls for Italian contessa Tracy Draco -- and marries her in order to get closer to Blofeld. Meanwhile, he locates Blofeld in the Alps and embarks on a classic ski chase.",
-                                                                                                            Rating = 8f,
+                                                                                                            Rating = "8",
                                                                                                             Runtime = @"140",
                                                                                                             Studio = @"EON Productions / Danjag S.A.",
                                                                                                             Tagline = @"Far up! Far out! Far more! James Bond 007 is back!",
-                                                                                                            Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/7/7ad68a24.tbn"),
+                                                                                                            Thumbnail = "special://masterprofile/Thumbnails/Video/7/7ad68a24.tbn",
                                                                                                             Title = @"On Her Majesty's Secret Service",
                                                                                                             Writer = @"Richard Maibaum",
-                                                                                                            Year = 1969
+                                                                                                            Year = "1969"
                                                                                                         },new Movie
                                                                                                             {
                                                                                                                 Director = @"Marc Forster",
@@ -1140,16 +1140,16 @@
                                                                                                                 Id = 38,
                                                                                                                 MPAA = @"Rated PG-13",
                                                                                                                 OriginalTitle = @"Quantum of Solace",
-                                                                                                                PlayCount = 0,
+                                                                                                                PlayCount = "0",
                                                                                                                 Plot = @"Quantum of Solace continues the high octane adventures of James Bond in Casino Royale. Betrayed by Vesper, the woman he loved, 007 fights the urge to make his latest mission personal. Pursuing his determination to uncover the truth, Bond and M interrogate Mr White who reveals the organisation which blackmailed Vesper is far more complex and dangerous than anyone had imagined.",
-                                                                                                                Rating = 7f,
+                                                                                                                Rating = "7",
                                                                                                                 Runtime = @"106",
                                                                                                                 Studio = @"Metro-Goldwyn-Mayer",
                                                                                                                 Tagline = @"For love, for hate, for justice, for revenge.",
-                                                                                                                Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/4/40424448.tbn"),
+                                                                                                                Thumbnail = "special://masterprofile/Thumbnails/Video/4/40424448.tbn",
                                                                                                                 Title = @"Quantum of Solace",
                                                                                                                 Writer = @"Robert Wade / Neal Purvis / Paul Haggis",
-                                                                                                                Year = 2008
+                                                                                                                Year = "2008"
                                                                                                             },new Movie
                                                                                                                 {
                                                                                                                     Director = @"John Glen",
@@ -1157,16 +1157,16 @@
                                                                                                                     Id = 39,
                                                                                                                     MPAA = @"Rated PG",
                                                                                                                     OriginalTitle = @"The Living Daylights",
-                                                                                                                    PlayCount = 0,
+                                                                                                                    PlayCount = "0",
                                                                                                                     Plot = @"James Bond helps a Russian General escape into the west. He soon finds out that the KGB wants to kill him for helping the General. A little while later the General is kidnapped from the Secret Service leading 007 to be suspicious. The 15th film from the Legendary James Bond series starring Timothy Dalton as a British super agent.",
-                                                                                                                    Rating = 7.2f,
+                                                                                                                    Rating = "7.2",
                                                                                                                     Runtime = @"130",
                                                                                                                     Studio = @"Danjag S.A. / EON Productions / United Artists",
                                                                                                                     Tagline = @"Licensed to thrill.",
-                                                                                                                    Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/6/6157c47a.tbn"),
+                                                                                                                    Thumbnail = "special://masterprofile/Thumbnails/Video/6/6157c47a.tbn",
                                                                                                                     Title = @"The Living Daylights",
                                                                                                                     Writer = @"Richard Maibaum / Michael J. Wilson",
-                                                                                                                    Year = 1987
+                                                                                                                    Year = "1987"
                                                                                                                 },new Movie
                                                                                                                     {
                                                                                                                         Director = @"Guy Hamilton",
@@ -1174,16 +1174,16 @@
                                                                                                                         Id = 40,
                                                                                                                         MPAA = @"Rated PG",
                                                                                                                         OriginalTitle = @"The Man with the Golden Gun",
-                                                                                                                        PlayCount = 0,
+                                                                                                                        PlayCount = "0",
                                                                                                                         Plot = @"A golden bullet has 007 engraved on it as it smashes into the secret service headquarters. The bullet came from the professional killer Scaramanga who has yet to miss a target and James Bond begins a mission to try and stop him. The ninth film from the Legendary James Bond series starring Roger Moore as a British super agent.",
-                                                                                                                        Rating = 7f,
+                                                                                                                        Rating = "7",
                                                                                                                         Runtime = @"125",
                                                                                                                         Studio = @"Danjag S.A. / EON Productions",
                                                                                                                         Tagline = @"The man with the golden gun is ready to assassinate James Bond.",
-                                                                                                                        Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/f/ff2b872c.tbn"),
+                                                                                                                        Thumbnail = "special://masterprofile/Thumbnails/Video/f/ff2b872c.tbn",
                                                                                                                         Title = @"The Man with the Golden Gun",
                                                                                                                         Writer = @"Richard Maibaum / Tom Mankiewicz",
-                                                                                                                        Year = 1974
+                                                                                                                        Year = "1974"
                                                                                                                     },new Movie
                                                                                                                         {
                                                                                                                             Director = @"Lewis Gilbert",
@@ -1191,16 +1191,16 @@
                                                                                                                             Id = 41,
                                                                                                                             MPAA = @"Rated PG",
                                                                                                                             OriginalTitle = @"The Spy Who Loved Me",
-                                                                                                                            PlayCount = 0,
+                                                                                                                            PlayCount = "0",
                                                                                                                             Plot = @"Russian and American submarines with nuclear missels on board both vanish from sight without a trace. America and Russia both blame each other as James Bond tries to solve the riddle of the disappearing ships. But the KGB also has an agent on the case. The tenth film from the Legendary James Bond series starring Roger Moore as a British super agent.",
-                                                                                                                            Rating = 8f,
+                                                                                                                            Rating = "8",
                                                                                                                             Runtime = @"125",
                                                                                                                             Studio = @"EON Productions / Danjag S.A.",
                                                                                                                             Tagline = @"It's the BIGGEST. It's the BEST. It's BOND. And B-E-Y-O-N-D.",
-                                                                                                                            Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/5/5363d34a.tbn"),
+                                                                                                                            Thumbnail = "special://masterprofile/Thumbnails/Video/5/5363d34a.tbn",
                                                                                                                             Title = @"The Spy Who Loved Me",
                                                                                                                             Writer = @"Christopher Wood / Richard Maibaum",
-                                                                                                                            Year = 1977
+                                                                                                                            Year = "1977"
                                                                                                                         },new Movie
                                                                                                                             {
                                                                                                                                 Director = @"Michael Apted",
@@ -1208,16 +1208,16 @@
                                                                                                                                 Id = 42,
                                                                                                                                 MPAA = @"Rated PG-13",
                                                                                                                                 OriginalTitle = @"The World Is Not Enough",
-                                                                                                                                PlayCount = 0,
+                                                                                                                                PlayCount = "0",
                                                                                                                                 Plot = @"Greed, revenge, world dominance, high-tech terrorism -- it's all in a day's work for cunning MI6 agent James Bond, who's on a mission to protect beautiful oil heiress Elektra King from a notorious terrorist. In a race against time that culminates in a dramatic submarine showdown, Bond works to defuse the international power struggle that has the world's oil supply hanging in the balance.",
-                                                                                                                                Rating = 8.4f,
+                                                                                                                                Rating = "8.4",
                                                                                                                                 Runtime = @"128",
                                                                                                                                 Studio = @"Danjaq / EON Productions / Metro-Goldwyn-Mayer (MGM) / United Artists",
                                                                                                                                 Tagline = @"As the countdown begins for the new millienum there is still one number you can always count on.",
-                                                                                                                                Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/f/f81c8006.tbn"),
+                                                                                                                                Thumbnail = "special://masterprofile/Thumbnails/Video/f/f81c8006.tbn",
                                                                                                                                 Title = @"The World Is Not Enough",
                                                                                                                                 Writer = null,
-                                                                                                                                Year = 1999
+                                                                                                                                Year = "1999"
                                                                                                                             },new Movie
                                                                                                                                 {
                                                                                                                                     Director = @"Terence Young",
@@ -1225,16 +1225,16 @@
                                                                                                                                     Id = 43,
                                                                                                                                     MPAA = @"Rated PG",
                                                                                                                                     OriginalTitle = @"Thunderball",
-                                                                                                                                    PlayCount = 0,
+                                                                                                                                    PlayCount = "0",
                                                                                                                                     Plot = @"A criminal organization has obtained two nuclear bombs and are asking for a 100 million pound ransom in the form of diamonds in seven days or they will use the weapons. The secret service sends James Bond to the Bahamas to once again save the world.",
-                                                                                                                                    Rating = 7.4f,
+                                                                                                                                    Rating = "7.4",
                                                                                                                                     Runtime = @"130",
                                                                                                                                     Studio = @"EON Productions",
                                                                                                                                     Tagline = @"Look up!  Look down!  Look out!",
-                                                                                                                                    Thumbnail = new Uri("special://masterprofile/Thumbnails/Video/2/2cc36602.tbn"),
+                                                                                                                                    Thumbnail = "special://masterprofile/Thumbnails/Video/2/2cc36602.tbn",
                                                                                                                                     Title = @"Thunderball",
                                                                                                                                     Writer = @"Jack Whittingham / Richard Maibaum / John Hopkins",
-                                                                                                                                    Year = 1965
+                                                                                                                                    Year = "1965"
                                                                                                                                 },
                             #endregion
                         }
@@ -1257,18 +1257,18 @@
                                     Id = 1,
                                     MPAA = @"Rated R",
                                     OriginalTitle = @"12 Monkeys",
-                                    PlayCount = 1,
+                                    PlayCount = "1",
                                     Plot =
                                         @"In the year 2035, convict James Cole volunteers reluctantly to be sent back in time by scientists to discover the origin of a deadly virus that wiped out nearly all of the earth's population decades earlier. But when Cole is sent mistakenly to 1990 instead of 1996, he's arrested and locked up in a mental hospital, where he meets a psychiatrist and the son of a famous virus expert.",
-                                    Rating = 8.2f,
+                                    Rating = "8.2",
                                     Runtime = @"130",
                                     Studio = @"Universal Studios",
                                     Tagline = @"The future is history",
                                     Thumbnail =
-                                        new Uri("special://masterprofile/Thumbnails/Video/f/f7fc8691.tbn"),
+                                        "special://masterprofile/Thumbnails/Video/f/f7fc8691.tbn",
                                     Title = @"12 Monkeys",
                                     Writer = @"David Webb Peoples / Janet Peoples",
-                                    Year = 1995
+                                    Year = "1995"
                                 },
                             new Movie
                                 {
@@ -1277,18 +1277,18 @@
                                     Id = 4,
                                     MPAA = @"Rated PG-13",
                                     OriginalTitle = @"The Bourne Identity",
-                                    PlayCount = 0,
+                                    PlayCount = "0",
                                     Plot =
                                         @"Wounded to the brink of death and suffering from amnesia, Jason Bourne is rescued at sea by a fisherman. With nothing to go on but a Swiss bank account number, he starts to reconstruct his life, but finds that many people he encounters want him dead. Bourne realizes, though, that he has the combat and mental skills of a world-class spy, but who does he work for?",
-                                    Rating = 8.6f,
+                                    Rating = "8.6",
                                     Runtime = @"119",
                                     Studio = @"Universal Pictures",
                                     Tagline = @"He was the perfect weapon until he became the target.",
                                     Thumbnail =
-                                        new Uri("special://masterprofile/Thumbnails/Video/e/e5af7158.tbn"),
+                                        "special://masterprofile/Thumbnails/Video/e/e5af7158.tbn",
                                     Title = @"The Bourne Identity",
                                     Writer = @"Tony Gilroy / W. Blake Herron",
-                                    Year = 2002
+                                    Year = "2002"
                                 },
                             new Movie
                                 {
@@ -1297,18 +1297,18 @@
                                     Id = 15,
                                     MPAA = @"Rated R",
                                     OriginalTitle = @"Rambo: First Blood Part II",
-                                    PlayCount = 0,
+                                    PlayCount = "0",
                                     Plot =
                                         @"Col. Troutman recruits ex-Green Beret John Rambo for a highly secret and dangerous mission. Teamed with freedom fighter Co Bao, Rambo goes deep into Vietnam to rescue POWs. Deserted by his own team, he's left in a hostile jungle to fight for his life, avenge the death of a woman and bring corrupt officials to justice.",
-                                    Rating = 6f,
+                                    Rating = "6",
                                     Runtime = @"94",
                                     Studio = @"Anabasis N.V.",
                                     Tagline = @"What most people call hell, he calls home.",
                                     Thumbnail =
-                                        new Uri("special://masterprofile/Thumbnails/Video/8/8917327c.tbn"),
+                                        "special://masterprofile/Thumbnails/Video/8/8917327c.tbn",
                                     Title = @"Rambo: First Blood Part II",
                                     Writer = @"Sylvester Stallone / James Cameron",
-                                    Year = 1985
+                                    Year = "1985"
                                 },
                             new Movie
                                 {
@@ -1317,18 +1317,18 @@
                                     Id = 19,
                                     MPAA = @"Rated PG-13",
                                     OriginalTitle = @"Star Trek: Nemesis",
-                                    PlayCount = 0,
+                                    PlayCount = "0",
                                     Plot =
                                         @"Break out your Vulcan ears: The crew of the USS Enterprise is back. This time around, the Next Generation crew members -- including Capt. Picard, Cmdr. Riker and, of course, Data -- are dispatched as peace ambassadors to their longtime foes, the Romulans. There, they encounter a mysterious new enemy that thwarts not only the armistice process, but Earth itself!",
-                                    Rating = 6.6f,
+                                    Rating = "6.6",
                                     Runtime = @"117",
                                     Studio = @"Paramount Pictures",
                                     Tagline = @"A generation's final journey... begins.",
                                     Thumbnail =
-                                        new Uri("special://masterprofile/Thumbnails/Video/f/f84ca5a8.tbn"),
+                                        "special://masterprofile/Thumbnails/Video/f/f84ca5a8.tbn",
                                     Title = @"Star Trek: Nemesis",
                                     Writer = @"John Logan",
-                                    Year = 2002
+                                    Year = "2002"
                                 },
                             new Movie
                                 {
@@ -1337,19 +1337,19 @@
                                     Id = 23,
                                     MPAA = @"Rated PG",
                                     OriginalTitle = @"A View to a Kill",
-                                    PlayCount = 0,
+                                    PlayCount = "0",
                                     Plot =
                                         @"A newly developed microchip designed by Zorin Industries for the British Government that can survive the electromagnetic radiation caused by a nuclear explosion has landed in the hands of the KGB. James Bond must find out how and why. His suspicions soon lead him to big industry leader Max Zorin. The 14th film from the Legendary James Bond series starring Roger Moore as a British super agent.",
-                                    Rating = 6.4f,
+                                    Rating = "6.4",
                                     Runtime = @"131",
                                     Studio =
                                         @"Danjag S.A. / EON Productions / United Artists / Metro-Goldwyn-Mayer",
                                     Tagline = @"Has James Bond finally met his match?",
                                     Thumbnail =
-                                        new Uri("special://masterprofile/Thumbnails/Video/2/2efe0c22.tbn"),
+                                        "special://masterprofile/Thumbnails/Video/2/2efe0c22.tbn",
                                     Title = @"A View to a Kill",
                                     Writer = @"Richard Maibaum / Michael J. Wilson",
-                                    Year = 1985
+                                    Year = "1985"
                                 },
                             new Movie
                                 {
@@ -1359,19 +1359,18 @@
                                     Id = 24,
                                     MPAA = null,
                                     OriginalTitle = @"Casino Royale",
-                                    PlayCount = 0,
+                                    PlayCount = "0",
                                     Plot =
                                         @"Sir James Bond is called back out of retirement to stop SMERSH. In order to trick SMERSH, Bond thinks up the ultimate plan. That every agent will be named James Bond. One of the Bonds, whose real name is Evelyn Tremble is sent to take on Le Chiffre in a game of baccarat, but all the Bonds get more than they can handle, especially when the ultimate villain turns out to be Bonds nephew.",
-                                    Rating = 8.6f,
+                                    Rating = "8.6",
                                     Runtime = @"131",
                                     Studio = null,
                                     Tagline = null,
                                     Thumbnail =
-                                        new Uri(
-                                        "special://masterprofile/Thumbnails/Video/3/3145107b.tbn"),
+                                        "special://masterprofile/Thumbnails/Video/3/3145107b.tbn",
                                     Title = @"Casino Royale",
                                     Writer = @"Wolf Mankowitz / John Law / Michael Sayers",
-                                    Year = 1967
+                                    Year = "1967"
                                 },
 
                             #endregion

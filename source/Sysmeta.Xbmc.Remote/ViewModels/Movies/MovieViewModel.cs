@@ -137,6 +137,7 @@
             }
         }
 
+        private Uri thumbnailSource;
         public Uri ThumbnailSource
         {
             get
@@ -145,8 +146,10 @@
                 {
                     return null;
                 }
-             
-                return this.movie.Thumbnail;
+
+                Uri.TryCreate(this.movie.Thumbnail, UriKind.RelativeOrAbsolute, out this.thumbnailSource);
+
+                return this.thumbnailSource;
             }
         }
 
@@ -175,7 +178,7 @@
 
                 if (this.year == null)
                 {
-                    this.year = movie.Year == 0 ? "N/A" : movie.Year.ToString();
+                    this.year = string.IsNullOrEmpty(movie.Year.Trim()) ? "N/A" : movie.Year;
                 }
 
                 return this.year;
@@ -237,6 +240,7 @@
             }
         }
 
+        private float rating;
         public float Rating
         {
             get
@@ -246,10 +250,16 @@
                     return 0;
                 }
 
-                return this.movie.Rating;
+                if (!float.TryParse(this.movie.Rating, out this.rating))
+                {
+                    return 0;
+                }
+
+                return this.rating;
             }
         }
 
+        private int playCount;
         public int PlayCount
         {
             get
@@ -259,7 +269,12 @@
                     return 0;
                 }
 
-                return this.movie.PlayCount;
+                if (int.TryParse(this.movie.PlayCount, out playCount))
+                {
+                    return 0;
+                }
+
+                return this.playCount;
             }
         }
 
