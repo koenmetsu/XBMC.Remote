@@ -18,4 +18,4 @@ V1.0
 
 Initial marketplace release
 
-![Screen1](https://github.com/fen/XBMC.Remote/blob/master/images/5.png)
+![Screen1](https://github.com/fen/XBMC.Remote/raw/master/images/5.png)
