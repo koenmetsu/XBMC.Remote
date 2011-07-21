@@ -84,10 +84,10 @@
                     return null;
                 }
 
-                if (this.mpaa == null && this.movie.MPAA != null)
+                if (this.mpaa == null && !string.IsNullOrEmpty(this.movie.MPAA) && this.movie.MPAA.Length > 6)
                 {
                     // Remove the starting text of the rating "Rating PG-13"
-                    this.mpaa = this.movie.MPAA.Substring(6);
+                    this.mpaa = this.movie.MPAA.Substring(6).Trim();
                 }
 
                 return this.mpaa;
