@@ -63,8 +63,6 @@
 
         private readonly bool executeCallbackOnUiThread;
 
-        private ICredentials credentials;
-
         public JsonRpcClient(Uri baseUrl, bool executeCallbackOnUIThread = true)
         {
             this.baseUrl = baseUrl;
@@ -124,7 +122,7 @@
             {
                 return JsonConvert.DeserializeObject<JsonRpcResponse<T>>(httpResponse.Content);
             }
-            catch (Exception e)
+            catch
             {
                 return null;
             }

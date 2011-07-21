@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.0">
-  <App xmlns="" ProductID="{703a4115-6cec-466a-8dc7-eaee5aa31b3c}" Title="XBMC Browser" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Fredrik Eriksson" Description="XBMC browser is an application for browsing your XBMC media center video collection direct from your Windows Phone 7." Publisher="Sysmeta.Xbmc.Remote">
+  <App xmlns="" ProductID="{703a4115-6cec-466a-8dc7-eaee5aa31b3c}" Title="XBMC Browser" RuntimeType="Silverlight" Version="1.1.0.0" Genre="apps.normal" Author="Fredrik Eriksson" Description="XBMC browser is an application for browsing your XBMC media center video collection direct from your Windows Phone 7." Publisher="Sysmeta.Xbmc.Remote">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />

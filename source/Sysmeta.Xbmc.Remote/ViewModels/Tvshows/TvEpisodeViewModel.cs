@@ -195,24 +195,29 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Tvshows
                     return null;
                 }
 
-                int duration = 0;
-
-                int.TryParse(this.episode.Year, out duration);
-
-                if (duration == 0)
+                if (this.duration != null)
                 {
-                    return "N/A";
+                    int duration = 0;
+
+                    int.TryParse(this.episode.Year, out duration);
+
+                    if (duration == 0)
+                    {
+                        this.duration = "N/A";
+                    }
+
+                    int h = duration / 3600;
+                    int m = (duration % 3600) / 60;
+
+                    if (h == 0 && m > 0)
+                    {
+                        this.duration = string.Format("{0} min", m);
+                    }
+
+                    this.duration = string.Format("{0} h {1} min", h, m);
                 }
 
-                int h = duration / 3600;
-                int m = (duration % 3600) / 60;
-                
-                if (h == 0 && m > 0)
-                {
-                    return string.Format("{0} min", m);
-                }
-
-                return string.Format("{0} h {1} min", h, m);
+                return this.duration;
             }
         }
 
