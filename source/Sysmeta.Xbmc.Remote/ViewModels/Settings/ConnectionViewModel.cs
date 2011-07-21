@@ -40,6 +40,8 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
 
         public string MachineAddress { get; set; }
 
+        public bool InvalidMachineAddress { get; set; }
+
         public string Port { get; set; }
 
         public string Username { get; set; }
@@ -67,9 +69,27 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
 
         public void Save()
         {
+            if (this.InvalidMachineAddress)
+            {
+                this.InvalidMachineAddress = false;
+                NotifyOfPropertyChange(() => this.InvalidMachineAddress);
+            }
+
+            Uri uri;
+            try
+            {
+               uri = new Uri(string.Format("http://{0}:{1}", MachineAddress, Port));
+            }
+            catch
+            {
+                this.InvalidMachineAddress = true;
+                NotifyOfPropertyChange(() => this.InvalidMachineAddress);
+                return;
+            }
+
             if (this.connection != null)
             {
-                this.connection.Url = new Uri(string.Format("http://{0}:{1}", MachineAddress, Port));
+                this.connection.Url = uri;
                 this.connection.Username = this.Username;
                 this.connection.Password = this.Password;
 
@@ -81,7 +101,7 @@ namespace Sysmeta.Xbmc.Remote.ViewModels.Settings
             {
                 this.settingsHost.AddConnection(new Connection
                 {
-                    Url = new Uri(string.Format("http://{0}:{1}", MachineAddress, Port)),
+                    Url = uri,
                     Username = this.Username,
                     Password = this.Password
                 });

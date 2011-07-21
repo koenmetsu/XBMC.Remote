@@ -143,6 +143,7 @@
     <Compile Include="ViewModels\Tvshows\TvshowSeasonsViewModel.cs" />
     <Compile Include="ViewModels\Tvshows\TvshowsLandingViewModel.cs" />
     <Compile Include="ViewModels\Tvshows\TvshowViewModel.cs" />
+    <Compile Include="Views\Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="Views\Converters\NullOrEmptyStringToCollapsedVisibilityConverter.cs" />
     <Compile Include="Views\Converters\NullToCollapsedVisibilityConverter.cs" />
     <Compile Include="Views\Converters\NullToVisibleVisibilityConverter.cs" />

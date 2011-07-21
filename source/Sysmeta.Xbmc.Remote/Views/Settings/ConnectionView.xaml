@@ -16,6 +16,7 @@
         <Grid.Resources>
             <Converters:NullOrEmptyStringToCollapsedVisibilityConverter x:Key="visibilityConverter" />
             <Converters1:ThemedImageConverter x:Key="imageConverter" />
+            <Converters1:BooleanToVisibilityConverter x:Key="booleanVisibilityConverter" />
         </Grid.Resources>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" MinHeight="144"/>
@@ -30,7 +31,10 @@
 
         <Grid x:Name="ContentPanel" Grid.Row="2" Margin="12,129,12,0">
             <StackPanel Margin="0,-123,0,0">
-                <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="XBMC Machine Address"/>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="XBMC Machine Address"/>
+                    <TextBlock Visibility="{Binding InvalidMachineAddress, Converter={StaticResource booleanVisibilityConverter}}" Margin="{StaticResource PhoneHorizontalMargin}" Foreground="Red" Text="Invalid characters"/>
+                </StackPanel>
                 <TextBox Text="{Binding MachineAddress, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="OnTextBoxTextChanged"/>
                 <TextBlock Margin="{StaticResource PhoneHorizontalMargin}" Text="Port"/>
                 <Views:NumericTextBox Text="{Binding Port, Mode=TwoWay, UpdateSourceTrigger=Explicit}" TextChanged="OnTextBoxTextChanged"/>

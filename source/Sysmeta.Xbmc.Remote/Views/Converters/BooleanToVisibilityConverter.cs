@@ -4,20 +4,18 @@ namespace Sysmeta.Xbmc.Remote.Views.Converters
     using System.Globalization;
     using System.Windows;
     using System.Windows.Data;
-    using System.Windows.Media;
 
-    public class ZeroVisibilityConverter : IValueConverter
+    public class BooleanToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            int i = (int)value;
-
-            if (i == 0)
+            bool b = (bool)value;
+            if (b)
             {
-                return Visibility.Collapsed;
+                return Visibility.Visible;
             }
 
-            return Visibility.Visible;
+            return Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
