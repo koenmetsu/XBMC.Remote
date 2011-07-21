@@ -200,29 +200,36 @@
                     }
                     else
                     {
-                        int x = int.Parse(this.movie.Runtime);
-                        int h = x / 60;
-                        int m = x % 60;
-
-                        string time;
-                        if (h == 0 && m == 0)
+                        int x;
+                        if (!int.TryParse(this.movie.Runtime, out x))
                         {
-                            time = "N/A";
-                        }
-                        else if (m == 0)
-                        {
-                            time = string.Format("{0} h", h);
-                        }
-                        else if (h == 0)
-                        {
-                            time = string.Format("{0} min", m);
+                            this.runtime = "N/A";
                         }
                         else
                         {
-                            time = string.Format("{0} h {1} min", h, m);
-                        }
+                            int h = x / 60;
+                            int m = x % 60;
 
-                        this.runtime = time;
+                            string time;
+                            if (h == 0 && m == 0)
+                            {
+                                time = "N/A";
+                            }
+                            else if (m == 0)
+                            {
+                                time = string.Format("{0} h", h);
+                            }
+                            else if (h == 0)
+                            {
+                                time = string.Format("{0} min", m);
+                            }
+                            else
+                            {
+                                time = string.Format("{0} h {1} min", h, m);
+                            }
+
+                            this.runtime = time;
+                        }
                     }
                 }
 
