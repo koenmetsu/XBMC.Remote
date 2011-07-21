@@ -54,7 +54,7 @@
             
             <shell:ApplicationBar.MenuItems>
                 <cal:AppBarMenuItem Text="remove" Message="RemoveAndNavigateBack" />
-                <cal:AppBarMenuItem Text="make active" Message="Activate" />
+                <cal:AppBarMenuItem Text="make active" Message="SetActive" />
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
