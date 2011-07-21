@@ -5,7 +5,7 @@ is a Windows Phone 7 application for browsing your
 XBMC movies and TV show collection.
 
 Built using:
- * [Caliburn.Micro](http://caliburnmicro.codeplex.com/)
+* [Caliburn.Micro](http://caliburnmicro.codeplex.com/)
 
 V1.1
 ----
@@ -17,4 +17,4 @@ V1.0
 
 Initial marketplace release
 
-!(Screen1)[images/5.png]
+![Screen1](images/5.png)
