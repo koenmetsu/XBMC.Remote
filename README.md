@@ -23,3 +23,6 @@ Initial marketplace release
 ![Screen1](https://github.com/fen/XBMC.Remote/raw/master/images/3.png)
 ![Screen1](https://github.com/fen/XBMC.Remote/raw/master/images/4.png)
 ![Screen1](https://github.com/fen/XBMC.Remote/raw/master/images/5.png)
+![Screen1](https://github.com/fen/XBMC.Remote/raw/master/images/6.png)
+![Screen1](https://github.com/fen/XBMC.Remote/raw/master/images/7.png)
+![Screen1](https://github.com/fen/XBMC.Remote/raw/master/images/8.png)
